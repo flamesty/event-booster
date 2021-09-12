@@ -1,3 +1,9 @@
+$pagination-item-color:#FFFFFF;
+$pagination-item-active-color: #DC56C5;
+$pagination-item-disabled-color: #FFFFFF;
+$pagination-item-hover-color: #DC56C5;
+
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -29,7 +35,7 @@
     font-size: 14px;
     line-height: 1.21;
     text-align: center;
-    color: #FFFFFF;
+    color: $pagination-item-color;
     text-decoration: none;
 
     @media screen and (min-width: 768px) {
@@ -42,20 +48,20 @@
     
 .pagination > * > :hover,
 .pagination > * > :focus {
-    color: rgba(220, 86, 197, 1);
-    border: 1px solid rgba(220, 86, 197, 1);
+    color: $pagination-item-hover-color;
+    border: 1px solid $pagination-item-hover-color;
     border-radius: 25% 0%;
 }
 
 .pagination > .uk-active > * {
     
-    border: 1px solid rgba(220, 86, 197, 1);
+    border: 1px solid $pagination-item-active-color;
     border-radius: 25% 0%;
 }
 
 
 .uk-disabled {
-    color: #FFFFFF;
+    color: $pagination-item-color;
 }
     
 
