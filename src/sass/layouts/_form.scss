@@ -1,0 +1,48 @@
+.hero {
+  text-align: center;
+  margin-top: 150px;
+
+  @media screen and (min-width: 768px){
+    margin-top: 140px;
+  }
+
+  @media screen and (min-width: 1280px) {
+   margin-top: 215px;
+  }
+  
+}
+
+input {
+padding: 10px 30px;
+// display: block;
+// border: none;
+  
+width: 270px;
+background-color: var(--form-input-background);
+backdrop-filter: blur(20px);
+border-radius: 20px;
+
+
+color: var(--form-input-text);
+
+font-family: Montserrat;
+font-size: 16px;
+line-height: 1.25;
+
+
+}
+
+input+input {
+  margin-top: 25px;
+
+  @media screen and (min-width: 768px){
+      margin-top: 0px;
+      margin-left: 30px;
+  }
+
+}
+
+
+#country-choice {
+  // display: none;
+}
