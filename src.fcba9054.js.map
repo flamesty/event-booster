@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;AAEA,aAFA,QAAA,oBACA,QAAA,sBACA,QAAA","file":"src.fcba9054.js","sourceRoot":"../src","sourcesContent":["import './sass/main.scss';\nimport './js/pagination.js';\nimport './js/modal.js'\n"]}
