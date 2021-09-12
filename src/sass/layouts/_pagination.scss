@@ -29,7 +29,7 @@
     font-size: 14px;
     line-height: 1.21;
     text-align: center;
-    color: #FFFFFF;
+    color: var(--pagination-color-text);
     text-decoration: none;
 
     @media screen and (min-width: 768px) {
@@ -42,20 +42,20 @@
     
 .pagination > * > :hover,
 .pagination > * > :focus {
-    color: rgba(220, 86, 197, 1);
-    border: 1px solid rgba(220, 86, 197, 1);
+    color: var(--pagination-color-active);
+    border: 1px solid var(--pagination-color-active);
     border-radius: 25% 0%;
 }
 
 .pagination > .uk-active > * {
     
-    border: 1px solid rgba(220, 86, 197, 1);
+    border: 1px solid var(--pagination-color-active);
     border-radius: 25% 0%;
 }
 
 
 .uk-disabled {
-    color: #FFFFFF;
+    color: var(--pagination-color-text);
 }
     
 
