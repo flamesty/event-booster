@@ -1,0 +1,55 @@
+{{!-- {{#each this}}
+<li id="{{id}}" class="img-list-item" data-url="{{largeImageURL}}">
+    <a href="javascript:void(0)" class="img-list-link">
+            <img src="{{webformatURL}}" alt="tags: {{tags}}" class="main-img" />
+    </a>
+    <div class="stats">
+        <p class="stats-item">
+            <i class="material-icons icon--op">thumb_up</i>
+            likes: {{likes}}   
+        </p>
+        <p class="stats-item">
+            <i class="material-icons icon--op">visibility</i>
+            views: {{views}}
+        </p>
+        <p class="stats-item">
+            <i class="material-icons icon--op">comment</i>
+            comments: {{comments}}
+        </p>
+        <p class="stats-item">
+            <i class="material-icons icon--op">cloud_download</i>
+            downloads: {{downloads}}
+        </p>
+        <a href="{{pageURL}}" class="stats-item home-page-link" target="_blank">
+            <i class="material-icons icon--op">home</i>
+            home page
+        </a>
+    </div>    
+</li>
+{{/each}} --}}
+
+    {{#each this}}
+    <li class="event-item">
+        
+        <a href="javascript:void(0)" class="event-list-link">
+            <div class="decorative-frame"></div>
+            <div class="img-frame">
+                <img src="{{url}}"  alt="{{name}}" class="event-img" />
+            </div>
+        </a>
+        <p class="event-description">
+            {{name}}
+        </p>
+        <p class="event-data">
+            {{data}}, {{time}}
+        </p>
+        <p class="event-lokation">
+            <span class="material-icons event-place">
+                place
+            </span>
+            Palace of Ukraine
+        </p>   
+    </li>
+    {{/each}}
+
+

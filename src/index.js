@@ -2,6 +2,8 @@ import './sass/main.scss';
 import './js/pagination.js';
 import './js/modal.js';
 import { Spinner } from 'spin.js';
+import { renderService } from './js/search-render-service';
+renderService.fetchAndRenderEvents();
 
 // настройки спиннера
 var opts = {
