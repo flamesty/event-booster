@@ -1,0 +1,36 @@
+
+      <img class="modal__img--preview" src="{{this.images.[6].url}}" alt="{{this.name}}">
+      <div class="modal__content--flex">
+        <img class="modal__img" src="{{this.images.[6].url}}" alt="{{this.name}}">
+        <div class="modal__content--description">
+      <ul class="modal-list">
+      <li class="modal-list__item">
+        <h3 class="modal-list__item-title">INFO</h3>
+      <p class="modal-list__item-text">{{name}}</p>
+      </li>
+      <li class="modal-list__item">
+        <h3 class="modal-list__item-title">WHEN</h3>
+      <p class="modal-list__item-text">{{this.dates.start.localDate}}</p>
+      <p class="modal-list__item-text">{{this.dates.start.localTime}} ({{this.dates.timezone}})</p>
+      </li>
+      <li class="modal-list__item">
+        <h3 class="modal-list__item-title">WHERE</h3>
+<p class="modal-list__item-text">{{_embedded.venues.[0].city.name}}, {{_embedded.venues.[0].country.name}}</p>
+           
+      <p class="modal-list__item-text">{{_embedded.venues.[0].name}}</p>
+      </li>
+      <li class="modal-list__item">
+        <h3 class="modal-list__item-title">WHO</h3>
+      <p class="modal-list__item-text">{{_embedded.attractions.[0].name}}</p>
+      </li>
+      <li class="modal-list__item">
+        <h3 class="modal-list__item-title">PRICES </h3>
+      <p class="modal-list__item-text">{{priceRanges.[0].min}} {{priceRanges.[0].currency}}</p>
+      {{!-- <button>BUY TICKETS</button> --}}
+      <p class="modal-list__item-text">{{priceRanges.[0].max}} {{priceRanges.[0].currency}}</p>
+      {{!-- <button>BUY TICKETS</button> --}}
+      </li>
+      </ul>
+    </div>
+    </div>
+    
