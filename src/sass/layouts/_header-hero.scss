@@ -1,9 +1,23 @@
 .header_logo {
-  display: flex;
+  position: absolute;
+  width: 108px;
+  height: 90px;
+  border-radius: 0 0 216px / 180px 0;
+  backdrop-filter: blur(5px);
+  @media screen and (min-width: 768px) {
+    width: 180px;
+    height: 151px;
+    border-radius: 0 0 360px / 302px 0;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 238px;
+    height: 201px;
+    border-radius: 0 0 476px / 402px 0;
+  }
 }
 
 .header_title {
-  margin: 0 auto 0 auto;
+  margin: 0px auto 0 auto;
   width: 212px;
   color: var(--main-title-color);
   font-family: Montserrat;
@@ -28,9 +42,16 @@
 
 .hero {
   padding-top: 78px;
+  @media screen and (min-width: 768px) {
+    padding-top: 40px;
+  }
+}
+
+.container-hero {
   padding-left: auto;
   padding-right: auto;
   height: 364px;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: top center;
   background-image: linear-gradient(
@@ -56,7 +77,6 @@
   }
 
   @media screen and (min-width: 768px) {
-    padding-top: 40px;
     background-image: linear-gradient(
         to top,
         var(--main-background-color),
