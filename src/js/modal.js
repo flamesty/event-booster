@@ -17,11 +17,40 @@ refs.button.addEventListener('click', onCloseModalBtn);
 refs.overlay.addEventListener('click', onCloseModalOverlay);
 window.addEventListener('keyup', onCloseModalEsc);
 
+
+
+
+
+
+function renderModal (e) {
+ refs.modalContainer.insertAdjacentHTML('afterbegin', modalMarkup)
+  
+}
+
+console.log(renderService.events);
+
 function modalIsOpen (e) {
-   
-refs.overlay.classList.add('is-open');
+
+// const eId = e.currentTarget.id;
+// console.log(eId);
+
+// renderService.tempRenderArrCreator = e.currentTarget.id;
+// renderModal();
+
+
+
+
+   refs.overlay.classList.add('is-open');
 refs.overlay.classList.remove('is-hidden');
+
+
+
+
 };
+
+
+
+
 
 function onCloseModalBtn (e) {
     
