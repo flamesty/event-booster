@@ -7,21 +7,19 @@ class EventsApiService {
         this.BASE_URL = 'https://app.ticketmaster.com/discovery/v2/';
         this.countryCode = '';
         this.page = 0;
-        this.tempEventsArray = [];
+        this.searchResult = '';
     }
 
     /* вариант используя async-away + axios + try-catch, который применен в ф-ции fetchAndRender*/
     
-    async fetchEvents(gameOver) {
+    async fetchEvents() {
         const url = `${this.BASE_URL}events.json?keyword=${this.searchQuery}&countryCode=${this.countryCode}&size=24&number=3&page=${this.page}&apikey=${this.KEY}`;
         const response = await axios.get(url);
         if (response.data._embedded === undefined || response.data._embedded.events.length === 0) {
+            this.searchResult = 'nothing';
             // console.log('повна дупа!')
-            return gameOver
+            return
         }
-        let result = response.data._embedded.events;
-        // console.log(result);
-        this.tempEventsArray.push(...result);
         this.incrementPage();
 //адреса карточек 4_3
         // console.log(

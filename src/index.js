@@ -1,9 +1,12 @@
 import './sass/main.scss';
 import './js/pagination.js';
 import './js/modal.js';
+import { refs } from './js/refs';
 import { Spinner } from 'spin.js';
 import { renderService } from './js/search-render-service';
-renderService.fetchAndRenderEvents();
+renderService.fetchAndRenderEvents(refs);
+import { toTop } from './js/to-top-btn';
+toTop.createBtnAndEvnListeners();
 
 // настройки спиннера
 var opts = {
@@ -26,4 +29,10 @@ var opts = {
   className: 'spinner', // The CSS class to assign to the spinner
   position: 'absolute', // Element positioning
 };
-var spinner = new Spinner(opts)
+var spinner = new Spinner(opts);
+
+
+
+console.log('массив всех объектов-событий, полученых с сервера и отрендереных на экране: refs.tempEventsArray ', refs.tempEventsArray);
+
+console.log("Привіт, світ!))) Життя ДУЖЕ брутальне!(((");
