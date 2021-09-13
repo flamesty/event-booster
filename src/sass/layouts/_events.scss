@@ -1,12 +1,15 @@
 :root {
   --bg-events-color: #333333;
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --main-btn-color: silver;
+  --inv-btn-main-color: rgb(63, 63, 63);
   --animation-duration: 250ms;
 }
 
-// .events-section {
-//   // background-color: var(--bg-events-color);
-// }
+.events-section {
+  display: flex;
+  flex-direction: column;
+}
 
 .result-container {
   display: flex;
@@ -190,4 +193,47 @@
 
 .event-place {
   font-size: 12px;
+}
+
+.btn-gen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px 0;
+  background-color: var(--main-btn-color);
+  color: var(--inv-btn-main-color);
+  font-weight: 600;
+}
+
+.done-btn {
+  // position: fixed;
+  // left: calc(50% - 150px);
+  // bottom: 36px;
+  margin: 12px auto 48px auto;
+  width: 240px;
+  opacity: 0.6;
+  background-color: rgba(220, 86, 197, 1);
+  color: var(--inv-btn-main-color);
+}
+
+.opacity-btn {
+  transform: scale(1);
+  opacity: 0.6;
+  transition: opacity var(--animation-duration) var(--timing-function),
+    transform var(--animation-duration) var(--timing-function);
+}
+
+.opacity-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.8;
+}
+
+.fix-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+}
+
+.hide-el {
+  display: none;
 }
