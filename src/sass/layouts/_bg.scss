@@ -1,8 +1,8 @@
 
 body {
-background-repeat: no-repeat;
-    background-size: contain;
-    background-position: bottom;
+background-repeat: no-repeat,no-repeat;
+    background-size: contain, contain;
+    background-position: bottom, center;
     background-color:var(--modal-text-color);
 @media screen and (max-width: 767px) {
     background-image: url(../images/background/mobile/bg-body-mob.png);
@@ -12,22 +12,19 @@ background-repeat: no-repeat;
 }
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    background-image: url(../images/background/tablet/bg-body-tabl.png);
+    background-image:url(../images/background/tablet/decor-body-tabl.png), url(../images/background/tablet/bg-body-tabl.png);
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-      background-image: url(../images/background/tablet/bg-body-tabl@2x.png);
+      background-image:url(../images/background/tablet/decor-body-tabl@2x.png), url(../images/background/tablet/bg-body-tabl@2x.png);
     }
   }
 
   @media screen and (min-width: 1280px) {
-    background-image: url(../images/background/desktop/bg-body-desk.png);
+    background-image:url(../images/background/desktop/decor-desktop.png), url(../images/background/desktop/bg-body-desk.png);
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-      background-image: url(../images/background/desktop/bg-body-desk@2x.png);
+      background-image: url(../images/background/desktop/decor-desk@2x.png),url(../images/background/desktop/bg-body-desk@2x.png); 
     }
   }
 }
-
-
-
 
 
 
