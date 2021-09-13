@@ -1,11 +1,44 @@
+.header_logo {
+  display: flex;
+}
+
+.header_title {
+  margin: 0 auto 0 auto;
+  width: 212px;
+  color: var(--main-title-color);
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1.22;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    width: 353px;
+    font-size: 30px;
+    line-height: 1.23;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 589px;
+    font-size: 50px;
+    line-height: 1.22;
+  }
+}
+
 .hero {
+  padding-top: 78px;
+  padding-left: auto;
+  padding-right: auto;
   height: 364px;
+  background-repeat: no-repeat;
+  background-position: top center;
   background-image: linear-gradient(
       to top,
       var(--main-background-color),
-      transparent,
-      transparent,
-      transparent
+      var(--background-overlay),
+      var(--background-overlay),
+      var(--background-overlay)
     ),
     url(../../src/images/hero/hero-mob.jpg);
 
@@ -15,20 +48,21 @@
     background-image: linear-gradient(
         to top,
         var(--main-background-color),
-        transparent,
-        transparent,
-        transparent
+        var(--background-overlay),
+        var(--background-overlay),
+        var(--background-overlay)
       ),
       url(../../src/images/hero/hero-mob-2x.jpg);
   }
 
   @media screen and (min-width: 768px) {
+    padding-top: 40px;
     background-image: linear-gradient(
         to top,
         var(--main-background-color),
-        transparent,
-        transparent,
-        transparent
+        var(--background-overlay),
+        var(--background-overlay),
+        var(--background-overlay)
       ),
       url(../../src/images/hero/hero-tab.jpg);
 
@@ -38,9 +72,9 @@
       background-image: linear-gradient(
           to top,
           var(--main-background-color),
-          transparent,
-          transparent,
-          transparent
+          var(--background-overlay),
+          var(--background-overlay),
+          var(--background-overlay)
         ),
         url(../../src/images/hero/hero-tab-2x.jpg);
     }
@@ -51,9 +85,9 @@
     background-image: linear-gradient(
         to top,
         var(--main-background-color),
-        transparent,
-        transparent,
-        transparent
+        var(--background-overlay),
+        var(--background-overlay),
+        var(--background-overlay)
       ),
       url(../../src/images/hero/hero-lap.jpg);
 
@@ -63,9 +97,9 @@
       background-image: linear-gradient(
           to top,
           var(--main-background-color),
-          transparent,
-          transparent,
-          transparent
+          var(--background-overlay),
+          var(--background-overlay),
+          var(--background-overlay)
         ),
         url(../../src/images/hero/hero-lap-2x.jpg);
     }
