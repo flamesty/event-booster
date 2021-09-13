@@ -1,0 +1,36 @@
+body {
+    
+    background-image: url(../image/bgbodymobile_1x.jpg);
+       
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: center;
+  
+    @media screen and (min-width: 768px) {
+      max-width: 768px;
+      background-image: url(../image/bgbodytablet_1x.jpg);
+    }
+  
+    @media screen and (min-width: 1280px) {
+      
+      background-image: url(../image/bgbodydesktop_1x.jpg);
+    }
+
+}
+
+@media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        body {
+            background-image: url(../image/bgbodymobile_2x.jpg);
+
+            @media screen and (min-width: 768px) {
+                background-image: url(../image/bgbodytablet_2x.jpg);
+            }
+
+            @media screen and (min-width: 1280px) {
+                background-image: url(../image/bgbodydesktop_2x.jpg);
+            }
+        }
+    }
