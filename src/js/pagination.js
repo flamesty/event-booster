@@ -62,3 +62,14 @@ function createPagination(totalPages, page){
   element.innerHTML = liTag; //add li tag inside ul tag
   return liTag; //reurn the li tag
 }
+
+
+const btnNumber = document.querySelector('.pagination__list');
+
+btnNumber.addEventListener('click', onNumberPage);
+
+function onNumberPage(e) {
+  const indexArr = Number(e.target.textContent) - 1;
+  // console.log(indexArr);
+  return indexArr;
+};
