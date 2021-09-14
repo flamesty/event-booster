@@ -3,10 +3,14 @@ import './js/pagination.js';
 import './js/modal.js';
 import { refs } from './js/refs';
 import { Spinner } from 'spin.js';
-import { renderService } from './js/search-render-service';
-renderService.fetchAndRenderEvents(refs);
+// import { renderService } from './js/search-render-service';
+// renderService.fetchAndRenderEvents(refs);
 import { toTop } from './js/to-top-btn';
 toTop.createBtnAndEvnListeners();
+import './js/datalist';
+
+
+
 
 // настройки спиннера
 var opts = {
@@ -33,6 +37,6 @@ var spinner = new Spinner(opts);
 
 
 
-console.log('массив всех объектов-событий, полученых с сервера и отрендереных на экране: refs.tempEventsArray ', refs.tempEventsArray);
+// console.log('массив всех объектов-событий, полученых с сервера и отрендереных на экране: refs.tempEventsArray ', refs.tempEventsArray);
 
-console.log("Привіт, світ!))) Життя ДУЖЕ брутальне!(((");
+// console.log("Привіт, світ!))) Життя ДУЖЕ брутальне!(((");

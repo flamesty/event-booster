@@ -6,18 +6,32 @@
       AROUND THE WORLD</h1>
       <form action="" class="search-form">
         <input type="text" placeholder="Start searching" />
-        <input
+
+        
+        <label for="custom-select"></label>
+        <input class="input-country" type="text" id="custom-select" id="country-choice" placeholder="Choose country">
+        <img src="./images/sprite.svg#icon-close" alt="">
+        <ul class="country-datalist">
+          <li class="option-country" tabindex='0'>Ukraine</li>
+          <li class="option-country" tabindex='0'>USA</li>
+          <li class="option-country" tabindex='0'>Canada</li>
+          <li class="option-country" tabindex='0'>Uganda</li>
+        </ul>
+        <!-- <div id='custom-select-status' class='hidden-visually' aria-live='polite'></div> -->
+        
+        
+        <!-- <input 
           list="country-name"
           id="country-choice"
           name=""
           placeholder="Choose country"
         />
-        <datalist id="country-name">
-          <option value="Ukraine"></option>
+        <datalist class="input-datalist" id="country-name">
+          <option  value="Ukraine"></option>
           <option value="USA"></option>
           <option value="Canada"></option>
           <option value=""></option>
-        </datalist>
+        </datalist> -->
       </form>
     </div>
   </section>
