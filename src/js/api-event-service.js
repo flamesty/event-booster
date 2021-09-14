@@ -48,6 +48,8 @@ class EventsApiService {
     set query(newQuery) {
         this.searchQuery = newQuery;
     }
+
+    
 };
 
 export const eventsApiService = new EventsApiService;
