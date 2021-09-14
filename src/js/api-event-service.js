@@ -3,7 +3,7 @@ import axios from '../../node_modules/axios';
 class EventsApiService {
     constructor() {
         this.searchQuery = 'music';
-        this.KEY = 'MkxNTXYXUEQRlh118nYnjnST38862gPB';
+        this.KEY = 'UpgHSJqZ1Y8ozVdUGkbpn88huHj46iS1';
         this.BASE_URL = 'https://app.ticketmaster.com/discovery/v2/';
         this.countryCode = '';
         this.page = 0;

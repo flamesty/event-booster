@@ -2,16 +2,18 @@
 .footer{
 
     @media screen and (min-width: 320px){
-        padding-top: 60px;
+        padding-top: 67px;
         padding-bottom: 27px;
     }
     @media screen and (min-width: 768px){
-        display:none;
-    }
+         padding-top: 65px;
+        padding-bottom: 18px;
+     }
+    
      @media screen and (min-width: 1280px){
-      display:block;
-        padding-top: 80px;
-        padding-bottom: 20px;
+       
+        padding-top: 85px;
+        padding-bottom: 19px;
      }
 
 }
@@ -25,12 +27,12 @@
     margin-left: auto;
     margin-right: auto;
     }
-    @media screen and (min-width: 1280px){
+    @media screen and (min-width: 768px){
     display: block;
     width:521px;
     height:20px;
     margin-left: auto;
-     margin-right: auto;
+    margin-right: auto;
     }
 }
 
@@ -45,7 +47,7 @@
     color:var(--footer-text-color);
 }
 
-@media screen and (min-width: 1280px){
+@media screen and (min-width: 768px){
     font-size: 16px;
     line-height: 1.25;
 }
