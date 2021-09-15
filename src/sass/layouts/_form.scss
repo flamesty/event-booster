@@ -9,20 +9,40 @@
       margin-right: auto;
     }
   }
-
   @media screen and (min-width: 768px) {
     padding-top: 27px;
   }
-
   @media screen and (min-width: 1280px) {
     padding-top: 52px;
+  }
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: 599px) {
+    display: grid;
+    .datalist-country {
+      left: 0%;
+    }
+  }
+}
+
+.label-search {
+  position: relative;
+  &::after {
+    content: '';
+    background-image: url(./../images/loupe.svg);
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 228px;
+    bottom: 14px;
   }
 }
 
 .input {
-  // padding: 10px 30px;
-  // display: block;
-  // border: none;
   padding-left: 30px;
   width: 270px;
   height: 40px;
@@ -42,3 +62,37 @@
     color: var(--form-imput-text-active);
   }
 }
+
+.label-country {
+  &::after {
+    content: '';
+    background-image: url(./../images/down.svg);
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    left: 225px;
+    bottom: 14px;
+    // transform: rotate(180deg);
+  }
+  &:focus,
+  &:hover {
+    &::after {
+      background-image: url(./../images/up.svg);
+      // transition-duration: 2000ms;
+    }
+  }
+}
+
+// .icon-country {
+//   position: absolute;
+//   left: 12px;
+//   bottom: 11px;
+//   width: 18px;
+//   @include transitions(fill);
+
+//   :hover + &,
+//   :focus + & {
+//     fill: $accent-color;
+//   }
+// }
