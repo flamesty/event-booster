@@ -87,7 +87,7 @@ backdrop-filter: blur(3px);
     transform: translate(-50%, -50%) scale(1);
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
     min-width: 272px;
-    // min-height: 915px;
+    max-height: 915px;
     background-color: var(--modal-background-color);
     
     border-radius: 150px 0px;
@@ -96,14 +96,14 @@ backdrop-filter: blur(3px);
     @media screen and (min-width: 768px) {
       padding: 28px 17px 56px 50px;
       width: 595px;
-height: 831px;
+max-height: 831px;
 border-radius: 300px 0px;
     }
 
     @media screen and (min-width: 1280px) {
       padding: 62px 30px;
       width: 930px;
-height: 1023px;
+max-height: 1023px;
     }
   }
 

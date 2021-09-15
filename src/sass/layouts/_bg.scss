@@ -1,8 +1,12 @@
-body {
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom;
-  background-color: var(--modal-text-color);
+
+// Версия без картинки героя в бэкграунде боди
+
+ body {
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    background-color:var(--modal-text-color);
+
   @media screen and (max-width: 767px) {
     background-image: url(../images/background/mobile/bg-body-mob.png);
     @media (min-device-pixel-ratio: 2),
@@ -13,23 +17,66 @@ body {
   }
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    background-image: url(../images/background/tablet/bg-body-tabl.png);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: url(../images/background/tablet/bg-body-tabl@2x.png);
+
+ background-size:595px,contain;
+  background-position:top,bottom;    
+    background-image:url(../images/background/tablet/decor-body-tabl.png), url(../images/background/tablet/bg-body-tabl.png)  ;
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+      background-image: url(../images/background/tablet/decor-body-tabl@2x.png),url(../images/background/tablet/bg-body-tabl@2x.png);
+
     }
   }
 
   @media screen and (min-width: 1280px) {
-    background-image: url(../images/background/desktop/bg-body-desk.png);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: url(../images/background/desktop/bg-body-desk@2x.png);
+
+    background-size:1050px,contain;
+    background-position:top,bottom; 
+     z-index:100,20;
+    background-image: url(../images/background/desktop/decor-desktop.png),url(../images/background/desktop/bg-body-desk.png);
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+      background-image: url(../images/background/desktop/decor-desk@2x.png), url(../images/background/desktop/bg-body-desk@2x.png);
+
     }
   }
 }
+
+// Версия с картинкой героя в бэкграунде боди
+
+
+//  body {
+//     z-index:100;
+//     background-repeat: no-repeat;
+//     background-size: contain;
+//     background-color:var(--modal-text-color);
+//   @media screen and (max-width: 767px) {
+//     background-image: 
+//     url(../../src/images/hero/hero-mob.jpg),url(../images/background/mobile/bg-body-mob.png);
+//     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+//       background-image: url(../../src/images/hero/hero-mob-2x.jpg), url(../images/background/mobile/bg-body-mob@2x.png);
+//     }
+// }
+
+//   @media screen and (min-width: 768px) and (max-width: 1279px) {
+//  background-size:595px,contain,contain;
+//   background-position:top,top,bottom;    
+  
+//     background-image:url(../images/background/tablet/decor-body-tabl.png), url(../../src/images/hero/hero-tab.jpg),url(../images/background/tablet/bg-body-tabl.png);
+//     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+//       background-image: url(../images/background/tablet/decor-body-tabl@2x.png), url(../../src/images/hero/hero-tab-2x.jpg),url(../images/background/tablet/bg-body-tabl@2x.png);
+//     }
+//   }
+
+//   @media screen and (min-width: 1280px) {
+//     background-size:1050px,contain,contain;
+//     background-position:top,top,bottom;  
+   
+//     background-image: url(../images/background/desktop/decor-desktop.png), url(../../src/images/hero/hero-lap.jpg),url(../images/background/desktop/bg-body-desk.png);
+//     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+//       background-image: url(../images/background/desktop/decor-desk@2x.png), url(../../src/images/hero/hero-lap-2x.jpg),url(../images/background/desktop/bg-body-desk@2x.png);
+//     }
+//   }
+// }
+
 
 // body {
 //     // max-width:100%;
@@ -73,3 +120,12 @@ body {
 //             }
 //         }
 //     }
+
+
+// linear-gradient(
+//       to top,
+//       transparent,
+//       var(--background-overlay),
+//       var(--background-overlay),
+//       var(--background-overlay)
+//     ),

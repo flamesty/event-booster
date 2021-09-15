@@ -1,0 +1,31 @@
+.notice-position {
+  position: fixed;
+  z-index: 100;
+  width: 360px;
+  // top: 130px;
+  // right: 100px;
+  // z-index: 10;
+}
+
+// .error-position {
+//   position: fixed;
+//   z-index: 100;
+//   width: 360px;
+//   // top: 50%;
+//   right: 50%;
+//   z-index: 11;
+// }
+
+.pnotify-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  opacity: 1;
+  pointer-events: initial;
+  backdrop-filter: blur(3px);
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.8);
+}

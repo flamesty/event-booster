@@ -1,5 +1,4 @@
 :root {
-  --bg-events-color: #333333;
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --main-btn-color: silver;
   --inv-btn-main-color: rgb(63, 63, 63);
@@ -16,6 +15,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 50vh;
   padding-top: 24px;
 }
 
@@ -85,6 +85,30 @@
   }
 }
 
+.img-frame {
+  width: 40vw;
+  height: 50.3vw;
+
+  @media screen and (min-width: 768px) {
+    width: 23.4vw;
+    height: 29.6vw;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 15.5vw;
+    height: 17.7vw;
+  }
+}
+
+.img-frame > img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  // object-fit: fill;
+  object-fit: cover;
+  // object-fit: contain;
+}
+
 .event-list-link {
   text-decoration: none;
   transform: scale(1);
@@ -99,8 +123,10 @@
   position: absolute;
   top: -3vw;
   right: -3vw;
-  width: 100%;
-  height: 100%;
+  width: 33.7vw;
+  height: 31.6vw;
+  // width: 100%;
+  // height: 100%;
   // top: -10px;
   // right: -10px;
   // width: 108px;
@@ -109,8 +135,10 @@
   @media screen and (min-width: 768px) {
     top: -1.8vw;
     right: -1.8vw;
-    width: 100%;
-    height: 100%;
+    width: 19.9vw;
+    height: 18.6vw;
+    // width: 100%;
+    // height: 100%;
     // top: -14px;
     // right: -14px;
     // width: 152px;
@@ -120,8 +148,10 @@
   @media screen and (min-width: 1280px) {
     top: -1.1vw;
     right: -1.1vw;
-    width: 100%;
-    height: 100%;
+    width: 12vw;
+    height: 11.2vw;
+    // width: 100%;
+    // height: 100%;
     // top: -14px;
     // right: -14px;
     // width: 152px;
@@ -140,12 +170,6 @@
 
 .img-list-link {
   width: 100%;
-}
-
-.event-img {
-  display: block;
-  width: 100%;
-  object-fit: contain;
 }
 
 .event-description,
@@ -206,9 +230,6 @@
 }
 
 .done-btn {
-  // position: fixed;
-  // left: calc(50% - 150px);
-  // bottom: 36px;
   margin: 12px auto 48px auto;
   width: 240px;
   opacity: 0.6;
