@@ -1,8 +1,9 @@
 import axios from '../../node_modules/axios';
+import { refsGen } from './refs';
 
 class EventsApiService {
     constructor() {
-        this.searchQuery = 'music';
+        this.searchQuery = 'rock and roll';
         this.KEY = 'UpgHSJqZ1Y8ozVdUGkbpn88huHj46iS1';
         this.BASE_URL = 'https://app.ticketmaster.com/discovery/v2/';
         this.countryCode = '';
@@ -19,6 +20,8 @@ class EventsApiService {
             this.searchResult = 'nothing';
             return
         }
+        refsGen.totalPages = response.data.page.totalPages;
+        console.log('refsGen.totalPages: ',refsGen.totalPages);
         this.incrementPage();
         return response.data._embedded.events;
     }
