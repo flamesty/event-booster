@@ -48,8 +48,7 @@ class RenderService {
         }
         catch (error) {
             console.log('Error: request failed ', error);
-            // alert('запрос не прошел')
-            console.log(this.events);
+            // alert('запрос не прошел');
             };
 
             // if (this.events === undefined) {
@@ -76,7 +75,7 @@ class RenderService {
     renderEvtList({tempEventsArray}) {
         this.tempRenderArrCreator();
         this.eventsList.insertAdjacentHTML('beforeend', evtListTpl(this.tempRenderArr));
-        tempEventsArray.push(...this.tempRenderArr);
+        tempEventsArray.push(...this.events);
     };
 
     tempRenderArrCreator() {
