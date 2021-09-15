@@ -1,15 +1,15 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
+let __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function (t) {
+        for (let s, i = 1, n = arguments.length; i < n; i++) {
             s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            for (let p in s) if (Object.prototype.hasOwnProperty.call(s, p))
                 t[p] = s[p];
         }
         return t;
     };
     return __assign.apply(this, arguments);
 };
-var defaults = {
+let defaults = {
     lines: 12,
     length: 7,
     width: 5,
@@ -31,29 +31,29 @@ var defaults = {
 };
 
 // настройки спиннера
-var opts = {
-  lines: 13, // The number of lines to draw
-  length: 25, // The length of each line
-  width: 12, // The line thickness
-  radius: 25, // The radius of the inner circle
-  scale: 1, // Scales overall size of the spinner
-  corners: 1, // Corner roundness (0..1)
-  speed: 1, // Rounds per second
-  rotate: 0, // The rotation offset
-  animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
-  direction: 1, // 1: clockwise, -1: counterclockwise
-  color: '#dc56c5', // CSS color or array of colors
-  fadeColor: 'transparent', // CSS color or array of colors
-  top: '50%', // Top position relative to parent
-  left: '50%', // Left position relative to parent
-  shadow: '0 0 1px transparent', // Box-shadow for the lines
-  zIndex: 2000000000, // The z-index (defaults to 2e9)
-  className: 'spinner', // The CSS class to assign to the spinner
-  position: 'absolute', // Element positioning
+let opts = {
+    lines: 13, // The number of lines to draw
+    length: 25, // The length of each line
+    width: 12, // The line thickness
+    radius: 25, // The radius of the inner circle
+    scale: 1, // Scales overall size of the spinner
+    corners: 1, // Corner roundness (0..1)
+    speed: 1, // Rounds per second
+    rotate: 0, // The rotation offset
+    animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    color: '#dc56c5', // CSS color or array of colors
+    fadeColor: 'transparent', // CSS color or array of colors
+    top: '50%', // Top position relative to parent
+    left: '50%', // Left position relative to parent
+    shadow: '0 0 1px transparent', // Box-shadow for the lines
+    zIndex: 2000000000, // The z-index (defaults to 2e9)
+    className: 'spinner', // The CSS class to assign to the spinner
+    position: 'absolute', // Element positioning
 };
 
 
-var Spinner = /** @class */ (function () {
+let Spinner = /** @class */ (function () {
     function Spinner(opts) {
         if (opts === void 0) { opts = {}; }
         this.opts = __assign(__assign({}, defaults), opts);
@@ -108,7 +108,7 @@ export { Spinner };
  * Sets multiple style properties at once.
  */
 function css(el, props) {
-    for (var prop in props) {
+    for (let prop in props) {
         el.style[prop] = props[prop];
     }
     return el;
@@ -123,18 +123,18 @@ function getColor(color, idx) {
  * Internal method that draws the individual lines.
  */
 function drawLines(el, opts) {
-    var borderRadius = (Math.round(opts.corners * opts.width * 500) / 1000) + 'px';
-    var shadow = 'none';
+    let borderRadius = (Math.round(opts.corners * opts.width * 500) / 1000) + 'px';
+    let shadow = 'none';
     if (opts.shadow === true) {
         shadow = '0 2px 4px #000'; // default shadow
     }
     else if (typeof opts.shadow === 'string') {
         shadow = opts.shadow;
     }
-    var shadows = parseBoxShadow(shadow);
-    for (var i = 0; i < opts.lines; i++) {
-        var degrees = ~~(360 / opts.lines * i + opts.rotate);
-        var backgroundLine = css(document.createElement('div'), {
+    let shadows = parseBoxShadow(shadow);
+    for (let i = 0; i < opts.lines; i++) {
+        let degrees = ~~(360 / opts.lines * i + opts.rotate);
+        let backgroundLine = css(document.createElement('div'), {
             position: 'absolute',
             top: -opts.width / 2 + "px",
             width: (opts.length + opts.width) + 'px',
@@ -144,9 +144,9 @@ function drawLines(el, opts) {
             transformOrigin: 'left',
             transform: "rotate(" + degrees + "deg) translateX(" + opts.radius + "px)",
         });
-        var delay = i * opts.direction / opts.lines / opts.speed;
+        let delay = i * opts.direction / opts.lines / opts.speed;
         delay -= 1 / opts.speed; // so initial animation state will include trail
-        var line = css(document.createElement('div'), {
+        let line = css(document.createElement('div'), {
             width: '100%',
             height: '100%',
             background: getColor(opts.color, i),
@@ -159,18 +159,18 @@ function drawLines(el, opts) {
     }
 }
 function parseBoxShadow(boxShadow) {
-    var regex = /^\s*([a-zA-Z]+\s+)?(-?\d+(\.\d+)?)([a-zA-Z]*)\s+(-?\d+(\.\d+)?)([a-zA-Z]*)(.*)$/;
-    var shadows = [];
-    for (var _i = 0, _a = boxShadow.split(','); _i < _a.length; _i++) {
-        var shadow = _a[_i];
-        var matches = shadow.match(regex);
+    let regex = /^\s*([a-zA-Z]+\s+)?(-?\d+(\.\d+)?)([a-zA-Z]*)\s+(-?\d+(\.\d+)?)([a-zA-Z]*)(.*)$/;
+    let shadows = [];
+    for (let _i = 0, _a = boxShadow.split(','); _i < _a.length; _i++) {
+        let shadow = _a[_i];
+        let matches = shadow.match(regex);
         if (matches === null) {
             continue; // invalid syntax
         }
-        var x = +matches[2];
-        var y = +matches[5];
-        var xUnits = matches[4];
-        var yUnits = matches[7];
+        let x = +matches[2];
+        let y = +matches[5];
+        let xUnits = matches[4];
+        let yUnits = matches[7];
         if (x === 0 && !xUnits) {
             xUnits = yUnits;
         }
@@ -195,18 +195,18 @@ function parseBoxShadow(boxShadow) {
  * Modify box-shadow x/y offsets to counteract rotation
  */
 function normalizeShadow(shadows, degrees) {
-    var normalized = [];
-    for (var _i = 0, shadows_1 = shadows; _i < shadows_1.length; _i++) {
-        var shadow = shadows_1[_i];
-        var xy = convertOffset(shadow.x, shadow.y, degrees);
+    let normalized = [];
+    for (let _i = 0, shadows_1 = shadows; _i < shadows_1.length; _i++) {
+        let shadow = shadows_1[_i];
+        let xy = convertOffset(shadow.x, shadow.y, degrees);
         normalized.push(shadow.prefix + xy[0] + shadow.xUnits + ' ' + xy[1] + shadow.yUnits + shadow.end);
     }
     return normalized.join(', ');
 }
 function convertOffset(x, y, degrees) {
-    var radians = degrees * Math.PI / 180;
-    var sin = Math.sin(radians);
-    var cos = Math.cos(radians);
+    let radians = degrees * Math.PI / 180;
+    let sin = Math.sin(radians);
+    let cos = Math.cos(radians);
     return [
         Math.round((x * cos + y * sin) * 1000) / 1000,
         Math.round((-x * sin + y * cos) * 1000) / 1000,
