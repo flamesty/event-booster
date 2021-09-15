@@ -2,7 +2,6 @@ import { eventsApiService } from "./api-event-service.js";
 import { renderService } from "./search-render-service.js";
 import modalMarkup from '../templates/modal-markup.hbs';
 import { tempEventsArray } from './refs';
-
 const refs = {
 modal: document.querySelector('.modal'),
 modalContainer: document.querySelector('.modal__content'),
