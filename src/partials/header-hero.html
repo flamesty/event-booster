@@ -5,33 +5,31 @@
       <h1 class="header_title">FIND BEST EVENTS
       AROUND THE WORLD</h1>
       <form action="" class="search-form">
-        <input type="text" placeholder="Start searching" />
+        <input class="input input-search" type="text" placeholder="Start searching" autocomplete="off"/>
 
         
-        <label for="custom-select"></label>
-        <input class="input-country" type="text" id="custom-select" id="country-choice" placeholder="Choose country">
-        <img src="./images/sprite.svg#icon-close" alt="">
-        <ul class="country-datalist">
-          <li class="option-country" tabindex='0'>Ukraine</li>
-          <li class="option-country" tabindex='0'>USA</li>
-          <li class="option-country" tabindex='0'>Canada</li>
-          <li class="option-country" tabindex='0'>Uganda</li>
+        <label class="label-country" for="custom-select">
+          <!-- <svg class="icon-country" widht="12" height="12">
+            <use href="./images/sprite.svg#icon-close"></use>
+          </svg> -->
+        <input class="input input-country" type="text" id="country-choice" placeholder="Choose country" autocomplete="off">
+        <ul class="datalist-country hidden-list">
+          <li tabindex="0" data-code="UA">Ukraine</li>
+          <li tabindex="0" data-code="US">USA</li>
+          <li tabindex="0" data-code="CA">Canada</li>
+          <li tabindex="0" data-code="UG">Uganda</li>
+          <li tabindex="0" data-code="FR">France</li>
+          <li tabindex="0" data-code="GE">Germany</li>
+          <li tabindex="0" data-code="GR">Gergia</li>
+          <li tabindex="0" data-code="MX">Mexico</li>
+          <li tabindex="0" data-code="EN">England</li>
+          <li tabindex="0" data-code="IR">Irland</li>
+          <li tabindex="0" data-code="SP">Spain</li>
+          <li tabindex="0" data-code="HZ">Hzchto</li>
         </ul>
+        </label>
         <!-- <div id='custom-select-status' class='hidden-visually' aria-live='polite'></div> -->
         
-        
-        <!-- <input 
-          list="country-name"
-          id="country-choice"
-          name=""
-          placeholder="Choose country"
-        />
-        <datalist class="input-datalist" id="country-name">
-          <option  value="Ukraine"></option>
-          <option value="USA"></option>
-          <option value="Canada"></option>
-          <option value=""></option>
-        </datalist> -->
       </form>
     </div>
   </section>
