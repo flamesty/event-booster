@@ -1,4 +1,5 @@
 import datalistTemplate from '../templates/datalistTemplate.hbs';
+import { refsGen } from '../js/refs';
 
 const countries = [
   { code: "AD", name: "Andorra" },
@@ -88,18 +89,18 @@ const countries = [
 
 const refInput = document.querySelector(".input-country");
 const refDatalist = document.querySelector(".datalist-country");
+const refItemDatalist = refDatalist.children;
+let contentInput = refInput.value;
+
+
+
 refInput.addEventListener('keyup', doKeyAction)
 // refInput.addEventListener('blur', canCloseList)
 refDatalist.addEventListener('keyup', doKeyAction)
 refInput.addEventListener("input", doFilter);
 refInput.addEventListener("focus", openList);
 refDatalist.addEventListener("click", doСountryClick);
-refDatalist.addEventListener("dblclick", makeChoice);
-
-
-const refItemDatalist = refDatalist.children;
-let country = "";
-let contentInput = refInput.value;
+// refDatalist.addEventListener("dblclick", makeChoice);
 
 function renderDatalistMarkup(data) {
     const datalistMarkup = data.map(datalistTemplate).join('');
@@ -109,17 +110,16 @@ renderDatalistMarkup(countries);
 
 function doKeyAction(whichKey) {
     const focusPoint = document.activeElement
-    console.log(focusPoint)
   switch(whichKey.key) {
-      case 'ArrowDown':
-          toggleListDown(focusPoint)
+    //   case 'ArrowDown':
+        //   toggleListDown(focusPoint)
         //   moveFocus(focusPoint, 'forward')
           
-          break;
-      case 'ArrowUp':
-          toggleListUp(focusPoint)
+        //   break;
+    //   case 'ArrowUp':
+        //   toggleListUp(focusPoint)
         //   moveFocus(focusPoint, 'back')
-          break;
+        //   break;
       case 'Enter':
           makeChoice(focusPoint)
         //   toggleList('Shut')
@@ -129,9 +129,10 @@ function doKeyAction(whichKey) {
 }
 
 function makeChoice(whichOption) {
-    doFilter()
+    // doFilter()
     let datalistLength = []
     let datalistName = []
+    console.log(whichOption)
     for (let i = 0; i < refItemDatalist.length; i += 1) {
         if (refItemDatalist[i].innerText.toUpperCase().includes(contentInput.toUpperCase())) {
             datalistLength.push(refItemDatalist[i].dataset.code)
@@ -140,16 +141,21 @@ function makeChoice(whichOption) {
     }
     if (datalistLength.length === 1) {
         refInput.value = datalistName[0];
-        country = datalistLength[0];
+        refsGen.countryCode = datalistLength[0];
         closeList()
         refInput.blur()
-        console.log(country)
+    }
+    if (whichOption.dataset.code !== undefined) {
+        refInput.value = whichOption.innerText;
+        refsGen.countryCode = whichOption.dataset.code;
+        closeList()
+        refInput.blur()
     }
 }
 
 function openList() {
     refDatalist.classList.remove("hidden-list");
-
+    refInput.value = "";
     refInput.style.borderRadius = "20px 20px 0 0";
      for (let each of refItemDatalist) {
             each.style.display=""
@@ -162,7 +168,6 @@ function closeList() {
 }
 
 // function canCloseList() {
-//     console.log(document.activeElement)
 //     if (document.activeElement !== refDatalist) {
 //         closeList()
 //     }
@@ -176,7 +181,6 @@ function toggleListUp(focusPoint) {
 }
 function toggleListDown(focusPoint) {
     if (focusPoint.classList.contains("input")) {
-        console.log(refItemDatalist[0])
         for (let i = 0; i < refItemDatalist.length; i += 1) {
             if (refItemDatalist[i].style.display !== "none") {
                 refItemDatalist[i].focus()
@@ -210,12 +214,15 @@ function doFilter() {
 
 function doСountryClick(e) {
     refInput.value = e.target.innerText;
+    refsGen.countryCode = e.target.dataset.code;
+        closeList()
+        refInput.blur()
+    // refInput.value = e.target.innerText;
 }
 
 
 
 // function updateStatus(howMany) {
-    //     console.log('updating status')
 //     csStatus.textContent = howMany + " options available."
 // }
 // csSelector.setAttribute('role', 'combobox') 
