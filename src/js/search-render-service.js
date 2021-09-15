@@ -1,6 +1,7 @@
 import { throttle } from '../../node_modules/throttle-debounce';
 import { eventsApiService } from './api-event-service';
 import evtListTpl from '../templates/events-list.hbs';
+import { spinner } from './spin';
 
 class RenderService {
     constructor() {
@@ -40,26 +41,36 @@ class RenderService {
 
 
 
-    async fetchAndRenderEvents(ref) {    
-    try {
-        this.events = await eventsApiService.fetchEvents();
-    }
-    catch (error) {
-        console.log('Error: request failed');
-        };
-
-        if (eventsApiService.searchResult === 'nothing') {
-            this.clearIfAllDone();
-            // return alert('Введи что-то нормальное');
+    async fetchAndRenderEvents(ref) {
+        spinner.spin(document.getElementById('events'));    
+        try {
+            this.events = await eventsApiService.fetchEvents();
         }
-        
-    if (this.infiniteScrollOn === 'on') {
-        this.endedScroll = false;
-        window.addEventListener("scroll", throttle(500, () => this.unlessScroll()));
-        this.renderEvtList(ref);  
-        };
+        catch (error) {
+            console.log('Error: request failed ', error);
+            // alert('запрос не прошел')
+            console.log(this.events);
+            };
 
-     this.renderEvtList(ref);   
+            // if (this.events === undefined) {
+            //     // this.clearIfAllDone();
+            //     return alert('Введи что-то нормальное');
+            // }
+
+            // if (eventsApiService.searchResult === 'nothing') {
+            //     this.clearIfAllDone();
+            //     // return alert('Введи что-то нормальное');
+            // }
+            
+        if (this.infiniteScrollOn === 'on') {
+            this.endedScroll = false;
+            window.addEventListener("scroll", throttle(500, () => this.unlessScroll()));
+            this.renderEvtList(ref);  
+            };
+
+        this.renderEvtList(ref);
+     
+        spinner.stop(document.getElementById('events'));
     };
 
     renderEvtList({tempEventsArray}) {
@@ -85,14 +96,13 @@ class RenderService {
             
             this.tempRenderArr.push(tempObj);
         }
-        // console.log(this.tempRenderArr);
     };
 
     unlessScroll(){
     if (this.endedScroll){
-      return window.removeEventListener("scroll", throttle(500, () => this.unlessScroll()));
+      return window.removeEventListener("scroll", throttle(0, () => this.unlessScroll()));
     }
-    if(window.pageYOffset + window.innerHeight >= document.getElementById('unless-scroll').offsetHeight){
+    if(window.pageYOffset + window.innerHeight >= document.getElementById('events').offsetHeight){
             //загружаем новое содержимое в элемент
       this.fetchAndRenderEvents();
       eventsApiService.page += 1;
