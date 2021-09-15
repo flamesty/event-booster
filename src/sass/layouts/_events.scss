@@ -1,5 +1,4 @@
 :root {
-  --bg-events-color: #333333;
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --main-btn-color: silver;
   --inv-btn-main-color: rgb(63, 63, 63);
@@ -16,6 +15,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 50vh;
   padding-top: 24px;
 }
 
@@ -230,9 +230,6 @@
 }
 
 .done-btn {
-  // position: fixed;
-  // left: calc(50% - 150px);
-  // bottom: 36px;
   margin: 12px auto 48px auto;
   width: 240px;
   opacity: 0.6;

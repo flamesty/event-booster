@@ -1,6 +1,6 @@
-export const refs = {
+export const refsGen = {
   currentSearchQuery: '',
   tempEventsArray: [],
 }
 
-export const tempEventsArray = refs.tempEventsArray;
+export const tempEventsArray = refsGen.tempEventsArray;
