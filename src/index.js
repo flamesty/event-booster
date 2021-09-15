@@ -6,8 +6,7 @@ import { renderService } from './js/search-render-service';
 renderService.fetchAndRenderEvents(refsGen);
 import { toTop } from './js/to-top-btn';
 toTop.createBtnAndEvnListeners();
-
-
+import './js/datalist';
 
 
 

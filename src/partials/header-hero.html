@@ -5,28 +5,20 @@
       <h1 class="header_title">FIND BEST EVENTS
       AROUND THE WORLD</h1>
       <form action="" class="search-form">
-        <input type="text" placeholder="Start searching" />
-        <!-- <span class="material-icons-outlined">
-search (code point e8b6)
-</span> -->
-        <input
-          list="country-name"
-          id="country-choice"
-          name=""
-          placeholder="Choose country"
-        />
-        <datalist id="country-name">
-          <option value="Ukraine"></option>
-          <option value="USA"></option>
-          <option value="Canada"></option>
-          <option value=""></option>
-        </datalist>
-        <!-- <span class="material-icons-outlined">
-arrow_drop_down (code point e5c5)
-</span> -->
-<!-- <span class="material-icons-outlined">
-arrow_drop_up(code point e5c7)
-</span> -->
+
+        <input class="input input-search" type="text" placeholder="Start searching" autocomplete="off"/>
+
+        
+        <label class="label-country" for="custom-select">
+          <!-- <svg class="icon-country" widht="12" height="12">
+            <use href="./images/sprite.svg#icon-close"></use>
+          </svg> -->
+        <input class="input input-country" type="text" id="country-choice" placeholder="Choose country" autocomplete="off">
+        <ul class="datalist-country hidden-list">
+        </ul>
+        </label>
+        <!-- <div id='custom-select-status' class='hidden-visually' aria-live='polite'></div> -->
+ 
       </form>
     </div>
   </section>
