@@ -1,11 +1,14 @@
+import { refsGen } from './refs';
+import { renderService } from './search-render-service';
+
 // selecting required element
 const element = document.querySelector(".pagination ul");
-let totalPages = 29;
-let page = 1;
+// export let totalPages;
+// export let page = 1;
 
 //calling function with passing parameters and adding inside element which is ul tag
-element.innerHTML = createPagination(totalPages, page);
-function createPagination(totalPages, page){
+// element.innerHTML = createPagination(totalPages, page);
+export function createPagination(totalPages, page){
   let liTag = '';
   let active;
   let beforePage = page - 1;
@@ -64,12 +67,16 @@ function createPagination(totalPages, page){
 }
 
 
-const btnNumber = document.querySelector('.pagination__list');
+// const btnNumber = document.querySelector('.pagination__list');
 
-btnNumber.addEventListener('click', onNumberPage);
+// !!!!еще не заработало, рендерит как кнопка догрузки (нужно очистить страницу перед рендером), и внимательно посмотреть код выше, также не пойму как обратиться к onclick в li-шках
+element.addEventListener('click', onClickPagination);
 
-function onNumberPage(e) {
-  const indexArr = Number(e.target.textContent) - 1;
-  // console.log(indexArr);
-  return indexArr;
+function onClickPagination(e) {
+  const newPageNumber = Number(e.target.textContent) - 1;
+  refsGen.pageNumber = newPageNumber;
+  
+  return  renderService.fetchAndRenderEvents(refsGen)
+  
+  
 };

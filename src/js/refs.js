@@ -3,6 +3,7 @@ export const refsGen = {
   tempEventsArray: [],
   countryCode: "",
   totalPages: 0,
+  pageNumber: 1,
 }
 
 export const tempEventsArray = refsGen.tempEventsArray;
