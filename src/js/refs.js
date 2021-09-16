@@ -1,7 +1,7 @@
 export const refsGen = {
   currentSearchQuery: '',
   tempEventsArray: [],
-  countriesCode: '',
+  countryCode: "",
   totalPages: 0,
 }
 

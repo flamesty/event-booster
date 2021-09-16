@@ -44,7 +44,7 @@
 
   &::after {
     content: '';
-    background-image: url(./../images/line.svg);
+    background-image: url(./../images/sprite.svg#icon-line);
     background-repeat: no-repeat;
     position: absolute;
     width: 226px;
@@ -57,6 +57,7 @@
   li {
     padding-left: 30px;
     padding-top: 2px;
+    outline: none;
   }
   :first-child {
     margin-top: 6px;

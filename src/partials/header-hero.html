@@ -8,14 +8,15 @@
 
         <label class="label-search">
           <input class="input input-search" type="text" name="query" placeholder="Start searching" autocomplete="off" />
-          <!-- <button type="submit" class="btn">
-            <span class="material-icons">search</span>
-          </button> -->
+          <button type="submit" class="btn btn-search" tabindex="-1">
+            <!-- <span class="material-icons">search</span> -->
+                  <svg class="icon-search" width="12" height="12">
+                    <use href="./images/sprite.svg#icon-loupe"></use>
+                  </svg>
+          </button>
         </label>
 
-        
         <label class="label-country" for="custom-select">
-          
         <input class="input input-country" type="text" id="country-choice" placeholder="Choose country" autocomplete="off">
         <ul class="datalist-country hidden-list">
         </ul>
