@@ -1,14 +1,24 @@
 import './sass/main.scss';
 import './js/pagination.js';
 import './js/modal.js';
+import './js/datalist';
 import { refsGen } from './js/refs';
 import { renderService } from './js/search-render-service';
-renderService.fetchAndRenderEvents(refsGen);
 import { toTop } from './js/to-top-btn';
+
 toTop.createBtnAndEvnListeners();
-import './js/datalist';
+window.addEventListener('DOMContentLoaded', () => renderService.initialAtStartup(refsGen));
 
 
-console.log('массив всех объектов-событий, полученых с сервера и отрендереных на экране: refs.tempEventsArray ', refsGen.tempEventsArray);
+
+
+
+
+
+
+
+
+console.log('массив всех объектов-событий, полученых с сервера и отрендереных на экране: refsGen.tempEventsArray ', refsGen.tempEventsArray);
 
 console.log("Привіт, світ!))) Життя ДУЖЕ брутальне!(((");
+

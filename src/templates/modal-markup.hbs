@@ -1,5 +1,5 @@
 
-      <img class="modal__img--preview" src="{{this.images.[6].url}}" alt="{{this.name}}">
+      <img class="modal__img--preview"  src="{{this.images.[6].url}}" alt="{{this.name}}">
       <div class="modal__content--flex">
         <img class="modal__img" src="{{this.images.[6].url}}" alt="{{this.name}}">
         <div class="modal__content--description">
@@ -25,12 +25,18 @@
       </li>
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">PRICES </h3>
-      <p class="modal-list__item-text">{{priceRanges.[0].min}} {{priceRanges.[0].currency}}</p>
-      {{!-- <button>BUY TICKETS</button> --}}
-      <p class="modal-list__item-text">{{priceRanges.[0].max}} {{priceRanges.[0].currency}}</p>
-      {{!-- <button>BUY TICKETS</button> --}}
+      {{!-- <p class="modal-list__item-text">{{priceRanges.[0].min}} {{priceRanges.[0].currency}}</p> --}}
+      {{!-- <p class="modal-list__item-text"><svg>
+        <use href="../images/sprite.svg#icon-ticket"></use>
+      </svg></p> --}}
+      <p class="modal-list__item-text modal-list__item-text--price-margin">Standart 300-500 UAH</p>
+      <a class="modal-list__tickets-standart modal-list__buy-tickets" href = {{url}}>BUY TICKETS</a>
+      {{!-- <p class="modal-list__item-text">{{priceRanges.[0].max}} {{priceRanges.[0].currency}}</p> --}}
+      <p class="modal-list__item-text modal-list__item-text--price-margin ">VIP 1000-1500 UAH</p>
+      <a class="modal-list__tickets-vip modal-list__buy-tickets" href={{url}}>BUY TICKETS</a>
       </li>
       </ul>
+      <button class="modal__btn-more">MORE FROM THIS AUTHOR</button>
     </div>
     </div>
     

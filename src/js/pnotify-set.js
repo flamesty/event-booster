@@ -42,11 +42,11 @@ function openModalPn() {
     let closerPn = document.querySelector('.pnotify-closer');
     closerPn.addEventListener('click', e => {
       document.querySelector('.pnotify-overlay').remove();
-      // input.disabled = false;
+      document.querySelector('[name="query"]').disabled = false; //разрешение ввода в input
       document.body.style.overflow = "auto"; // запуск скролла после закрытия модального окна
       document.body.style.height = "auto"; // запуск скролла после закрытия модального окна
     })
-    // input.disabled = true;
+    document.querySelector('[name="query"]').disabled = true; //запрет ввода в input
     document.body.style.overflow = "hidden"; // остановка скролла под модальным окном
     document.body.style.height = "100wh"; // остановка скролла под модальным окном
 };
