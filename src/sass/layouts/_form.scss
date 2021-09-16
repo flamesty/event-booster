@@ -30,16 +30,16 @@
 
 .label-search {
   position: relative;
-  &::after {
-    content: '';
-    background-image: url(./../images/loupe.svg);
-    background-repeat: no-repeat;
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    left: 228px;
-    bottom: 14px;
-  }
+  // &::after {
+  //   content: '';
+  //   background-image: url(./../images/loupe.svg);
+  //   background-repeat: no-repeat;
+  //   position: absolute;
+  //   width: 12px;
+  //   height: 12px;
+  //   left: 228px;
+  //   bottom: 14px;
+  // }
 }
 
 .input {
@@ -58,11 +58,11 @@
   line-height: 1.25;
 
   &:focus,
-  & :hover {
+  &:hover {
     color: var(--form-imput-text-active);
   }
 
-  outline: 0;
+  outline: none;
 }
 
 .label-country {
@@ -75,26 +75,45 @@
     height: 10px;
     left: 225px;
     bottom: 14px;
-    // transform: rotate(180deg);
+    transform: rotate(0deg);
+    transition: transform 400ms ease-in-out 0ms;
   }
   &:focus,
   &:hover {
     &::after {
-      background-image: url(./../images/up.svg);
-      // transition-duration: 2000ms;
+      transform: rotate(180deg);
+      transition: transform 400ms ease-in-out 0ms;
     }
   }
 }
 
-// .icon-country {
-//   position: absolute;
-//   left: 12px;
-//   bottom: 11px;
-//   width: 18px;
-//   @include transitions(fill);
+@keyframes animate180 {
+  0% {
+    transform: rotate(0deg);
+  }
 
-//   :hover + &,
-//   :focus + & {
-//     fill: $accent-color;
-//   }
-// }
+  50% {
+    transform: rotate(90deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.btn-search {
+  position: absolute;
+  background-color: transparent;
+  border: 0;
+  color: var(--form-input-icons);
+  left: 218px;
+  top: 11px;
+}
+
+.icon-search {
+  fill: var(--form-input-icons);
+  &:focus,
+  &:hover {
+    fill: var(--form-imput-bgc-active);
+  }
+}
