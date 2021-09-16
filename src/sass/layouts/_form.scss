@@ -58,7 +58,7 @@
 .label-country {
   &::after {
     content: '';
-    background-image: url(./../images/sprite.svg#icon-up);
+    background-image: url(./../images/up.svg);
     background-repeat: no-repeat;
     position: absolute;
     width: 15px;
@@ -71,23 +71,10 @@
   &:focus,
   &:hover {
     &::after {
+      content: '';
       transform: rotate(180deg);
       transition: transform 400ms ease-in-out 0ms;
     }
-  }
-}
-
-@keyframes animate180 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(90deg);
-  }
-
-  100% {
-    transform: rotate(180deg);
   }
 }
 

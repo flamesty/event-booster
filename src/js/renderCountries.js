@@ -1,5 +1,5 @@
 export const countries = [
-  { code: "", name: "...all" },
+  { code: "", name: "whole world" },
   { code: "AD", name: "Andorra" },
   { code: "AI", name: "Anguilla" },
   { code: "AR", name: "Argentina" },
