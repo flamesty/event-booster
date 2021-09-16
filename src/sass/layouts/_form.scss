@@ -30,16 +30,6 @@
 
 .label-search {
   position: relative;
-  // &::after {
-  //   content: '';
-  //   background-image: url(./../images/loupe.svg);
-  //   background-repeat: no-repeat;
-  //   position: absolute;
-  //   width: 12px;
-  //   height: 12px;
-  //   left: 228px;
-  //   bottom: 14px;
-  // }
 }
 
 .input {
@@ -68,7 +58,7 @@
 .label-country {
   &::after {
     content: '';
-    background-image: url(./../images/down.svg);
+    background-image: url(./../images/sprite.svg#icon-up);
     background-repeat: no-repeat;
     position: absolute;
     width: 15px;
