@@ -21,7 +21,7 @@ class EventsApiService {
         // console.log('response: ',response);
         if (response.data._embedded === undefined || response.data._embedded.events.length === 0 || response.data.page.totalPages === 0) {
             renderService.renderStoper = true;
-            alert('а нифига не найдено!!!!')
+            // alert('а нифига не найдено!!!!')
             return
         }
         refsGen.totalPages = response.data.page.totalPages;

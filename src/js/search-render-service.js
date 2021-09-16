@@ -4,6 +4,7 @@ import evtListTpl from '../templates/events-list.hbs';
 import { spinner } from './spin';
 import {onPnNotice, onPnError, pN } from './pnotify-set'
 
+
 class RenderService {
     constructor() {
         this.events;
@@ -21,14 +22,15 @@ class RenderService {
         
         if (e.currentTarget.elements.query.value === '') {
             // return alert('Введи хоть что-то!');
-            onPnNotice(pN.emptyRequest);
-            return this.renderStoper = false; 
+            // onPnNotice(pN.emptyRequest);
+            return this.renderStoper = false;
         }
 
-        if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '') {
+        // if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '') {
             // return alert('такое уже есть...');
-            return onPnNotice(pN.controlInput);
-        }
+            // return onPnNotice(pN.controlInput);
+            // return
+        // }
         
         eventsApiService.searchQuery = e.currentTarget.elements.query.value;
         console.log('на входе: ', eventsApiService.searchQuery)
@@ -41,7 +43,7 @@ class RenderService {
     async fetchAndRenderEvents(ref) {
         
         spinner.spin(document.getElementById('events'));
-        eventsApiService.countryCode = ref.countriesCode;
+        eventsApiService.countryCode = ref.countryCode;
         try {
             this.events = await eventsApiService.fetchEvents();
         }
@@ -164,7 +166,7 @@ class RenderService {
 
     /* =====создатель слушателей событий===== */
     eventsListCreator(ref) {
-        this.searchForm.addEventListener('input', e => renderService.controlKeyUp(e));
+        // this.searchForm.addEventListener('input', e => renderService.controlKeyUp(e));
         this.searchForm.addEventListener('submit', e => renderService.onSearch(e, ref));
         this.doneBtn.addEventListener('click', () => this.resetAll(ref));
     };
@@ -177,5 +179,4 @@ class RenderService {
 
 };
 export const renderService = new RenderService;
-
 
