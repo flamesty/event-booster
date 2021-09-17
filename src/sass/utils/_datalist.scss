@@ -37,8 +37,8 @@
   color: var(--form-imput-text-active);
   text-align: left;
   vertical-align: top;
-  :focus,
-  :hover {
+  // :hover,
+  :focus {
     background-color: var(--form-imput-bgc-active);
   }
 
@@ -65,8 +65,8 @@
 }
 
 .input-country {
-  &:focus,
-  & :hover {
+  // & :hover,
+  &:focus {
     border-radius: 20px 20px 0 0;
   }
 }
