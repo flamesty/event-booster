@@ -25,11 +25,11 @@ export function createPagination(totalPages, page){
   }
 
   // how many pages or li show before the current li
-  if (page == totalPages) {
-    beforePage = beforePage - 2;
-  } else if (page == totalPages - 1) {
-    beforePage = beforePage - 1;
-  }
+  // if (page == totalPages) {
+  //   beforePage = beforePage - 2;
+  // } else if (page == totalPages - 1) {
+  //   beforePage = beforePage - 1;
+  // }
   // how many pages or li show after the current li
   if (page == 1) {
     afterPage = afterPage + 3;
