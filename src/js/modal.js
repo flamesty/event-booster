@@ -20,9 +20,14 @@ window.addEventListener('keyup', onCloseModalEsc);
 
 const renderArr = [];
 function modalIsOpen(e) {
+  // решение не-открытия модалки при клике между карточками
+  if (e.target.nodeName !== 'IMG' && !e.target.classList.contains('decorative-frame')) {
+    return;
+  }
   const eventId = document.activeElement.dataset.id;
   const eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
   const eventObj = tempEventsArray[eventIndex]
+
   console.log('id: ', eventId, ' index: ', eventIndex, ' eventObj ', eventObj)
   refs.overlay.classList.add('is-open');
   refs.overlay.classList.remove('is-hidden');
