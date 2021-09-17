@@ -6,7 +6,7 @@ import { renderService } from './search-render-service';
 const refInputSearch = document.querySelector(".input-search");
 const refInput = document.querySelector(".input-country");
 const refDatalist = document.querySelector(".datalist-country");
-const submit = document.querySelector('.search-form');
+const eventsList = document.querySelector('.event-img');
 let aFilteredOptions = [];
 
 window.addEventListener('keyup', doKeyAction);
@@ -24,6 +24,13 @@ if (localStorage['CountryForBooster'] !== undefined) {
     refInput.value = localStorage['CountryForBooster'];
     refsGen.countryCode = localStorage['CountryCodeForBooster'];
 }
+
+function getNotFilteredOptions() {
+    for (let each of refDatalist.children) {
+         aFilteredOptions.push(each)
+    }
+}
+getNotFilteredOptions()
 
 for (let each of refDatalist.children) {
          aFilteredOptions.push(each)
@@ -44,7 +51,7 @@ function doKeyAction(whichKey) {
       case 'Escape':
           closeList()
           break;
-    }
+                }
 }
 
 function doMouseClick(e) {
@@ -57,9 +64,10 @@ function doMouseClick(e) {
               clickPoint.focus()
         } else {
             if (clickPoint.nodeName === 'LI') {
-                doOptionClick(e)
+                acceptСhoice(e.target)
             } else {
                 closeList()
+                refInput.value = "";
             }
         }
     }
@@ -79,13 +87,16 @@ function openList() {
     refDatalist.classList.remove("hidden-list");
     refInput.value = "";
     refInput.style.borderRadius = "20px 20px 0 0";
+    document.querySelector(".input-country").classList.add("up-arrow")
     displayItems()
 }
 
 function closeList() {
     refDatalist.classList.add("hidden-list")
     refInput.style.borderRadius = "20px";
+    document.querySelector(".input-country").classList.remove("up-arrow")
     refInputSearch.focus()
+    refInputSearch.click()
 }
 
 
@@ -125,17 +136,19 @@ function displayItems() {
     }
 }
 
-function doOptionClick(e) {
-    acceptСhoice(e.target)
-}
+// function doOptionClick(e) {
+//     acceptСhoice(e.target)
+// }
 
 function acceptСhoice(el) {
     refInput.value = el.innerText;
     refsGen.countryCode = el.dataset.code;
     closeList()
+    // el.blur()
     document.querySelector('.btn-search').click();
     localStorage.setItem('CountryForBooster', el.innerText);
     localStorage.setItem('CountryCodeForBooster', el.dataset.code);
+    displayItems()
 }
 
 // csSelector.setAttribute('role', 'combobox') 

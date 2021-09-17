@@ -117,6 +117,11 @@
 
 .event-list-link:hover {
   transform: scale(1.02);
+  .decorative-frame {
+    transition: transform 200ms ease-in-out 0ms;
+    transform: scale(1.34, 1.7);
+    transform-origin: top right;
+  }
 }
 
 .decorative-frame {
@@ -125,6 +130,8 @@
   right: -3vw;
   width: 33.7vw;
   height: 31.6vw;
+  transform: scale(1, 1);
+  transform-origin: top right;
   // width: 100%;
   // height: 100%;
   // top: -10px;
@@ -224,8 +231,11 @@
   align-items: center;
   flex-direction: column;
   border-radius: 20px 0;
-  background-color: var(--main-btn-color);
-  color: var(--inv-btn-main-color);
+  // background-color: var(--main-btn-color);
+  // color: var(--inv-btn-main-color);
+  background-color: transparent;
+  border-color: var(--main-title-color);
+  color: var(--main-title-color);
   font-weight: 600;
 }
 

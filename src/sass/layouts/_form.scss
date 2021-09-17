@@ -52,7 +52,7 @@
     color: var(--form-imput-text-active);
   }
 
-  outline: none;
+  // outline: none;
 }
 
 .label-country {
@@ -74,6 +74,7 @@
       content: '';
       transform: rotate(180deg);
       transition: transform 400ms ease-in-out 0ms;
+      // background-image: url(./../images/up.svg);
     }
   }
 }
