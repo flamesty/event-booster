@@ -608,7 +608,7 @@ a {
 
 .label-country::after {
   content: '';
-  background-image: url(./../images/up.svg);
+  background-image: url(./../images/down.svg);
   background-repeat: no-repeat;
   position: absolute;
   width: 15px;
@@ -623,7 +623,7 @@ a {
   transition: transform 400ms ease-in-out 0ms, -webkit-transform 400ms ease-in-out 0ms;
 }
 
-.label-country:focus::after, .label-country:hover::after {
+.label-country:hover::after, .label-country:focus::after {
   content: '';
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
@@ -644,10 +644,22 @@ a {
 
 .icon-search {
   fill: var(--form-input-icons);
+  -webkit-transition: -webkit-transform 400ms ease-in-out 0ms;
+  transition: -webkit-transform 400ms ease-in-out 0ms;
+  transition: transform 400ms ease-in-out 0ms;
+  transition: transform 400ms ease-in-out 0ms, -webkit-transform 400ms ease-in-out 0ms;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .icon-search:focus, .icon-search:hover {
   fill: var(--form-imput-bgc-active);
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+  -webkit-transition: -webkit-transform 400ms ease-in-out 0ms;
+  transition: -webkit-transform 400ms ease-in-out 0ms;
+  transition: transform 400ms ease-in-out 0ms;
+  transition: transform 400ms ease-in-out 0ms, -webkit-transform 400ms ease-in-out 0ms;
 }
 
 .header_logo {
@@ -1113,8 +1125,7 @@ body {
   border-radius: 0 0 20px 20px;
 }
 
-.datalist-country :focus,
-.datalist-country :hover {
+.datalist-country :focus {
   background-color: var(--form-imput-bgc-active);
 }
 
@@ -1139,8 +1150,7 @@ body {
   margin-top: 6px;
 }
 
-.input-country:focus,
-.input-country :hover {
+.input-country:focus {
   border-radius: 20px 20px 0 0;
 }
 

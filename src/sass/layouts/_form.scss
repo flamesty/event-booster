@@ -58,7 +58,7 @@
 .label-country {
   &::after {
     content: '';
-    background-image: url(./../images/up.svg);
+    background-image: url(./../images/down.svg);
     background-repeat: no-repeat;
     position: absolute;
     width: 15px;
@@ -68,8 +68,8 @@
     transform: rotate(0deg);
     transition: transform 400ms ease-in-out 0ms;
   }
-  &:focus,
-  &:hover {
+  &:hover,
+  &:focus {
     &::after {
       content: '';
       transform: rotate(180deg);
@@ -89,8 +89,12 @@
 
 .icon-search {
   fill: var(--form-input-icons);
+  transition: transform 400ms ease-in-out 0ms;
+  transform: scale(1);
   &:focus,
   &:hover {
     fill: var(--form-imput-bgc-active);
+    transform: scale(1.3);
+    transition: transform 400ms ease-in-out 0ms;
   }
 }

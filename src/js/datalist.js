@@ -1,19 +1,18 @@
 import datalistTemplate from '../templates/datalistTemplate.hbs';
 import { refsGen } from '../js/refs';
-import { countries } from './renderCountries'
+import { countries } from './renderCountries';
+import { renderService } from './search-render-service';
 
-
+const refInputSearch = document.querySelector(".input-search");
 const refInput = document.querySelector(".input-country");
 const refDatalist = document.querySelector(".datalist-country");
-const refItemDatalist = refDatalist.children;
-let contentInput = refInput.value;
+const submit = document.querySelector('.search-form');
+let aFilteredOptions = [];
 
-
-refInput.addEventListener('keyup', doKeyAction)
-refDatalist.addEventListener('keyup', doKeyAction)
+window.addEventListener('keyup', doKeyAction);
+window.addEventListener("click", doMouseClick);
 refInput.addEventListener("input", doFilter);
 refInput.addEventListener("focus", openList);
-refDatalist.addEventListener("click", doСountryClick);
 
 function renderDatalistMarkup(data) {
     const datalistMarkup = data.map(datalistTemplate).join('');
@@ -21,21 +20,26 @@ function renderDatalistMarkup(data) {
 };
 renderDatalistMarkup(countries);
 
+if (localStorage['CountryForBooster'] !== undefined) {
+    refInput.value = localStorage['CountryForBooster'];
+    refsGen.countryCode = localStorage['CountryCodeForBooster'];
+}
+
+for (let each of refDatalist.children) {
+         aFilteredOptions.push(each)
+    }
+
 function doKeyAction(whichKey) {
     const focusPoint = document.activeElement
   switch(whichKey.key) {
     //   case 'ArrowDown':
         //   toggleListDown(focusPoint)
-        //   moveFocus(focusPoint, 'forward')
         //   break;
     //   case 'ArrowUp':
         //   toggleListUp(focusPoint)
-        //   moveFocus(focusPoint, 'back')
         //   break;
       case 'Enter':
-          makeChoice(focusPoint)
-        //   toggleList('Shut')
-        //   setState('closed')
+          selectOption()
           break;
       case 'Escape':
           closeList()
@@ -43,46 +47,48 @@ function doKeyAction(whichKey) {
     }
 }
 
-function makeChoice(whichOption) {
-    let datalistLength = []
-    let datalistName = []
-    for (let i = 0; i < refItemDatalist.length; i += 1) {
-        if (refItemDatalist[i].innerText.toUpperCase().includes(contentInput.toUpperCase())) {
-            datalistLength.push(refItemDatalist[i].dataset.code)
-            datalistName.push(refItemDatalist[i].innerText)
+function doMouseClick(e) {
+    const clickPoint = document.activeElement
+    if (clickPoint.nodeName !== undefined) {
+          if (clickPoint.nodeName === 'INPUT') {
+              if (clickPoint.classList.contains("input-search")) {
+              closeList()
+            }
+              clickPoint.focus()
+        } else {
+            if (clickPoint.nodeName === 'LI') {
+                doOptionClick(e)
+            } else {
+                closeList()
+            }
         }
     }
-    if (datalistLength.length === 1) {
-        refInput.value = datalistName[0];
-        refsGen.countryCode = datalistLength[0];
-        closeList()
-    }
-    if (whichOption.dataset.code !== undefined) {
-        refInput.value = whichOption.innerText;
-        refsGen.countryCode = whichOption.dataset.code;
-        closeList()
-    }
-    
+}
+
+function selectOption() {
+    if (aFilteredOptions.length === 1) {
+        acceptСhoice(aFilteredOptions[0])
+    } else {
+        if (aFilteredOptions.length !== 0 && document.activeElement.nodeName === "LI") {
+            acceptСhoice(document.activeElement)
+        }
+    } 
 }
 
 function openList() {
     refDatalist.classList.remove("hidden-list");
     refInput.value = "";
     refInput.style.borderRadius = "20px 20px 0 0";
-    displayItemsList()
+    displayItems()
 }
 
 function closeList() {
     refDatalist.classList.add("hidden-list")
     refInput.style.borderRadius = "20px";
-    refInput.blur();
+    refInputSearch.focus()
 }
 
-// function canCloseList() {
-//     if (document.activeElement !== refDatalist) {
-//         closeList()
-//     }
-// }
+
 // function toggleListUp(focusPoint) {
 //     if (focusPoint.previousElementSibling === null) {
 //         refInput.focus()
@@ -91,9 +97,9 @@ function closeList() {
 // }
 // function toggleListDown(focusPoint) {
 //     if (focusPoint.classList.contains("input")) {
-//         for (let i = 0; i < refItemDatalist.length; i += 1) {
-//             if (refItemDatalist[i].style.display !== "none") {
-//                 refItemDatalist[i].focus()
+//         for (let i = 0; i < refDatalist.children.length; i += 1) {
+//             if (refDatalist.children[i].style.display !== "none") {
+//                 refDatalist.children[i].focus()
 //                 return
 //             }
 //         }
@@ -102,31 +108,36 @@ function closeList() {
 //     }
 // }
 
+
 function doFilter() {
-    contentInput = refInput.value;
-    displayItemsList()
-    let aFilteredOptions = []
-    for (let each of refItemDatalist) {
-        if (!each.innerText.toUpperCase().includes(contentInput.toUpperCase())) {
+    displayItems()
+    aFilteredOptions = []
+    for (let each of refDatalist.children) {
+        if (!each.innerText.toUpperCase().includes(refInput.value.toUpperCase())) {
             each.style.display = "none"
         } else { aFilteredOptions.push(each)}
     }
 }
 
-function displayItemsList() {
-    for (let each of refItemDatalist) {
+function displayItems() {
+    for (let each of refDatalist.children) {
             each.style.display=""
     }
 }
 
-function doСountryClick(e) {
-    refInput.value = e.target.innerText;
-    refsGen.countryCode = e.target.dataset.code;
-    closeList()
+function doOptionClick(e) {
+    acceptСhoice(e.target)
 }
 
+function acceptСhoice(el) {
+    refInput.value = el.innerText;
+    refsGen.countryCode = el.dataset.code;
+    closeList()
+    document.querySelector('.btn-search').click();
+    localStorage.setItem('CountryForBooster', el.innerText);
+    localStorage.setItem('CountryCodeForBooster', el.dataset.code);
+}
 
-// function updateStatus(howMany) {csStatus.textContent = howMany + " options available."}
 // csSelector.setAttribute('role', 'combobox') 
 // csSelector.setAttribute('aria-haspopup', 'listbox')
 // csSelector.setAttribute('aria-owns', '#list') 
