@@ -43,9 +43,7 @@ a {
   }
 }
 
-.modal {
-  transform: translate(-50%, -50%) scale(1.2);
-}
+
 
 .backdrop {
   // display: none;
@@ -64,9 +62,9 @@ a {
   overflow-y: scroll;
 }
 
-// .backdrop.is-hidden .modal {
-//   transform: translate(-50%, -50%) scale(1.2);
-// }
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.4);
+}
 
 .backdrop.is-hidden {
   opacity: 0;
@@ -76,7 +74,7 @@ a {
 
 .modal {
   position: absolute;
-  top: 60%;
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -89,7 +87,7 @@ a {
   
 
   @media screen and (min-width: 768px) {
-    
+    top: 90%;
     width: 595px;
    
     border-radius: 300px 0px;
@@ -226,6 +224,11 @@ margin-right: auto;
   }
 }
 
+.modal-list__buy-tickets:hover {
+  background-color: #2E009A;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 // .modal-list__tickets-standart {
 //   margin-bottom: 31px;
   
@@ -258,4 +261,28 @@ margin-right: auto;
 }
 
 
+}
+
+.modal__btn-more:hover{
+  border-color: var(--modal-title-color);
+}
+
+.modal-list__price-container {
+  display: flex;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-start;
+  }
+}
+
+.modal-list__price-container--icon {
+  width: 24px;
+  height: 16px;
+  margin-right: 13px;
+
+  @media screen and (min-width: 1280px) {
+    width: 29px;
+    height: 20px;
+  }
 }
