@@ -44,9 +44,10 @@ function modalIsOpen(e) {
 
   // Render MoreFromThisAuthor 
   function renderByMoreFromThisAuthor(ref) {
-    console.log('должно быть attractions: ', eventObj._embedded.attractions[0]);
-    refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
-    console.log('должно быть ключевое слово: ', eventObj._embedded.attractions[0].name);
+    eventObj._embedded.attractions === undefined ?
+      refsGen.currentSearchQuery = eventObj.name :
+      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
+    refsGen.currentSearchQuery = eventObj.name;
     renderService.onKeyWord(ref);
     renderService.resetAtPaginationAndKeyWord(ref);
     return renderService.fetchAndRenderEvents(ref);
