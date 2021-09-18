@@ -52,7 +52,18 @@ function modalIsOpen(e) {
     renderService.resetAtPaginationAndKeyWord(ref);
     return renderService.fetchAndRenderEvents(ref);
   }
+  stopScroll();
 }
+
+function stopScroll() {
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100wh";
+    };
+
+    function startScroll() {
+        document.body.style.overflow = "auto"; 
+        document.body.style.height = "auto";
+    };
 
 
 // не понимаю куда эту хрень засунуть, чтобы получать норм обьект и отрендерить в модалку 
@@ -89,6 +100,7 @@ function onCloseModalOverlay (e) {
     if (e.currentTarget === e.target) {
       removeClassIsOpen();
   }
+  
   };
 
 
@@ -97,12 +109,13 @@ function onCloseModalEsc (e) {
       return;
     }
     removeClassIsOpen();
+    
   };
   
   function removeClassIsOpen () {
     refs.overlay.classList.remove('is-open');
     refs.overlay.classList.add('is-hidden');
-    
+    startScroll();
   };
 
 
