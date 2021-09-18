@@ -2,7 +2,7 @@ import { refsGen } from './refs';
 import { renderService } from './search-render-service';
 import { eventsApiService } from './api-event-service';
 
-const element = document.querySelector(".pagination ul");
+const element = document.querySelector(".pagination__list");
 
 export function createPagination(totalPages, page){
   let liTag = '';
@@ -11,43 +11,43 @@ export function createPagination(totalPages, page){
   let afterPage = page + 1;
 
   if(page > 2){ 
-    liTag += `<li class="first numb" onclick="createPagination(totalPages, 1)"><span>1</span></li>`;
+    liTag += `<li class="first numb"><span>1</span></li>`;
     if(page > 3){ 
       liTag += `<li class="dots"><span>...</span></li>`;
     }
   }
 
-  if (page == 1) {
-    afterPage = afterPage + 3;
-  } else if (page == 2) {
-    afterPage  = afterPage + 1;
+  if (page === 1) {
+    afterPage += 3;
+  } else if (page === 2) {
+    afterPage += 1;
   }
 
-  for (var plength = beforePage; plength <= afterPage; plength++) {
+  for (let plength = beforePage; plength <= afterPage; plength++) {
     if (plength > totalPages) { 
       continue;
     }
-    if (plength == 0) { 
-      plength = plength + 1;
+    if (plength === 0) { 
+      plength += 1;
     }
-    if(page == plength){ 
+    if(page === plength){ 
       active = "active";
-    }else{ 
+    } else { 
       active = "";
     }
-    liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength})"><span>${plength}</span></li>`;
+    liTag += `<li class="numb ${active}"><span>${plength}</span></li>`;
   }
 
   if(page < totalPages - 1){ 
     if(page < totalPages - 2){ 
       liTag += `<li class="dots"><span>...</span></li>`;
     }
-    liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+    liTag += `<li class="last numb"><span>${totalPages}</span></li>`;
   }
 
   element.innerHTML = liTag; 
   return liTag; 
-}
+};
 
 
 element.addEventListener('click', e => onClickPagination(e, refsGen));
