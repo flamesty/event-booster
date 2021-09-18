@@ -4,17 +4,19 @@
       
       <img class="modal__img--preview"  src="{{this.images.[0].url}}" alt="{{this.name}}">
       <div class="modal__content--flex">
-        <img class="modal__img" src="{{this.images.[1].url}}" alt="{{this.name}}">
+        <img class="modal__img" src="{{this.images.[0].url}}" alt="{{this.name}}">
         <div class="modal__content--description">
       <ul class="modal-list">
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">INFO</h3>
-        {{!-- {{#if info}}
+        {{#if info}}
+        <div class="modal-list__item-info--wrapper">
         <p class="modal-list__item-text">{{info}}</p>
-         {{else}} --}}
+        </div>
+         {{else}}
       <p class="modal-list__item-text">{{name}}</p>
       
-      {{!-- {{/if}} --}}
+      {{/if}}
       
       </li>
       <li class="modal-list__item">
