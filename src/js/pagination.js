@@ -1,5 +1,6 @@
 import { refsGen } from './refs';
 import { renderService } from './search-render-service';
+import { eventsApiService } from './api-event-service';
 
 // selecting required element
 const element = document.querySelector(".pagination ul");
@@ -70,13 +71,10 @@ export function createPagination(totalPages, page){
 // const btnNumber = document.querySelector('.pagination__list');
 
 // !!!!еще не заработало, рендерит как кнопка догрузки (нужно очистить страницу перед рендером), и внимательно посмотреть код выше, также не пойму как обратиться к onclick в li-шках
-element.addEventListener('click', onClickPagination);
+element.addEventListener('click', e => onClickPagination(e, refsGen));
 
-function onClickPagination(e) {
-  const newPageNumber = Number(e.target.textContent) - 1;
-  refsGen.pageNumber = newPageNumber;
-  
-  return  renderService.fetchAndRenderEvents(refsGen)
-  
-  
+function onClickPagination(e, ref) {
+  eventsApiService.page = Number(e.target.textContent) - 1;
+  renderService.resetAtPaginationAndKeyWord(ref);
+  return renderService.fetchAndRenderEvents(ref);
 };
