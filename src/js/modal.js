@@ -4,6 +4,7 @@ import modalMarkup from '../templates/modal-markup.hbs';
 import { tempEventsArray } from './refs';
 // import evtListTpl from '../templates/events-list.hbs';
 import { refsGen } from "./refs";
+import axios from "axios";
 
 const refs = {
 modal: document.querySelector('.modal'),
@@ -11,7 +12,8 @@ modalContainer: document.querySelector('.modal__content'),
 button: document.querySelector('.modal__button'),
 overlay: document.querySelector('.backdrop'),
 eventsList: document.querySelector('.events-list'),
-lightbox: document.querySelector('.js-lightbox'),
+  lightbox: document.querySelector('.js-lightbox'),
+inputCountry: document.querySelector(".input-country"),
 }
 refs.eventsList.addEventListener('click', modalIsOpen);
 refs.button.addEventListener('click', onCloseModalBtn);
@@ -135,3 +137,13 @@ function renderList(arr) {
 function clearMarkUp() {
   refs.eventsList.innerHTML = ''
 }
+// function searchUserCountry() {
+//   axios.get('https://ipapi.co/json/')
+//     .then((response) => {
+//       let data = response.data;
+//       console.log(data);
+//       refs.inputCountry.value = `${data.country_name}`
+//     })
+//     .catch((err) => console.log(err))
+// }
+// searchUserCountry();
