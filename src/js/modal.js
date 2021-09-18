@@ -38,11 +38,11 @@ function modalIsOpen(e) {
   // Added by Aleksey, for MoreFromThisAuthor btn 
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', renderByMoreFromThisAuthor)
-  console.log(eventObj._embedded.attractions.[0].name);
+  console.log(eventObj._embedded.attractions[0].name);
 
   // Render MoreFromThisAuthor 
   function renderByMoreFromThisAuthor() {
-    eventsApiService.searchQuery = eventObj._embedded.attractions.[0].name;
+    eventsApiService.searchQuery = eventObj._embedded.attractions[0].name;
     console.log(eventsApiService.searchQuery);
     // запрос на сервер по ключевому слову, в первой карточке возвращает данные, а в остальных нет
     eventsApiService.fetchEvents()
