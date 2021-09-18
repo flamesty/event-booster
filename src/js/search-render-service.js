@@ -139,7 +139,7 @@ class RenderService {
     this.doneBtn.classList.add('hide-el');
     this.eventsList.innerHTML = '';
     this.renderStoper = false; //может здесь и не нужно, но на всякий случай
-  }
+  };
 
   /* ======================== очистка всего ======================== */
 
@@ -151,7 +151,29 @@ class RenderService {
     ref.tempEventsArray.length = 0;
     this.doneBtn.classList.add('hide-el');
     //прописать закрытие пагинации
-  }
+  };
+  
+  /* ============= при пагинации ============= */
+
+  resetAtPaginationAndKeyWord(ref) {
+    this.eventsList.innerHTML = '';
+    this.tempRenderArr.length = 0;
+    ref.tempEventsArray.length = 0;
+    this.doneBtn.classList.add('hide-el');
+  };
+
+  /* ============= запрос по ключевому слову ============= */
+
+  // передать страницу 0 в апи-сервис
+  // то же в рефсы
+  // передать ключевое слово в апи - сервис  =========(сделано)
+  // передать ключевое слово в рефсы
+  // передать ключевое слово в инпут - чтоб прописалось
+  // код страны обнулить в рефсах
+  // код страны обнулить в апи сервисе
+  // код страны обнулить в инпуте - решить с олегом
+  // запустить resetAtPaginationAndKeyWord(ref)
+  // запустить fetchAndRenderEvents(ref)
 
   /* = очистка галереи (может и можно без неё обойтись), пока смотрю = */
   // clearEventsList() {
