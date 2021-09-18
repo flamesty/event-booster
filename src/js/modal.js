@@ -2,7 +2,7 @@ import { eventsApiService } from "./api-event-service.js";
 import { renderService } from "./search-render-service.js";
 import modalMarkup from '../templates/modal-markup.hbs';
 import { tempEventsArray } from './refs';
-import evtListTpl from '../templates/events-list.hbs';
+// import evtListTpl from '../templates/events-list.hbs';
 import { refsGen } from "./refs";
 
 const refs = {
@@ -37,20 +37,17 @@ function modalIsOpen(e) {
 
   // Added by Aleksey, for MoreFromThisAuthor btn 
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
-  refs.modalContainer.lastElementChild.addEventListener('click', renderByMoreFromThisAuthor)
-  console.log(eventObj._embedded.attractions[0].name);
+  refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
+  
 
   // Render MoreFromThisAuthor 
-  function renderByMoreFromThisAuthor() {
-    eventsApiService.searchQuery = eventObj._embedded.attractions[0].name;
-    console.log(eventsApiService.searchQuery);
-    // запрос на сервер по ключевому слову, в первой карточке возвращает данные, а в остальных нет
-    eventsApiService.fetchEvents()
-      .then(data => console.log(data))
-    // вот код ниже , который перерисовывает разметку, но работает только на первой карточке.
-    // eventsApiService.fetchEvents()  
-    //   .then((data) => renderList(data))
-    // .then(err => console.log(err))
+  function renderByMoreFromThisAuthor(ref) {
+    console.log('должно быть attractions: ', eventObj._embedded.attractions[0]);
+    refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
+    console.log('должно быть ключевое слово: ', eventObj._embedded.attractions[0].name);
+    renderService.onKeyWord(ref);
+    renderService.resetAtPaginationAndKeyWord(ref);
+    return renderService.fetchAndRenderEvents(ref);
   }
 }
 
