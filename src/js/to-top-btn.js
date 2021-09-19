@@ -2,7 +2,7 @@ import { throttle } from '../../node_modules/throttle-debounce';
 
 class ToTop {
     constructor() {
-        this.markupString = '<button type="button" class="btn-gen opacity-btn fix-top-btn hide-el" data-action="to-top"><span class="material-icons">arrow_upward</span>to TOP</button>';
+        this.markupString = '<button type="button" class="btn-gen opacity-btn fix-top-btn hide-el wobble-hor-top" data-action="to-top"><span class="material-icons">arrow_upward</span></button>';//удалил после </span> to TOP 
         this.toTopBtn;
     };
 
