@@ -17,7 +17,7 @@ let myNotify3
 let myNotify4
 let myNotify5
 
-function pushNotify1() {
+export function pushNotify1() {
   myNotify1 = new Notify({
     status: 'error',
     title: '',
@@ -30,7 +30,7 @@ function pushNotify1() {
   })
 }
 
-function pushNotify2() {
+export function pushNotify2() {
   myNotify2 = new Notify({
     status: 'error',
     title: 'no search value entered',
@@ -43,7 +43,7 @@ function pushNotify2() {
   })
 }
 
-function pushNotify3() {
+export function pushNotify3() {
   myNotify3 = new Notify({
     status: 'error',
     title: '',
@@ -56,7 +56,7 @@ function pushNotify3() {
   })
 }
 
-function pushNotify4() {
+export function pushNotify4() {
   myNotify4 = new Notify({
     status: 'error',
     title: 'please enter a new search value',
@@ -69,7 +69,7 @@ function pushNotify4() {
   })
 }
 
-function pushNotify5() {
+export function pushNotify5() {
   myNotify5 = new Notify({
     status: 'error',
     title: 'server error',

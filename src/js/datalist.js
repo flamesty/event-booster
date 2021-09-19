@@ -1,6 +1,7 @@
 import datalistTemplate from '../templates/datalistTemplate.hbs';
 import { refsGen } from '../js/refs';
 import { countries } from './renderCountries';
+import { eventsApiService } from './api-event-service';
 import { renderService } from './search-render-service';
 import Notify from 'simple-notify';
 
@@ -149,6 +150,7 @@ function displayItems() {
 
 function acceptСhoice(el) {
     refInput.value = el.innerText;
+    eventsApiService.countryCode = el.dataset.code;
     refsGen.countryCode = el.dataset.code;
     temporaryСhoiceCountry = [];
     temporaryСhoiceCountry.push(el);

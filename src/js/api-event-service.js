@@ -11,7 +11,7 @@ class EventsApiService {
     this.KEY = 'UpgHSJqZ1Y8ozVdUGkbpn88huHj46iS1';
     this.BASE_URL = 'https://app.ticketmaster.com/discovery/v2/';
     this.countryCode = '';
-      this.page = 0;
+    this.page = 0;
     //   this.pageNumber = this.page + 1;
     //   this.queryTotalPages = 1;
   }
@@ -20,15 +20,11 @@ class EventsApiService {
 
   async fetchEvents() {
     const url = `${this.BASE_URL}events.json?keyword=${this.searchQuery}&countryCode=${this.countryCode}&size=24&number=3&page=${this.page}&apikey=${this.KEY}`;
-    renderService.renderStoper = 0;
+    renderService.renderStoper = false;
     console.log('ищу: ', this.searchQuery);
     const response = await axios.get(url);
     // console.log('response: ',response);
-    if (
-      response.data._embedded === undefined ||
-      response.data._embedded.events.length === 0 ||
-      response.data.page.totalPages === 0
-    ) {
+    if (response.data._embedded === undefined || response.data._embedded.events.length === 0 || response.data.page.totalPages === 0) {
       renderService.renderStoper = true;
       // alert('а нифига не найдено!!!!')
       return;
