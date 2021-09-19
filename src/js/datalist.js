@@ -1,8 +1,6 @@
 import datalistTemplate from '../templates/datalistTemplate.hbs';
 import { refsGen } from '../js/refs';
 import { countries } from './renderCountries';
-import { renderService } from './search-render-service';
-import Notify from 'simple-notify';
 
 const refInput = document.querySelector(".input-country");
 const refInputSearch = document.querySelector(".input-search");
@@ -158,6 +156,12 @@ function acceptСhoice(el) {
     localStorage.setItem('CountryCodeForBooster', el.dataset.code);
     displayItems();
 }
+
+function nullifyCountryInput() {
+    refInput.value = "";
+    refsGen.countryCode = "";
+}
+
 
 // csSelector.setAttribute('role', 'combobox') 
 // csSelector.setAttribute('aria-haspopup', 'listbox')
