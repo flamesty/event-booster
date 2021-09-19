@@ -11,36 +11,40 @@
         <h3 class="modal-list__item-title">INFO</h3>
         {{#if info}}
         <div class="modal-list__item-info--wrapper">
-        <p class="modal-list__item-text">{{info}}</p>
+        <p class="modal-list__item-text modal-list__item-info">{{info}}</p>
         </div>
          {{else}}
-      <p class="modal-list__item-text">{{name}}</p>
-      
-      {{/if}}
+      <p class="modal-list__item-text">No information provided!</p>
+        {{/if}}
       
       </li>
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">WHEN</h3>
+        {{#if dates.start.localDate}}
       <p class="modal-list__item-text">{{this.dates.start.localDate}}</p>
-      <p class="modal-list__item-text">{{this.dates.start.localTime}} ({{this.dates.timezone}})</p>
+      {{/if}}
+      {{#if dates.start.localTime}}
+      <p class="modal-list__item-text">{{this.dates.start.localTime}}{{/if}} {{#if dates.timezone}}({{this.dates.timezone}}){{/if}}</p>
       </li>
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">WHERE</h3>
-<p class="modal-list__item-text">{{_embedded.venues.[0].city.name}}, {{_embedded.venues.[0].country.name}}</p>
-           
+<p class="modal-list__item-text">{{#if _embedded.venues.[0].city.name}}{{_embedded.venues.[0].city.name}},{{/if}} {{#if _embedded.venues.[0].country.name}}{{_embedded.venues.[0].country.name}}{{/if}}</p>
+           {{#if _embedded.venues.[0].name}}
       <p class="modal-list__item-text">{{_embedded.venues.[0].name}}</p>
+      {{/if}}
       </li>
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">WHO</h3>
+        {{#if _embedded.attractions.[0].name}}
       <p class="modal-list__item-text">{{_embedded.attractions.[0].name}}</p>
+      {{else}}
+      <p class="modal-list__item-text">{{name}}</p>
+      {{/if}}
       </li>
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">PRICES </h3>
-      {{!-- <p class="modal-list__item-text">{{priceRanges.[0].min}} {{priceRanges.[0].currency}}</p> --}}
-      {{!-- <p class="modal-list__item-text"><svg>
-        <use href="../images/sprite.svg#icon-ticket"></use>
-      </svg></p> --}}
-      <div class="modal-list__price-container">
+        {{#if priceRanges.0.currency}}
+            <div class="modal-list__price-container">
       <svg class="modal-list__price-container--icon" width="29" height="21" viewBox="0 0 29 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M3.22222 0.833496L0 0.833496L0 20.1668H3.22222L3.22222 0.833496Z" fill="#0E0E0E"/>
 <path d="M11.3266 0.833496L8.10439 0.833496L8.10439 20.1668H11.3266L11.3266 0.833496Z" fill="#0E0E0E"/>
@@ -53,7 +57,9 @@
       <p class="modal-list__item-text modal-list__item-text--price-margin">Standart {{priceRanges.[0].min}}-{{priceRanges.[0].max}} {{priceRanges.[0].currency}}</p>
       </div>
       <a class="modal-list__tickets-standart modal-list__buy-tickets"  target="_blank" href = {{url}}>BUY TICKETS</a>
-      {{!-- <p class="modal-list__item-text">{{priceRanges.[0].max}} {{priceRanges.[0].currency}}</p> --}}
+      {{else}}
+       <p class="modal-list__item-text modal-list__item-text--price-margin">No Standart tickets available!</p>
+       {{/if}}
       {{#if priceRanges.1.currency}}
       <div class="modal-list__price-container">
         <svg class="modal-list__price-container--icon" width="29" height="21" viewBox="0 0 29 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,6 +74,8 @@
       <p class="modal-list__item-text modal-list__item-text--price-margin">VIP {{priceRanges.[1].min}}-{{priceRanges.[1].max}} {{priceRanges.[1].currency}}</p>
         </div>
       <a class="modal-list__tickets-vip modal-list__buy-tickets" href={{url}}>BUY TICKETS</a>
+      {{else}}
+       <p class="modal-list__item-text modal-list__item-text--price-margin">No VIP tickets available!</p>
       {{/if}}
       </li>
       </ul>
