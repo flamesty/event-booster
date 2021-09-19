@@ -1,11 +1,11 @@
 import { throttle } from '../../node_modules/throttle-debounce';
 import { eventsApiService } from './api-event-service';
-// import { totalPages, page } from "./api-event-service";
 import evtListTpl from '../templates/events-list.hbs';
 import { spinner } from './spin';
-import { onPnNotice, onPnError, pN } from './pnotify-set';
 import { createPagination } from './pagination';
 import { queryTotalPages, pageNumber } from "./api-event-service";
+import { refsGen } from './refs';
+import {pushNotify1, pushNotify2, pushNotify3, pushNotify4} from './notify'
 
 class RenderService {
   constructor() {
@@ -15,79 +15,84 @@ class RenderService {
     this.searchForm = document.querySelector('.search-form');
     this.tempRenderArr = [];
     this.infiniteScrollOn = 'off';
+    this.tempCountryCode = '';
     // this.endedScroll = false;
     this.renderStoper = false;
   }
 
+  // ======запуск поиска по клику или энтеру======
+
   onSearch(e, ref) {
     e.preventDefault();
 
+    // ======проверка на пустой инпут======
+
     if (e.currentTarget.elements.query.value === '') {
       // return alert('Введи хоть что-то!');
-      // onPnNotice(pN.emptyRequest);
+      pushNotify4();
       return (this.renderStoper = false);
-    }
+    };
 
-    // if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '') {
+    // ======проверка на повторный ввод того-же======
+
+    if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '' && ref.countryCode === this.tempCountryCode) {
     // return alert('такое уже есть...');
-    // return onPnNotice(pN.controlInput);
-    // return
-    // }
+      return pushNotify4();
+    };
 
     eventsApiService.searchQuery = e.currentTarget.elements.query.value;
     console.log('на входе: ', eventsApiService.searchQuery);
     ref.currentSearchQuery = e.currentTarget.elements.query.value;
-    // console.log(ref.currentSearchQuery);
     this.clearFirstSearch(ref);
-
     return this.fetchAndRenderEvents(ref);
-  }
+  };
 
   async fetchAndRenderEvents(ref) {
     spinner.spin(document.getElementById('events'));
-    eventsApiService.countryCode = ref.countryCode;
+    this.tempCountryCode = eventsApiService.countryCode; //для последующей проверки
     try {
       this.events = await eventsApiService.fetchEvents();
     } catch (error) {
       console.log('Error: request failed: ', error.message);
     }
-    document.querySelector('.pagination__list').innerHTML = createPagination(
-      queryTotalPages,
-      pageNumber);
+    document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages,pageNumber);
     if (this.renderStoper) {
       spinner.stop(document.getElementById('events'));
       // alert('рендер остановился!');
-      this.doneBtn.classList.remove('hide-el');
-      return;
-    }
+      // this.doneBtn.classList.remove('hide-el');
+      document.querySelector('.pagination').classList.add('hide-el'); // закрытие пагинации
+      pushNotify3();
+      return this.defaultSearchAndRender(ref);
+    };
 
-    /* пересмотреть это дерьмецо */
-    // if (this.events === undefined) {
-    //     // this.clearIfAllDone();
-    //     return alert('Введи что-то нормальное');
+    // if (this.infiniteScrollOn === 'on') {
+    //   this.endedScroll = false;
+    //   window.addEventListener(
+    //     'scroll',
+    //     throttle(500, () => this.unlessScroll()),
+    //   );
+    //   //прописать закрытие пагинации
+    //   this.renderEvtList(ref);
     // }
 
-    // if (this.renderStoper) {
-    //     this.clearIfAllDone();
-    //     // return alert('Введи что-то нормальное');
-    // }
-
-    if (this.infiniteScrollOn === 'on') {
-      this.endedScroll = false;
-      window.addEventListener(
-        'scroll',
-        throttle(500, () => this.unlessScroll()),
-      );
-      //прописать закрытие пагинации
-      this.renderEvtList(ref);
-    }
-
-    // прописать открытие пагинации
-
+    document.querySelector('.pagination').classList.remove('hide-el'); // открытие пагинаци
     this.renderEvtList(ref);
-
     spinner.stop(document.getElementById('events'));
-  }
+  };
+
+  /* ===== запуск дефолтного поиска и рендера ===== */
+  
+  defaultSearchAndRender(ref) {
+    eventsApiService.page = 0;   // передать страницу 0 в апи-сервис
+    ref.pageNumber = 0; // то же в рефсы
+    ref.countryCode = "",  // код страны обнулить в рефсах 
+    eventsApiService.countryCode = ''; // код страны обнулить в апи сервисе
+    eventsApiService.searchQuery = ref.DEFAULT_QUERY;
+    ref.currentSearchQuery = ref.DEFAULT_QUERY;
+    this.searchForm.elements.query.value = ref.DEFAULT_QUERY;
+    this.clearFirstSearch(ref);
+    return this.fetchAndRenderEvents(ref);
+  };
 
   renderEvtList({ tempEventsArray }) {
     this.tempRenderArrCreator();
@@ -96,7 +101,7 @@ class RenderService {
       evtListTpl(this.tempRenderArr),
     );
     tempEventsArray.push(...this.events);
-  }
+  };
 
   tempRenderArrCreator() {
     for (let i = 0; i < this.events.length; i += 1) {
@@ -116,9 +121,9 @@ class RenderService {
 
       this.tempRenderArr.push(tempObj);
     }
-  }
+  };
 
-  /* =======будет сделан отлично!======= */
+  /* =======будет сделан ======= */
   // unlessScroll(){
   // if (this.endedScroll){
   //   return window.removeEventListener("scroll", throttle(0, () => this.unlessScroll()));
@@ -165,15 +170,13 @@ class RenderService {
   /* ============= передача ключевого слова с модалки ============= */
 
   onKeyWord(ref) {
-    
   eventsApiService.page = 0;   // передать страницу 0 в апи-сервис
   ref.pageNumber = 0; // то же в рефсы
   eventsApiService.searchQuery = ref.currentSearchQuery;// передать ключевое слово в апи - сервис  
   this.searchForm.elements.query.value = ref.currentSearchQuery; // перепрописать ключевое слово в инпут
   ref.countryCode = "",// код страны обнулить в рефсах
   eventsApiService.countryCode = ''; // код страны обнулить в апи сервисе
-  // код страны обнулить в инпуте - решить с олегом
-  
+  // код страны обнулить в инпуте - решить с Олегом
   };
   
 
@@ -190,33 +193,32 @@ class RenderService {
   // };
 
   /* =====контроль ввода латинских букв===== */
+
   controlKeyUp(e) {
-    if (
-      /[^A-Za-z]/.test(
-        e.currentTarget.elements.query.value[
-          e.currentTarget.elements.query.value.length - 1
-        ],
-      )
-    ) {
-      onPnNotice(pN.controlA_Z);
+    if (/[^A-Za-z]/.test(e.currentTarget.elements.query.value[e.currentTarget.elements.query.value.length - 1],)) {
+      // onPnNotice(pN.controlA_Z);
+      pushNotify1();
     }
-    e.currentTarget.elements.query.value =
-      e.currentTarget.elements.query.value.replace(/[^A-Za-z]/g, '');
-  }
+    e.currentTarget.elements.query.value = e.currentTarget.elements.query.value.replace(/[^A-Za-z]/g, '');
+  };
 
   /* =====создатель слушателей событий===== */
+
   eventsListCreator(ref) {
-    // this.searchForm.addEventListener('input', e => renderService.controlKeyUp(e));
-    this.searchForm.addEventListener('submit', e =>
-      renderService.onSearch(e, ref),
-    );
-    this.doneBtn.addEventListener('click', () => this.resetAll(ref));
-  }
+    this.searchForm.addEventListener('input', e => renderService.controlKeyUp(e));
+    this.searchForm.addEventListener('submit', e => renderService.onSearch(e, ref),);
+    this.doneBtn.addEventListener('click', () => {
+      this.resetAll(ref);
+      this.defaultSearchAndRender(ref);
+    });
+  };
 
   /* ======инициализация при запуске приложения====== */
+
   initialAtStartup(ref) {
     this.eventsListCreator(ref);
     this.fetchAndRenderEvents(ref);
-  }
-}
+    this.searchForm.elements.query.value = ref.DEFAULT_QUERY;
+  };
+};
 export const renderService = new RenderService();
