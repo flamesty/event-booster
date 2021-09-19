@@ -7,7 +7,7 @@ export let queryTotalPages = 1;
 export let pageNumber = 1
 class EventsApiService {
   constructor() {
-    this.searchQuery = 'rock and roll';
+    this.searchQuery = refsGen.DEFAULT_QUERY;
     this.KEY = 'UpgHSJqZ1Y8ozVdUGkbpn88huHj46iS1';
     this.BASE_URL = 'https://app.ticketmaster.com/discovery/v2/';
     this.countryCode = '';
@@ -33,9 +33,15 @@ class EventsApiService {
       // alert('а нифига не найдено!!!!')
       return;
     }
-      refsGen.totalPages = response.data.page.totalPages;
-      queryTotalPages = response.data.page.totalPages;
     pageNumber = this.page + 1;
+    refsGen.lastServerPage = response.data.page.totalPages;
+    if (refsGen.lastServerPage >= pageNumber + 40) {
+      queryTotalPages = 42;
+      refsGen.totalPages = 42;
+    } else {
+      queryTotalPages = response.data.page.totalPages;
+      refsGen.totalPages = response.data.page.totalPages;
+    }
     //   console.log(queryTotalPages);
     //   console.log(pageNumber);
     // console.log('refsGen.totalPages: ', refsGen.totalPages);
