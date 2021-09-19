@@ -1,12 +1,23 @@
 
-      <img class="modal__img--preview"  src="{{this.images.[6].url}}" alt="{{this.name}}">
+     
+      
+      
+      <img class="modal__img--preview"  src="{{this.images.[0].url}}" alt="{{this.name}}">
       <div class="modal__content--flex">
-        <img class="modal__img" src="{{this.images.[6].url}}" alt="{{this.name}}">
+        <img class="modal__img" src="{{this.images.[0].url}}" alt="{{this.name}}">
         <div class="modal__content--description">
       <ul class="modal-list">
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">INFO</h3>
+        {{#if info}}
+        <div class="modal-list__item-info--wrapper">
+        <p class="modal-list__item-text">{{info}}</p>
+        </div>
+         {{else}}
       <p class="modal-list__item-text">{{name}}</p>
+      
+      {{/if}}
+      
       </li>
       <li class="modal-list__item">
         <h3 class="modal-list__item-title">WHEN</h3>
@@ -41,7 +52,7 @@
 </svg>
       <p class="modal-list__item-text modal-list__item-text--price-margin">Standart {{priceRanges.[0].min}}-{{priceRanges.[0].max}} {{priceRanges.[0].currency}}</p>
       </div>
-      <a class="modal-list__tickets-standart modal-list__buy-tickets" href = {{url}}>BUY TICKETS</a>
+      <a class="modal-list__tickets-standart modal-list__buy-tickets"  target="_blank" href = {{url}}>BUY TICKETS</a>
       {{!-- <p class="modal-list__item-text">{{priceRanges.[0].max}} {{priceRanges.[0].currency}}</p> --}}
       {{#if priceRanges.1.currency}}
       <div class="modal-list__price-container">

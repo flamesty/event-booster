@@ -16,10 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    // background: #fff;
-    // padding: 8px;
-    // border-radius: 50px;
-    // box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+    
   }
 
 .pagination__list li{
@@ -47,42 +44,19 @@
     user-select: none;
     transition: all 0.3s ease;
 
-    // text-decoration: none;
     @media screen and (min-width: 768px) {
         font-size: 16px;
         line-height: 1.25;
     }
+
+    &:not(:last-child) {
+        margin-right: 5px;
+    }
+
 }
 
 .pagination__list li.numb{
-    list-style: none;
-    height: 45px;
-    width: 45px;
-    margin: 0 3px;
-    line-height: 45px;
     border-radius: 50%;
-}
-
-
-.pagination__list li.numb.first{
-    margin: 0px 3px 0 -5px;
-}
-
-.pagination__list li.numb.last{
-    margin: 0px -5px 0 3px;
-}
-.pagination__list li.dots{
-    font-size: 14px;
-    line-height: 1.21;
-    cursor: default;
-    @media screen and (min-width: 768px) {
-        font-size: 16px;
-        line-height: 1.25;
-    }
-}
-.pagination__list li.btn{
-    padding: 0 20px;
-    border-radius: 50px;
 }
 
 .pagination li.active,

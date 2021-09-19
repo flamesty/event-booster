@@ -2,8 +2,9 @@ import { eventsApiService } from "./api-event-service.js";
 import { renderService } from "./search-render-service.js";
 import modalMarkup from '../templates/modal-markup.hbs';
 import { tempEventsArray } from './refs';
-import evtListTpl from '../templates/events-list.hbs';
+// import evtListTpl from '../templates/events-list.hbs';
 import { refsGen } from "./refs";
+import axios from "axios";
 
 const refs = {
 modal: document.querySelector('.modal'),
@@ -11,7 +12,8 @@ modalContainer: document.querySelector('.modal__content'),
 button: document.querySelector('.modal__button'),
 overlay: document.querySelector('.backdrop'),
 eventsList: document.querySelector('.events-list'),
-lightbox: document.querySelector('.js-lightbox'),
+  lightbox: document.querySelector('.js-lightbox'),
+inputCountry: document.querySelector(".input-country"),
 }
 refs.eventsList.addEventListener('click', modalIsOpen);
 refs.button.addEventListener('click', onCloseModalBtn);
@@ -37,22 +39,31 @@ function modalIsOpen(e) {
 
   // Added by Aleksey, for MoreFromThisAuthor btn 
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
-  refs.modalContainer.lastElementChild.addEventListener('click', renderByMoreFromThisAuthor)
-  console.log(eventObj._embedded.attractions.[0].name);
+  refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
+  
 
   // Render MoreFromThisAuthor 
-  function renderByMoreFromThisAuthor() {
-    eventsApiService.searchQuery = eventObj._embedded.attractions.[0].name;
-    console.log(eventsApiService.searchQuery);
-    // запрос на сервер по ключевому слову, в первой карточке возвращает данные, а в остальных нет
-    eventsApiService.fetchEvents()
-      .then(data => console.log(data))
-    // вот код ниже , который перерисовывает разметку, но работает только на первой карточке.
-    // eventsApiService.fetchEvents()  
-    //   .then((data) => renderList(data))
-    // .then(err => console.log(err))
+  function renderByMoreFromThisAuthor(ref) {
+    eventObj._embedded.attractions === undefined ?
+      refsGen.currentSearchQuery = eventObj.name :
+      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
+    refsGen.currentSearchQuery = eventObj.name;
+    renderService.onKeyWord(ref);
+    renderService.resetAtPaginationAndKeyWord(ref);
+    return renderService.fetchAndRenderEvents(ref);
   }
+  stopScroll();
 }
+
+function stopScroll() {
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100wh";
+    };
+
+    function startScroll() {
+        document.body.style.overflow = "auto"; 
+        document.body.style.height = "auto";
+    };
 
 
 // не понимаю куда эту хрень засунуть, чтобы получать норм обьект и отрендерить в модалку 
@@ -89,6 +100,7 @@ function onCloseModalOverlay (e) {
     if (e.currentTarget === e.target) {
       removeClassIsOpen();
   }
+  
   };
 
 
@@ -97,12 +109,13 @@ function onCloseModalEsc (e) {
       return;
     }
     removeClassIsOpen();
+    
   };
   
   function removeClassIsOpen () {
     refs.overlay.classList.remove('is-open');
     refs.overlay.classList.add('is-hidden');
-    
+    startScroll();
   };
 
 
@@ -138,3 +151,13 @@ function renderList(arr) {
 function clearMarkUp() {
   refs.eventsList.innerHTML = ''
 }
+// function searchUserCountry() {
+//   axios.get('https://ipapi.co/json/')
+//     .then((response) => {
+//       let data = response.data;
+//       console.log(data);
+//       refs.inputCountry.value = `${data.country_name}`
+//     })
+//     .catch((err) => console.log(err))
+// }
+// searchUserCountry();

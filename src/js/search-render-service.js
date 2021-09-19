@@ -139,7 +139,7 @@ class RenderService {
     this.doneBtn.classList.add('hide-el');
     this.eventsList.innerHTML = '';
     this.renderStoper = false; //может здесь и не нужно, но на всякий случай
-  }
+  };
 
   /* ======================== очистка всего ======================== */
 
@@ -151,7 +151,31 @@ class RenderService {
     ref.tempEventsArray.length = 0;
     this.doneBtn.classList.add('hide-el');
     //прописать закрытие пагинации
-  }
+  };
+  
+  /* =============очистка при пагинации и при вводе ключевого слова============= */
+
+  resetAtPaginationAndKeyWord(ref) {
+    this.eventsList.innerHTML = '';
+    this.tempRenderArr.length = 0;
+    ref.tempEventsArray.length = 0;
+    this.doneBtn.classList.add('hide-el');
+  };
+
+  /* ============= передача ключевого слова с модалки ============= */
+
+  onKeyWord(ref) {
+    
+  eventsApiService.page = 0;   // передать страницу 0 в апи-сервис
+  ref.pageNumber = 0; // то же в рефсы
+  eventsApiService.searchQuery = ref.currentSearchQuery;// передать ключевое слово в апи - сервис  
+  this.searchForm.elements.query.value = ref.currentSearchQuery; // перепрописать ключевое слово в инпут
+  ref.countryCode = "",// код страны обнулить в рефсах
+  eventsApiService.countryCode = ''; // код страны обнулить в апи сервисе
+  // код страны обнулить в инпуте - решить с олегом
+  
+  };
+  
 
   /* = очистка галереи (может и можно без неё обойтись), пока смотрю = */
   // clearEventsList() {
