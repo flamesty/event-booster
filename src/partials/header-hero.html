@@ -1,6 +1,6 @@
 <header>
   <section class="container container-hero">
-    <img class="header_logo" src="./images/logo/logo.svg" alt="Event booster logo">
+    <a href="./index.html"><img class="header_logo" src="./images/logo/logo.svg" alt="Event booster logo"></a>
     <div class="hero">
       <h1 class="header_title text-focus-in">FIND BEST EVENTS
       AROUND THE WORLD</h1>
@@ -10,14 +10,15 @@
           <input class="input input-search" type="text" name="query" placeholder="Start searching" autocomplete="off" />
           <button type="submit" class="btn btn-search" tabindex="-1">
             <!-- <span class="material-icons">search</span> -->
-                  <svg class="icon-search" width="12" height="12">
-                    <use href="./images/sprite.svg#icon-loupe"></use>
-                  </svg>
+            <svg class="icon-search" width="12" height="12">
+              <use href="./images/sprite.svg#icon-loupe"></use>
+            </svg>
           </button>
         </label>
-
+        
         <label class="label-country" for="custom-select">
-        <input class="input input-country" type="text" id="country-choice" placeholder="Choose country" autocomplete="off">
+          <input class="input input-country" type="text" id="country-choice" placeholder="Choose country" autocomplete="off">
+          <div class="input-triangle"></div>
         <ul class="datalist-country hidden-list">
         </ul>
         </label>

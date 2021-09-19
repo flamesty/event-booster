@@ -1,6 +1,10 @@
 .search-form {
   text-align: center;
   padding-top: 25px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
   .input-search {
     margin-right: 30px;
     @media screen and (max-width: 599px) {
@@ -15,11 +19,6 @@
   @media screen and (min-width: 1280px) {
     padding-top: 52px;
   }
-
-  position: relative;
-  display: flex;
-  justify-content: center;
-
   @media screen and (max-width: 599px) {
     display: grid;
     .datalist-country {
@@ -52,31 +51,55 @@
     color: var(--form-imput-text-active);
   }
 
-  // outline: none;
+  outline: none;
 }
 
+// версия стрелочки на инпуте через афтер с ховером
+//
+// .label-country {
+//   &::after {
+//     content: '';
+//     background-image: url(./../images/down.svg);
+//     background-repeat: no-repeat;
+//     position: absolute;
+//     width: 15px;
+//     height: 10px;
+//     left: 225px;
+//     bottom: 14px;
+//     transform: rotate(0deg);
+//     transition: transform 400ms ease-in-out 0ms;
+//   }
+//   &:hover,
+//   &:focus {
+//     &::after {
+//       content: '';
+//       transform: rotate(180deg);
+//       transition: transform 400ms ease-in-out 0ms;
+//       background-image: url(./../images/up.svg);
+//     }
+//   }
+// }
+
 .label-country {
-  &::after {
-    content: '';
-    background-image: url(./../images/down.svg);
-    background-repeat: no-repeat;
-    position: absolute;
-    width: 15px;
-    height: 10px;
-    left: 225px;
-    bottom: 14px;
-    transform: rotate(0deg);
-    transition: transform 400ms ease-in-out 0ms;
-  }
-  &:hover,
-  &:focus {
-    &::after {
-      content: '';
-      transform: rotate(180deg);
-      transition: transform 400ms ease-in-out 0ms;
-      // background-image: url(./../images/up.svg);
-    }
-  }
+  position: relative;
+}
+
+.input-triangle {
+  position: absolute;
+  left: 225px;
+  bottom: 16px;
+  height: 0;
+  width: 0;
+  border-left: 7.5px solid transparent;
+  border-right: 7.5px solid transparent;
+  border-top: 7.5px solid var(--form-input-icons);
+  transform: rotate(0deg);
+  transition: transform 400ms ease-in-out 0ms;
+}
+
+.input-triangle-rotate {
+  transform: rotate(180deg);
+  transition: transform 400ms ease-in-out 0ms;
 }
 
 .btn-search {
