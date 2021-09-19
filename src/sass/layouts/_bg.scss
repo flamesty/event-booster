@@ -3,7 +3,7 @@
 body {
   background-repeat: no-repeat;
   background-size: cover;
-
+  background-position: top;
   background-color: var(--modal-text-color);
 
   @media screen and (max-width: 767px) {
