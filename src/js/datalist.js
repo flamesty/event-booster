@@ -2,12 +2,14 @@ import datalistTemplate from '../templates/datalistTemplate.hbs';
 import { refsGen } from '../js/refs';
 import { countries } from './renderCountries';
 import { renderService } from './search-render-service';
+import Notify from 'simple-notify';
 
-const refInputSearch = document.querySelector(".input-search");
 const refInput = document.querySelector(".input-country");
+const refInputSearch = document.querySelector(".input-search");
 const refDatalist = document.querySelector(".datalist-country");
 const eventsList = document.querySelector('.event-img');
 let aFilteredOptions = [];
+let temporaryСhoiceCountry = [];
 
 window.addEventListener('keyup', doKeyAction);
 window.addEventListener("click", doMouseClick);
@@ -20,17 +22,18 @@ function renderDatalistMarkup(data) {
 };
 renderDatalistMarkup(countries);
 
-if (localStorage['CountryForBooster'] !== undefined) {
-    refInput.value = localStorage['CountryForBooster'];
-    refsGen.countryCode = localStorage['CountryCodeForBooster'];
-}
+// ---------включает запись страны из локалстридж--------
 
-function getNotFilteredOptions() {
-    for (let each of refDatalist.children) {
-         aFilteredOptions.push(each)
-    }
-}
-getNotFilteredOptions()
+// if (localStorage['CountryForBooster'] !== undefined) {
+//     refInput.value = localStorage['CountryForBooster'];
+//     refsGen.countryCode = localStorage['CountryCodeForBooster'];
+//     temporaryСhoiceCountry = [];
+//     temporaryСhoiceCountry.push({
+//         innerText: refInput.value,
+//         dataset: { code: refsGen.countryCode }
+//     });
+//     console.log(temporaryСhoiceCountry)
+// }
 
 for (let each of refDatalist.children) {
          aFilteredOptions.push(each)
@@ -67,7 +70,7 @@ function doMouseClick(e) {
                 acceptСhoice(e.target)
             } else {
                 closeList()
-                refInput.value = "";
+                // refInput.value = "";
             }
         }
     }
@@ -83,20 +86,24 @@ function selectOption() {
     } 
 }
 
-function openList() {
+function openList() {   
     refDatalist.classList.remove("hidden-list");
     refInput.value = "";
     refInput.style.borderRadius = "20px 20px 0 0";
-    document.querySelector(".input-country").classList.add("up-arrow")
+    document.querySelector(".input-triangle").classList.add("input-triangle-rotate")
     displayItems()
 }
 
 function closeList() {
     refDatalist.classList.add("hidden-list")
     refInput.style.borderRadius = "20px";
-    document.querySelector(".input-country").classList.remove("up-arrow")
+    document.querySelector(".input-triangle").classList.remove("input-triangle-rotate")
     refInputSearch.focus()
     refInputSearch.click()
+    if (temporaryСhoiceCountry.length === 1) {
+        refInput.value = temporaryСhoiceCountry[0].innerText;
+        refsGen.countryCode = temporaryСhoiceCountry[0].dataset.code;
+    }
 }
 
 
@@ -143,12 +150,13 @@ function displayItems() {
 function acceptСhoice(el) {
     refInput.value = el.innerText;
     refsGen.countryCode = el.dataset.code;
-    closeList()
-    // el.blur()
+    temporaryСhoiceCountry = [];
+    temporaryСhoiceCountry.push(el);
+    closeList();
     document.querySelector('.btn-search').click();
     localStorage.setItem('CountryForBooster', el.innerText);
     localStorage.setItem('CountryCodeForBooster', el.dataset.code);
-    displayItems()
+    displayItems();
 }
 
 // csSelector.setAttribute('role', 'combobox') 
