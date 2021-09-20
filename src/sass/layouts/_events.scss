@@ -229,6 +229,7 @@
 
 .event-lokation {
   font-size: 12px;
+  padding-bottom: 30px;
 
   @media screen and (min-width: 768px) {
     font-size: 14px;
@@ -238,7 +239,7 @@
   color: rgba(255, 255, 255, 1);
 }
 
-.event-place {
+.material-icons.event-place {
   font-size: 12px;
 }
 
