@@ -239,6 +239,10 @@
   // color: var(--main-title-color);
   color: var(--other-event-text);
   font-weight: 600;
+  &:hover {
+    color: var(--modal-btn-background);
+    box-shadow: -2px 0px 22px 10px var(--modal-btn-background);
+  }
 }
 
 .done-btn {
