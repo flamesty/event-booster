@@ -49,6 +49,7 @@
   &:focus,
   &:hover {
     color: var(--form-imput-text-active);
+    box-shadow: 1px -10px 13px var(--main-title-color);
   }
 
   outline: none;
