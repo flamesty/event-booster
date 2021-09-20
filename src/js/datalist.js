@@ -161,6 +161,12 @@ function acceptСhoice(el) {
     displayItems();
 }
 
+function nullifyCountryInput() {
+    refInput.value = "";
+    refsGen.countryCode = "";
+}
+
+
 // csSelector.setAttribute('role', 'combobox') 
 // csSelector.setAttribute('aria-haspopup', 'listbox')
 // csSelector.setAttribute('aria-owns', '#list') 
