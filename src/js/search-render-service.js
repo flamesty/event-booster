@@ -5,7 +5,7 @@ import { spinner } from './spin';
 import { createPagination } from './pagination';
 import { queryTotalPages, pageNumber } from "./api-event-service";
 import { refsGen } from './refs';
-import {pushNotify1, pushNotify2, pushNotify3, pushNotify4} from './notify'
+import {pushNotify1, pushNotify2, pushNotify3, pushNotify4, myNotify1, myNotify2, myNotify3, myNotify4} from './notify'
 
 class RenderService {
   constructor() {
@@ -13,6 +13,7 @@ class RenderService {
     this.eventsList = document.querySelector('.events-list');
     this.doneBtn = document.querySelector('.js-done-btn');
     this.searchForm = document.querySelector('.search-form');
+    this.inputCountry = document.querySelector(".input-country");
     this.tempRenderArr = [];
     this.infiniteScrollOn = 'off';
     this.tempCountryCode = '';
@@ -29,7 +30,10 @@ class RenderService {
 
     if (e.currentTarget.elements.query.value === '') {
       // return alert('Введи хоть что-то!');
-      pushNotify4();
+      if (myNotify2) {
+        myNotify2.close();
+      };
+      pushNotify2();
       return (this.renderStoper = false);
     };
 
@@ -37,11 +41,14 @@ class RenderService {
 
     if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '' && ref.countryCode === this.tempCountryCode) {
     // return alert('такое уже есть...');
+      if (myNotify4) {
+        myNotify4.close();
+      };
       return pushNotify4();
     };
 
     eventsApiService.searchQuery = e.currentTarget.elements.query.value;
-    console.log('на входе: ', eventsApiService.searchQuery);
+    // console.log('на входе: ', eventsApiService.searchQuery);
     ref.currentSearchQuery = e.currentTarget.elements.query.value;
     this.clearFirstSearch(ref);
     return this.fetchAndRenderEvents(ref);
@@ -55,12 +62,16 @@ class RenderService {
     } catch (error) {
       console.log('Error: request failed: ', error.message);
     }
-    document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages,pageNumber);
+    document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages, pageNumber);
+    // console.log('введенная страна: ', this.inputCountry.value);
     if (this.renderStoper) {
       spinner.stop(document.getElementById('events'));
       // alert('рендер остановился!');
       // this.doneBtn.classList.remove('hide-el');
       document.querySelector('.pagination').classList.add('hide-el'); // закрытие пагинации
+      if (myNotify3) {
+        myNotify3.close();
+      };
       pushNotify3();
       return this.defaultSearchAndRender(ref);
     };
@@ -85,11 +96,13 @@ class RenderService {
   defaultSearchAndRender(ref) {
     eventsApiService.page = 0;   // передать страницу 0 в апи-сервис
     ref.pageNumber = 0; // то же в рефсы
-    ref.countryCode = "",  // код страны обнулить в рефсах 
+    ref.countryCode = ' ',  // код страны обнулить в рефсах 
     eventsApiService.countryCode = ''; // код страны обнулить в апи сервисе
+    this.inputCountry.value = ''; // название страны обнулить в инпуте 
     eventsApiService.searchQuery = ref.DEFAULT_QUERY;
     ref.currentSearchQuery = ref.DEFAULT_QUERY;
     this.searchForm.elements.query.value = ref.DEFAULT_QUERY;
+    console.log('название страны: ', this.inputCountry.value)
     this.clearFirstSearch(ref);
     return this.fetchAndRenderEvents(ref);
   };
@@ -170,36 +183,25 @@ class RenderService {
   /* ============= передача ключевого слова с модалки ============= */
 
   onKeyWord(ref) {
-  eventsApiService.page = 0;   // передать страницу 0 в апи-сервис
-  ref.pageNumber = 0; // то же в рефсы
-  eventsApiService.searchQuery = ref.currentSearchQuery;// передать ключевое слово в апи - сервис  
-  this.searchForm.elements.query.value = ref.currentSearchQuery; // перепрописать ключевое слово в инпут
-  ref.countryCode = "",// код страны обнулить в рефсах
-  eventsApiService.countryCode = ''; // код страны обнулить в апи сервисе
-  // код страны обнулить в инпуте - решить с Олегом
+    eventsApiService.page = 0;   // передать страницу 0 в апи-сервис
+    ref.pageNumber = 0; // то же в рефсы
+    eventsApiService.searchQuery = ref.currentSearchQuery;// передать ключевое слово в апи - сервис  
+    this.searchForm.elements.query.value = ref.currentSearchQuery; // перепрописать ключевое слово в инпут
+    ref.countryCode = "",// код страны обнулить в рефсах
+    eventsApiService.countryCode = ''; // код страны обнулить в апи сервисе
+    this.inputCountry.value = ''; // название страны обнулить в инпуте 
   };
-  
-
-  /* = очистка галереи (может и можно без неё обойтись), пока смотрю = */
-  // clearEventsList() {
-  //     this.eventsList.innerHTML = '';
-  // };
-
-  /* = очистка, когда все запросы выполнены, может и не нужно = */
-  // clearIfAllDone() {
-  //     this.endedScroll = true;
-  //     this.doneBtn.classList.remove('hide-el');
-  //     document.querySelector('.result-section').scrollIntoView({block: "end", behavior: "smooth"});
-  // };
 
   /* =====контроль ввода латинских букв===== */
 
   controlKeyUp(e) {
-    if (/[^A-Za-z]/.test(e.currentTarget.elements.query.value[e.currentTarget.elements.query.value.length - 1],)) {
-      // onPnNotice(pN.controlA_Z);
+    if (/[^A-Za-z ]/.test(e.currentTarget.elements.query.value[e.currentTarget.elements.query.value.length - 1],)) {
+      if (myNotify1) {
+        myNotify1.close();
+      };
       pushNotify1();
-    }
-    e.currentTarget.elements.query.value = e.currentTarget.elements.query.value.replace(/[^A-Za-z]/g, '');
+    };
+    e.currentTarget.elements.query.value = e.currentTarget.elements.query.value.replace(/[^A-Za-z ]/g, '');
   };
 
   /* =====создатель слушателей событий===== */
@@ -211,6 +213,7 @@ class RenderService {
       this.resetAll(ref);
       this.defaultSearchAndRender(ref);
     });
+    document.querySelector('.js-logo-link').addEventListener('click', () => this.defaultSearchAndRender(ref))
   };
 
   /* ======инициализация при запуске приложения====== */
