@@ -2,12 +2,11 @@
 
 body {
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
+  background-size: 100%;
+  background-position: top center;
   background-color: var(--modal-text-color);
 
   @media screen and (max-width: 767px) {
-    background-size: contain;
     background-image: url(../images/background/mobile/bg-body-mob.png);
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -17,7 +16,6 @@ body {
   }
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    background-size: contain;
     background-image: url(../images/background/tablet/bg-body-tabl.png);
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -27,7 +25,6 @@ body {
   }
 
   @media screen and (min-width: 1280px) {
-    background-size: contain;
     z-index: 100, 20;
     background-image: url(../images/background/desktop/bg-body-desk.png);
     @media (min-device-pixel-ratio: 2),
