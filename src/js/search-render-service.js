@@ -125,7 +125,10 @@ class RenderService {
       tempObj.id = this.events[i].id;
       tempObj.data = this.events[i].dates.start.localDate;
       tempObj.time = this.events[i].dates.start.localTime;
+      // added by Yulia
       tempObj.locationId = this.events[i]._embedded.venues[0].id;
+      tempObj.countryName = this.events[i]._embedded.venues[0].country.name;
+
       // tempObj.time = this.events[i].dates.start.localTime.slice(0, 5); //со .slice(0, 5) может выдавать ошибку (видно на сервере не всегда корректно прописано)
       tempObj.url = this.events
         .map(item => item.images)
