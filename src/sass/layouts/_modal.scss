@@ -28,7 +28,8 @@
   top: 50%;
   left: 50%;
   max-width: 272px;
-  transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+  height: auto;
+  transform: translate(-50%, -50%) scale(0.8, 0.65) rotate(0deg);
   transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 20;
   background-color: var(--modal-background-color);
@@ -38,6 +39,7 @@
   @media screen and (min-width: 768px) {
    max-width: 595px;
    border-radius: 300px 0px;
+   transform: translate(-50%, -50%) scale(0.69) rotate(0deg);
   }
 
   @media screen and (min-width: 1280px) {
@@ -270,6 +272,6 @@ margin-right: auto;
 }
 
 .modal-list__item-info--wrapper {
-max-height: 130px;
+max-height: 100px;
 overflow-y: auto;
 }
