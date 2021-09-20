@@ -64,6 +64,10 @@
   }
 }
 
+.datalist-item:hover {
+  background-color: var(--form-imput-bgc-active);
+}
+
 .input-country {
   // & :hover,
   &:focus {
