@@ -11,11 +11,11 @@ import 'simple-notify/dist/simple-notify.min.css'
 // text: red,
 
 
-let myNotify1
-let myNotify2
-let myNotify3
-let myNotify4
-let myNotify5
+export let myNotify1
+export let myNotify2
+export let myNotify3
+export let myNotify4
+export let myNotify5
 
 export function pushNotify1() {
   myNotify1 = new Notify({

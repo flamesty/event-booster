@@ -21,7 +21,7 @@ class EventsApiService {
   async fetchEvents() {
     const url = `${this.BASE_URL}events.json?keyword=${this.searchQuery}&countryCode=${this.countryCode}&size=24&number=3&page=${this.page}&apikey=${this.KEY}`;
     renderService.renderStoper = false;
-    console.log('ищу: ', this.searchQuery);
+    // console.log('ищу: ', this.searchQuery);
     const response = await axios.get(url);
     // console.log('response: ',response);
     if (response.data._embedded === undefined || response.data._embedded.events.length === 0 || response.data.page.totalPages === 0) {
