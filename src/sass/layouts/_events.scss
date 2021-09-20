@@ -259,6 +259,8 @@
   &:hover {
     color: var(--modal-btn-background);
     box-shadow: -2px 0px 22px 10px var(--modal-btn-background);
+    -webkit-animation: pulsate-bck 0.7s ease-in-out infinite both;
+    animation: pulsate-bck 0.7s ease-in-out infinite both;
   }
 }
 

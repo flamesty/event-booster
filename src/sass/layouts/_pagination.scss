@@ -55,6 +55,10 @@
 
 .pagination__list li.numb {
   border-radius: 50%;
+  &:hover {
+    -webkit-animation: pulsate-bck 0.7s ease-in-out infinite both;
+    animation: pulsate-bck 0.7s ease-in-out infinite both;
+  }
 }
 
 .pagination li.active,
@@ -62,6 +66,6 @@
 .pagination__list li:first-child:hover,
 .pagination__list li:last-child:hover {
   color: var(--pagination-color-active);
-  border: 1px solid var(--pagination-color-active);
+  border: 2px solid var(--pagination-color-active);
   border-radius: 25% 0%;
 }
