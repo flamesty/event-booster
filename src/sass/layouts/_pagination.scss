@@ -1,70 +1,67 @@
 .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-top: 60px;
-    padding: 0;
-    
-    @media screen and (min-width: 1280px) {
-        margin-top: 80px;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 60px;
+  padding: 0;
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 80px;
+  }
 }
 
 .pagination__list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    
-  }
-
-.pagination__list li{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 30px;
-    height: 30px;
-    color: var(--pagination-color-text);
-
-    list-style: none;
-    
-    font-size: 14px;
-    line-height: 1.21;
-    text-align: center;
-
-    padding: 5px 10px;
-    
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 400;
-    
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.3s ease;
-
-    @media screen and (min-width: 768px) {
-        font-size: 16px;
-        line-height: 1.25;
-    }
-
-    &:not(:last-child) {
-        margin-right: 5px;
-    }
-
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.pagination__list li.numb{
-    border-radius: 50%;
+.pagination__list li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  color: var(--pagination-color-text);
+
+  list-style: none;
+
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+
+  padding: 5px 10px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
+
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  &:not(:last-child) {
+    margin-right: 5px;
+  }
+}
+
+.pagination__list li.numb {
+  border-radius: 50%;
 }
 
 .pagination li.active,
 .pagination__list li.numb:hover,
 .pagination__list li:first-child:hover,
-.pagination__list li:last-child:hover{
-    color: var(--pagination-color-active);
-    border: 1px solid var(--pagination-color-active);
-    border-radius: 25% 0%;
+.pagination__list li:last-child:hover {
+  color: var(--pagination-color-active);
+  border: 1px solid var(--pagination-color-active);
+  border-radius: 25% 0%;
 }
-
