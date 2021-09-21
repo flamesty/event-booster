@@ -21,7 +21,7 @@ class EventsApiService {
     const response = await axios.get(url);
     // console.log('response: ',response);
     if (response.data._embedded === undefined || response.data._embedded.events.length === 0 || response.data.page.totalPages === 0) {
-      renderService.renderStoper = true;
+      renderService.renderStopper = true;
       // alert('а нифига не найдено!!!!')
       return;
     }
