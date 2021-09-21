@@ -1,5 +1,5 @@
 export const refsGen = {
-  DEFAULT_QUERY: 'rock and roll',
+  DEFAULT_QUERY: 'music', //classic
   currentSearchQuery: '',
   tempEventsArray: [],
   countryCode: "", 

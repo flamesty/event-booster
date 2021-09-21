@@ -19,8 +19,9 @@
             <span class="material-icons event-place">
                 place
             </span>
-            {{location}}, {{city}}
-        </p>   
+            <a class="event-lokation event-lokation--link" target="blanket" href="https://www.google.com/maps/search/?api=1&query={{location}}+{{city}}+{{countryName}}&query_place_id={{locationId}}">{{location}}, {{city}}</a>
+        </p>
+          
     </li>
     {{/each}}
 
