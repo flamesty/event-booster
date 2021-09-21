@@ -5,7 +5,7 @@ import { spinner } from './spin';
 import { createPagination } from './pagination';
 import { queryTotalPages, pageNumber } from "./api-event-service";
 import { refsGen } from './refs';
-import {pushNotify1, pushNotify2, pushNotify3, pushNotify4, myNotify1, myNotify2, myNotify3, myNotify4} from './notify'
+import { pushNotify1, pushNotify2, pushNotify3, pushNotify4, myNotify1, myNotify2, myNotify3, myNotify4 } from './notify';
 
 class RenderService {
   constructor() {
@@ -14,19 +14,19 @@ class RenderService {
     this.doneBtn = document.querySelector('.js-done-btn');
     this.searchForm = document.querySelector('.search-form');
     this.inputCountry = document.querySelector(".input-country");
+    this.scrollSwitch = document.querySelector('#scroll-switch-toggle');
     this.tempRenderArr = [];
-    this.infiniteScrollOn = 'off';
     this.tempCountryCode = '';
-    // this.endedScroll = false;
-    this.renderStoper = false;
+    this.tempMadePage;
+    this.renderStopper = false;
   }
 
-  // ======запуск поиска по клику или энтеру======
+  /* ======запуск поиска по клику или энтеру====== */
 
   onSearch(e, ref) {
     e.preventDefault();
 
-    // ======проверка на пустой инпут======
+  /* ======проверка на пустой инпут====== */
 
     if (e.currentTarget.elements.query.value === '') {
       // return alert('Введи хоть что-то!');
@@ -34,10 +34,10 @@ class RenderService {
         myNotify2.close();
       };
       pushNotify2();
-      return (this.renderStoper = false);
+      return (this.renderStopper = false);
     };
 
-    // ======проверка на повторный ввод того-же======
+  /* ======проверка на повторный ввод того-же====== */
 
     if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '' && ref.countryCode === this.tempCountryCode) {
     // return alert('такое уже есть...');
@@ -48,7 +48,6 @@ class RenderService {
     };
 
     eventsApiService.searchQuery = e.currentTarget.elements.query.value;
-    // console.log('на входе: ', eventsApiService.searchQuery);
     ref.currentSearchQuery = e.currentTarget.elements.query.value;
     this.clearFirstSearch(ref);
     return this.fetchAndRenderEvents(ref);
@@ -61,14 +60,12 @@ class RenderService {
       this.events = await eventsApiService.fetchEvents();
     } catch (error) {
       console.log('Error: request failed: ', error.message);
-    }
-    document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages, pageNumber);
-    // console.log('введенная страна: ', this.inputCountry.value);
-    if (this.renderStoper) {
+    };
+    if (this.renderStopper) {
       spinner.stop(document.getElementById('events'));
       // alert('рендер остановился!');
       // this.doneBtn.classList.remove('hide-el');
-      document.querySelector('.pagination').classList.add('hide-el'); // закрытие пагинации
+      // document.querySelector('.pagination').classList.add('hide-el'); // закрытие пагинации
       if (myNotify3) {
         myNotify3.close();
       };
@@ -76,19 +73,37 @@ class RenderService {
       return this.defaultSearchAndRender(ref);
     };
 
-    // if (this.infiniteScrollOn === 'on') {
-    //   this.endedScroll = false;
-    //   window.addEventListener(
-    //     'scroll',
-    //     throttle(500, () => this.unlessScroll()),
-    //   );
-    //   //прописать закрытие пагинации
-    //   this.renderEvtList(ref);
-    // }
+    /* ======= запуск бесконечного скролла ======= */
 
-    document.querySelector('.pagination').classList.remove('hide-el'); // открытие пагинаци
-    this.renderEvtList(ref);
-    spinner.stop(document.getElementById('events'));
+    if (ref.UNLESS_SCROLL) { 
+      window.addEventListener('scroll',throttle(500, () => this.unlessScroll(ref)));
+      document.querySelector('.pagination__list').classList.add('hide-el'); //скрытие пагинации
+      this.renderEvtList(ref);
+      spinner.stop(document.getElementById('events'));
+      document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages, pageNumber);
+      this.tempMadePage = eventsApiService.page;
+    } else {
+      window.removeEventListener("scroll", throttle(500, () => this.unlessScroll(ref)));
+      document.querySelector('.pagination__list').classList.remove('hide-el'); //скрытие пагинации
+      this.renderEvtList(ref);
+      spinner.stop(document.getElementById('events'));
+      document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages, pageNumber);
+    };
+  };
+
+  /* ======= бесконечный скролл - сделан! ======= */
+
+  unlessScroll(ref) {
+    if (eventsApiService.page >= ref.totalPages - 1) {
+      return window.removeEventListener("scroll", throttle(500, () => this.unlessScroll(ref)));
+    };
+    if(window.pageYOffset + window.innerHeight >= document.getElementById('events').offsetHeight){
+            //загружаем новое содержимое в элемент если предыдущая страница отрендерина
+      if (eventsApiService.page === this.tempMadePage) {
+        eventsApiService.page += 1;
+      this.fetchAndRenderEvents(ref);
+      } else { return };
+    };
   };
 
   /* ===== запуск дефолтного поиска и рендера ===== */
@@ -102,17 +117,13 @@ class RenderService {
     eventsApiService.searchQuery = ref.DEFAULT_QUERY;
     ref.currentSearchQuery = ref.DEFAULT_QUERY;
     this.searchForm.elements.query.value = ref.DEFAULT_QUERY;
-    console.log('название страны: ', this.inputCountry.value)
     this.clearFirstSearch(ref);
     return this.fetchAndRenderEvents(ref);
   };
 
   renderEvtList({ tempEventsArray }) {
     this.tempRenderArrCreator();
-    this.eventsList.insertAdjacentHTML(
-      'beforeend',
-      evtListTpl(this.tempRenderArr),
-    );
+    this.eventsList.insertAdjacentHTML('beforeend',evtListTpl(this.tempRenderArr));
     tempEventsArray.push(...this.events);
   };
 
@@ -156,19 +167,6 @@ class RenderService {
     }
   };
 
-
-  /* =======будет сделан ======= */
-  // unlessScroll(){
-  // if (this.endedScroll){
-  //   return window.removeEventListener("scroll", throttle(0, () => this.unlessScroll()));
-  // }
-  // if(window.pageYOffset + window.innerHeight >= document.getElementById('events').offsetHeight){
-  //         //загружаем новое содержимое в элемент
-  //   this.fetchAndRenderEvents();
-  //   eventsApiService.page += 1;
-  // }
-  // };
-
   /* = очистка при первом запросе в т.ч., когда новый вводился дополняя предыдущий = */
 
   clearFirstSearch(ref) {
@@ -177,7 +175,7 @@ class RenderService {
     this.tempRenderArr.length = 0;
     this.doneBtn.classList.add('hide-el');
     this.eventsList.innerHTML = '';
-    this.renderStoper = false; //может здесь и не нужно, но на всякий случай
+    this.renderStopper = false; //может здесь и не нужно, но на всякий случай
   };
 
   /* ======================== очистка всего ======================== */
@@ -189,10 +187,19 @@ class RenderService {
     ref.currentSearchQuery = '';
     ref.tempEventsArray.length = 0;
     this.doneBtn.classList.add('hide-el');
-    //прописать закрытие пагинации
   };
   
   /* =============очистка при пагинации и при вводе ключевого слова============= */
+
+  resetAtPagination(ref) {
+    if (this.tempMadePage === eventsApiService.page) {
+      return document.querySelector('body').scrollIntoView({block: "start", behavior: "smooth"});
+    };
+    this.eventsList.innerHTML = '';
+    this.tempRenderArr.length = 0;
+    ref.tempEventsArray.length = 0;
+    this.doneBtn.classList.add('hide-el');
+  };
 
   resetAtPaginationAndKeyWord(ref) {
     this.eventsList.innerHTML = '';
@@ -225,6 +232,25 @@ class RenderService {
     e.currentTarget.elements.query.value = e.currentTarget.elements.query.value.replace(/[^A-Za-z ]/g, '');
   };
 
+  /* функционал переключения бесконечного скролла */
+
+  onInfiniteScroll() {
+    let toggle = document.querySelector('.js-toggle');
+    //console.log('ДО переключения: ', toggle.dataset.toggle);
+    if (toggle.dataset.toggle === 'off') {
+      toggle.dataset.toggle = 'on';
+      refsGen.UNLESS_SCROLL = true;
+      document.querySelector('.on-icon').classList.remove('hide-el');
+      document.querySelector('.off-icon').classList.add('hide-el');
+    } else {
+      toggle.dataset.toggle = 'off';
+      refsGen.UNLESS_SCROLL = false;
+      document.querySelector('.off-icon').classList.remove('hide-el');
+      document.querySelector('.on-icon').classList.add('hide-el');
+    };
+    //console.log('ПОСЛЕ переключения: ', toggle.dataset.toggle);
+  };
+
   /* =====создатель слушателей событий===== */
 
   eventsListCreator(ref) {
@@ -234,7 +260,8 @@ class RenderService {
       this.resetAll(ref);
       this.defaultSearchAndRender(ref);
     });
-    document.querySelector('.js-logo-link').addEventListener('click', () => this.defaultSearchAndRender(ref))
+    document.querySelector('.js-logo-link').addEventListener('click', () => this.defaultSearchAndRender(ref));
+    document.querySelector('.js-toggle').addEventListener('click', () => this.onInfiniteScroll()); 
   };
 
   /* ======инициализация при запуске приложения====== */
