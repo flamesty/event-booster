@@ -117,18 +117,34 @@ class RenderService {
   };
 
   tempRenderArrCreator() {
+    this.tempRenderArr.length = 0;
     for (let i = 0; i < this.events.length; i += 1) {
       let tempObj = {};
       tempObj.name = this.events[i].name;
-      tempObj.city = this.events[i]._embedded.venues[0].city.name;
-      tempObj.location = this.events[i]._embedded.venues[0].name;
+      if(this.events[i]._embedded === undefined || this.events[i]._embedded.venues[0] === undefined || this.events[i]._embedded.venues[0].city === undefined) {
+        tempObj.city = 'НЕИЗВЕСТНО';
+      } else {
+        tempObj.city = this.events[i]._embedded.venues[0].city.name;
+      };
+      if(this.events[i]._embedded === undefined || this.events[i]._embedded.venues[0] === undefined || this.events[i]._embedded.venues[0].city === undefined) {
+        tempObj.location = 'НЕИЗВЕСТНО';
+      } else {
+        tempObj.location = this.events[i]._embedded.venues[0].name;
+      };
       tempObj.id = this.events[i].id;
       tempObj.data = this.events[i].dates.start.localDate;
       tempObj.time = this.events[i].dates.start.localTime;
       // added by Yulia
-      tempObj.locationId = this.events[i]._embedded.venues[0].id;
-      tempObj.countryName = this.events[i]._embedded.venues[0].country.name;
-
+      if(this.events[i]._embedded === undefined || this.events[i]._embedded.venues[0] === undefined || this.events[i]._embedded.venues[0].city === undefined) {
+        tempObj.locationId = 'НЕИЗВЕСТНО';
+      } else {
+       tempObj.locationId = this.events[i]._embedded.venues[0].id; 
+      };
+      if(this.events[i]._embedded === undefined || this.events[i]._embedded.venues[0] === undefined || this.events[i]._embedded.venues[0].city === undefined) {
+        tempObj.countryName = 'НЕИЗВЕСТНО';
+      } else {
+        tempObj.countryName = this.events[i]._embedded.venues[0].country.name;
+      };
       // tempObj.time = this.events[i].dates.start.localTime.slice(0, 5); //со .slice(0, 5) может выдавать ошибку (видно на сервере не всегда корректно прописано)
       tempObj.url = this.events
         .map(item => item.images)
@@ -139,6 +155,7 @@ class RenderService {
       this.tempRenderArr.push(tempObj);
     }
   };
+
 
   /* =======будет сделан ======= */
   // unlessScroll(){
