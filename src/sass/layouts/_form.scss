@@ -122,20 +122,26 @@
   fill: var(--form-input-icons);
   transition: transform 400ms ease-in-out 0ms;
   transform: scale(1);
-  &:focus,
-  &:hover {
+  // &:focus,
+  &:active {
     fill: var(--form-imput-bgc-active);
     transform: scale(1.3);
     transition: transform 400ms ease-in-out 0ms;
   }
 }
 
-.select-sort {
-  display: block;
+.select {
+  width: 180px;
   background-color: transparent;
   color: var(--form-imput-bgc-active);
   border: none;
   outline: none;
+  cursor: pointer;
+  &:first-child {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-right: 60px;
+  }
 }
 
 .hidden-visually {
@@ -155,7 +161,7 @@
   background-color: transparent;
   border: none;
   display: block;
-  padding-right: 120px;
+  padding-left: 30px;
 }
 
 .checkbox-open-menu {
@@ -173,8 +179,14 @@
   fill: var(--form-input-icons);
 }
 
-.form-sort {
-  right: 45%;
-  width: 320px;
+.form {
+  display: flex;
+  justify-content: center;
   position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+
+  @media screen and (max-width: 599px) {
+    display: block;
+  }
 }

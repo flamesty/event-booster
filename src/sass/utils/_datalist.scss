@@ -9,12 +9,13 @@
 
 .datalist-country {
   position: absolute;
-  z-index: 10;
+  z-index: 20;
   max-height: 170px;
   width: 270px;
   overflow: auto;
   background-color: var(--form-input-background);
   backdrop-filter: blur(20px);
+  cursor: pointer;
 
   font-family: Montserrat;
   font-style: normal;
