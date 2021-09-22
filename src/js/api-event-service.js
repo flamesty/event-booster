@@ -15,7 +15,7 @@ class EventsApiService {
   /* вариант используя async-away + axios + try-catch, который применен в ф-ции fetchAndRenderEvents*/
 
   async fetchEvents() {
-    const url = `${this.BASE_URL}events.json?keyword=${this.searchQuery}&sort=${this.sort}&countryCode=${this.countryCode}&size=3&number=3&page=${this.page}&apikey=${this.KEY}`;
+    const url = `${this.BASE_URL}events.json?keyword=${this.searchQuery}&sort=${this.sort}&countryCode=${this.countryCode}&size=24&number=3&page=${this.page}&apikey=${this.KEY}`;
     renderService.renderStopper = false;
     // console.log('ищу: ', this.searchQuery);
     const response = await axios.get(url);
