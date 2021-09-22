@@ -80,7 +80,7 @@ export const countries = [
   { code: "TR", name: "Turkey" },
   { code: "UA", name: "Ukraine" },
   { code: "AE", name: "United Arab Emirates" },
-  { code: "US", name: "United States Of America" },
+  { code: "US", name: "USA" },
   { code: "UY", name: "Uruguay" },
   { code: "VE", name: "Venezuela" },
 ];

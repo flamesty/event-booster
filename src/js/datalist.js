@@ -2,18 +2,14 @@ import datalistTemplate from '../templates/datalistTemplate.hbs';
 import { refsGen } from '../js/refs';
 import { countries } from './renderCountries';
 import { eventsApiService } from './api-event-service';
-import { renderService } from './search-render-service';
-import Notify from 'simple-notify';
 
 const refInput = document.querySelector(".input-country");
 const refInputSearch = document.querySelector(".input-search");
 const refDatalist = document.querySelector(".datalist-country");
-const eventsList = document.querySelector('.event-img');
 let aFilteredOptions = [];
 let temporaryСhoiceCountry = [];
 
 window.addEventListener('keyup', doKeyAction);
-window.addEventListener("click", doMouseClick);
 refInput.addEventListener("input", doFilter);
 refInput.addEventListener("focus", openList);
 
@@ -23,39 +19,39 @@ function renderDatalistMarkup(data) {
 };
 renderDatalistMarkup(countries);
 
+
 // ---------включает запись страны из локалстридж--------
 
 // if (localStorage['CountryForBooster'] !== undefined) {
-//     refInput.value = localStorage['CountryForBooster'];
-//     refsGen.countryCode = localStorage['CountryCodeForBooster'];
-//     temporaryСhoiceCountry = [];
-//     temporaryСhoiceCountry.push({
-//         innerText: refInput.value,
-//         dataset: { code: refsGen.countryCode }
-//     });
-//     console.log(temporaryСhoiceCountry)
-// }
-
-for (let each of refDatalist.children) {
-         aFilteredOptions.push(each)
-    }
-
-function doKeyAction(whichKey) {
-    const focusPoint = document.activeElement
-  switch(whichKey.key) {
-    //   case 'ArrowDown':
-        //   toggleListDown(focusPoint)
-        //   break;
-    //   case 'ArrowUp':
-        //   toggleListUp(focusPoint)
-        //   break;
-      case 'Enter':
-          selectOption()
-          break;
-      case 'Escape':
-          closeList()
-          break;
-                }
+//         refInput.value = localStorage['CountryForBooster'];
+//         refsGen.countryCode = localStorage['CountryCodeForBooster'];
+//         temporaryСhoiceCountry = [];
+//         temporaryСhoiceCountry.push({
+//                 innerText: refInput.value,
+//                 dataset: { code: refsGen.countryCode }
+//             });
+//         }
+        
+        for (let each of refDatalist.children) {
+            aFilteredOptions.push(each)
+        }
+        
+        function doKeyAction(whichKey) {
+            const focusPoint = document.activeElement
+            switch(whichKey.key) {
+                //   case 'ArrowDown':
+                //   toggleListDown(focusPoint)
+                //   break;
+                //   case 'ArrowUp':
+                //   toggleListUp(focusPoint)
+                //   break;
+                case 'Enter':
+                    selectOption()
+                    break;
+                    case 'Escape':
+                        closeList()
+                        break;
+                    }
 }
 
 function doMouseClick(e) {
@@ -65,13 +61,12 @@ function doMouseClick(e) {
               if (clickPoint.classList.contains("input-search")) {
               closeList()
             }
-              clickPoint.focus()
+            //   clickPoint.focus()
         } else {
             if (clickPoint.nodeName === 'LI') {
                 acceptСhoice(e.target)
             } else {
                 closeList()
-                // refInput.value = "";
             }
         }
     }
@@ -87,12 +82,20 @@ function selectOption() {
     } 
 }
 
-function openList() {   
+function openList() {
+    if (document.querySelector('.checkbox-open-menu').checked === true) {
+        document.querySelector('.form').classList.add("hidden-visually")
+        document.querySelector('.container-hero').classList.remove("container-hero-big")
+        document.querySelector('.checkbox-open-menu').checked = false
+        
+    }
     refDatalist.classList.remove("hidden-list");
     refInput.value = "";
     refInput.style.borderRadius = "20px 20px 0 0";
     document.querySelector(".input-triangle").classList.add("input-triangle-rotate")
     displayItems()
+    window.addEventListener("click", doMouseClick);
+
 }
 
 function closeList() {
@@ -105,6 +108,10 @@ function closeList() {
         refInput.value = temporaryСhoiceCountry[0].innerText;
         refsGen.countryCode = temporaryСhoiceCountry[0].dataset.code;
     }
+    if (eventsApiService.countryCode) {
+        refInput.value = "";
+    }
+    window.removeEventListener("click", doMouseClick);
 }
 
 
@@ -149,13 +156,12 @@ function displayItems() {
 // }
 
 function acceptСhoice(el) {
-    refInput.value = el.innerText;
+    closeList();
     eventsApiService.countryCode = el.dataset.code;
+    refInput.value = el.innerText;
     refsGen.countryCode = el.dataset.code;
     temporaryСhoiceCountry = [];
     temporaryСhoiceCountry.push(el);
-    closeList();
-    document.querySelector('.btn-search').click();
     localStorage.setItem('CountryForBooster', el.innerText);
     localStorage.setItem('CountryCodeForBooster', el.dataset.code);
     displayItems();

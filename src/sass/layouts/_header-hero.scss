@@ -3,7 +3,8 @@
   width: 108px;
   height: 90px;
   border-radius: 0 0 216px / 180px 0;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(20px);
+  cursor: pointer;
   @media screen and (min-width: 603px) {
     width: 180px;
     height: 151px;
@@ -14,6 +15,10 @@
     height: 201px;
     border-radius: 0 0 476px / 402px 0;
   }
+}
+
+.logo-div {
+  backdrop-filter: blur(3px);
 }
 
 .header_title {
@@ -52,6 +57,7 @@
   padding-left: auto;
   padding-right: auto;
   height: 364px;
+
   // min-width: 320px;
   // background-size: contain;
   // background-repeat: no-repeat;
