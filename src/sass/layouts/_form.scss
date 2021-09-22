@@ -12,7 +12,7 @@
 
   .input-search {
     margin-right: 30px;
-    @media screen and (max-width: 599px) {
+    @media screen and (max-width: 645px) {
       margin-bottom: 25px;
       margin-left: auto;
       margin-right: auto;
@@ -24,7 +24,7 @@
   @media screen and (min-width: 1280px) {
     padding-top: 52px;
   }
-  @media screen and (max-width: 599px) {
+  @media screen and (max-width: 645px) {
     display: grid;
     .datalist-country {
       left: 0%;
@@ -130,20 +130,6 @@
   }
 }
 
-.select {
-  width: 180px;
-  background-color: transparent;
-  color: var(--form-imput-bgc-active);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  &:first-child {
-    margin-bottom: 15px;
-    margin-top: 15px;
-    margin-right: 60px;
-  }
-}
-
 .hidden-visually {
   position: absolute;
   width: 1px;
@@ -188,5 +174,25 @@
 
   @media screen and (max-width: 599px) {
     display: block;
+  }
+}
+
+.container-hero.container-hero-big {
+  @media screen and (max-width: 645px) {
+    margin-bottom: 0;
+  }
+}
+
+.select {
+  width: 180px;
+  background-color: transparent;
+  color: var(--form-imput-bgc-active);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  &:first-child {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-right: 60px;
   }
 }

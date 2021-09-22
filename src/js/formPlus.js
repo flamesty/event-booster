@@ -12,6 +12,8 @@ refSelectScroll.addEventListener("change", changeValueScroll);
 
 function openMenu() {
     refFormSort.classList.toggle("hidden-visually")
+    document.querySelector('.container-hero').classList.toggle("container-hero-big")
+
 
 }
 
@@ -28,5 +30,4 @@ function changeValueScroll(e) {
     } else {
         refsGen.UNLESS_SCROLL = false
     }
-    console.log(refsGen.UNLESS_SCROLL)
 }
