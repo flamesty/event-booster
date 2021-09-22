@@ -263,7 +263,7 @@ class RenderService {
       this.defaultSearchAndRender(ref);
     });
     document.querySelector('.js-logo-link').addEventListener('click', () => this.defaultSearchAndRender(ref));
-    document.querySelector('.js-toggle').addEventListener('click', () => this.onInfiniteScroll()); 
+    // document.querySelector('.js-toggle').addEventListener('click', () => this.onInfiniteScroll()); 
   };
 
   /* ======инициализация при запуске приложения====== */
