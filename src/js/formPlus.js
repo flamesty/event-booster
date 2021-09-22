@@ -11,8 +11,14 @@ refSelectSort.addEventListener("change", changeValueSort);
 refSelectScroll.addEventListener("change", changeValueScroll);
 
 function openMenu() {
-    refFormSort.classList.toggle("hidden-visually")
-    document.querySelector('.container-hero').classList.toggle("container-hero-big")
+    if (refBtnOpenMenu.checked === true) {
+        refFormSort.classList.remove("hidden-visually")
+        document.querySelector('.container-hero').classList.add("container-hero-big")
+    } else {
+        refFormSort.classList.add("hidden-visually")
+        document.querySelector('.container-hero').classList.remove("container-hero-big")
+    }
+    
 
 
 }
@@ -31,3 +37,4 @@ function changeValueScroll(e) {
         refsGen.UNLESS_SCROLL = false
     }
 }
+console.dir(refBtnOpenMenu)
