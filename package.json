@@ -34,8 +34,12 @@
   "dependencies": {
     "axios": "^0.21.1",
     "gh-pages": "^3.2.3",
+    "react": "^17.0.2",
+    "s": "^1.0.0",
     "simple-notify": "^0.5.4",
     "spin.js": "^4.1.1",
+    "swiper": "^6.8.4",
+    "swiper-react": "^1.0.0",
     "throttle-debounce": "^3.0.1"
   }
 }

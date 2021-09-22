@@ -2,7 +2,8 @@ export const refsGen = {
   DEFAULT_QUERY: 'music', //classic
   currentSearchQuery: '',
   tempEventsArray: [],
-  countryCode: "", 
+  currentEvent: 0,
+  countryCode: "",
   totalPages: 0,  //крайняя страница, доступная в пагинации
   pageNumber: 1,
   lastServerPage: 0, //крайняя страница, доступная на сервере

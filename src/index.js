@@ -7,6 +7,7 @@ import { renderService } from './js/search-render-service';
 import { toTop } from './js/to-top-btn';
 import './js/notify.js';
 
+
 toTop.createBtnAndEvnListeners();
 window.addEventListener('DOMContentLoaded', () => renderService.initialAtStartup(refsGen));
 

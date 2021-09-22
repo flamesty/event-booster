@@ -10,7 +10,6 @@ import 'simple-notify/dist/simple-notify.min.css'
 // title: black,
 // text: red,
 
-
 export let myNotify1
 export let myNotify2
 export let myNotify3

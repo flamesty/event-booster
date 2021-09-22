@@ -23,7 +23,7 @@
   pointer-events: none;
 }
 
-.modal {
+.modal  {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -35,11 +35,11 @@
   background-color: var(--modal-background-color);
   border-radius: 150px 0px;
   box-shadow: #dc56c6a9 0px 48px 100px 20px;
- 
+
   @media screen and (min-width: 768px) {
-   max-width: 595px;
-   border-radius: 300px 0px;
-   transform: translate(-50%, -50%) scale(0.69) rotate(0deg);
+    max-width: 595px;
+    border-radius: 300px 0px;
+    transform: translate(-50%, -50%) scale(0.69) rotate(0deg);
   }
 
   @media screen and (min-width: 1280px) {
@@ -52,7 +52,7 @@
   font-size: 20px;
   line-height: 1.2;
   margin-bottom: 5px;
-   color: var(--modal-title-color);
+  color: var(--modal-title-color);
 
   @media screen and (min-width: 1280px) {
     font-size: 24px;
@@ -147,7 +147,7 @@
 }
 
 .modal__content--flex {
- margin-top: 18px;
+  margin-top: 18px;
   margin-bottom: 25px;
 
   @media screen and (min-width: 768px) {
