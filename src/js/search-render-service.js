@@ -54,6 +54,7 @@ class RenderService {
   };
 
   async fetchAndRenderEvents(ref) {
+    document.querySelector('.pagination__list').classList.add('hide-el'); //скрытие пагинации
     spinner.spin(document.getElementById('events'));
     this.tempCountryCode = eventsApiService.countryCode; //для последующей проверки
     try {
@@ -73,7 +74,7 @@ class RenderService {
       return this.defaultSearchAndRender(ref);
     };
 
-    /* ======= запуск бесконечного скролла ======= */
+    /* ======= запуск/не запуск бесконечного скролла ======= */
 
     if (ref.UNLESS_SCROLL) { 
       window.addEventListener('scroll',throttle(500, () => this.unlessScroll(ref)));
@@ -84,9 +85,10 @@ class RenderService {
       this.tempMadePage = eventsApiService.page;
     } else {
       window.removeEventListener("scroll", throttle(500, () => this.unlessScroll(ref)));
-      document.querySelector('.pagination__list').classList.remove('hide-el'); //скрытие пагинации
+      
       this.renderEvtList(ref);
       spinner.stop(document.getElementById('events'));
+      document.querySelector('.pagination__list').classList.remove('hide-el'); //открытие пагинации
       document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages, pageNumber);
     };
   };
