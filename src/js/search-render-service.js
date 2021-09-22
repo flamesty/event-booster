@@ -54,6 +54,7 @@ class RenderService {
   };
 
   async fetchAndRenderEvents(ref) {
+    eventsApiService.sort = ref.sortType;
     document.querySelector('.pagination__list').classList.add('hide-el'); //скрытие пагинации
     spinner.spin(document.getElementById('events'));
     this.tempCountryCode = eventsApiService.countryCode; //для последующей проверки
@@ -75,7 +76,6 @@ class RenderService {
     };
 
     /* ======= запуск/не запуск бесконечного скролла ======= */
-
     if (ref.UNLESS_SCROLL) { 
       window.addEventListener('scroll',throttle(500, () => this.unlessScroll(ref)));
       document.querySelector('.pagination__list').classList.add('hide-el'); //скрытие пагинации
