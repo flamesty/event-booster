@@ -63,6 +63,6 @@ element.addEventListener('click', e => onClickPagination(e, refsGen));
 
 function onClickPagination(e, ref) {
   eventsApiService.page = Number(e.target.textContent) - 1;
-  renderService.resetAtPaginationAndKeyWord(ref);
+  renderService.resetAtPagination(ref);
   return renderService.fetchAndRenderEvents(ref);
 }

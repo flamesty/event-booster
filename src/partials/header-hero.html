@@ -1,8 +1,11 @@
 <header>
   <section class="container container-hero">
-    <a href="javascript:void(0)" class="logo-div js-logo-link pulsate-bck"><img class="header_logo" src="./images/logo/logo.svg" alt="Event booster logo"></a>
+
+    <img class="header_logo js-logo-link slide-in-blurred-br" src="./images/logo/logo.svg" alt="Event booster logo">
+    <!-- <a href="javascript:void(0)"></a> -->
+
     <div class="hero">
-      <h1 class="header_title text-focus-in">FIND BEST EVENTS
+      <h1 class="header_title text-flicker-in-glow">FIND BEST EVENTS
       AROUND THE WORLD</h1>
       <form action="" class="search-form" name="search-form">
 
@@ -19,7 +22,7 @@
         <label class="label-country" for="custom-select">
           <input class="input input-country" type="text" id="country-choice" placeholder="Choose country" autocomplete="off">
           <div class="input-triangle"></div>
-        <ul class="datalist-country hidden-list">
+        <ul class="datalist-country hidden-list" id="datalist-country"> 
         </ul>
         </label>
 

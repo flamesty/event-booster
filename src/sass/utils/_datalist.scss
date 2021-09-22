@@ -61,3 +61,22 @@
     border-radius: 20px 20px 0 0;
   }
 }
+
+.datalist-country::-webkit-scrollbar {
+  width: 11px;
+  background-color: transparent;
+}
+
+.datalist-country::-webkit-scrollbar-thumb {
+  border-radius: 11px;
+  height: 43px;
+  background-color: var(--form-input-text);
+  background-clip: content-box;
+  border: 3px solid transparent;
+}
+
+.datalist-country::-webkit-scrollbar-track {
+  border-radius: 11px;
+  height: 43px;
+  background-color: transparent;
+}

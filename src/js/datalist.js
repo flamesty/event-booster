@@ -23,22 +23,20 @@ renderDatalistMarkup(countries);
 // ---------включает запись страны из локалстридж--------
 
 // if (localStorage['CountryForBooster'] !== undefined) {
-    //     refInput.value = localStorage['CountryForBooster'];
-    //     refsGen.countryCode = localStorage['CountryCodeForBooster'];
-    //     temporaryСhoiceCountry = [];
-    //     temporaryСhoiceCountry.push({
-        //         innerText: refInput.value,
-        //         dataset: { code: refsGen.countryCode }
-        //     });
-        //     console.log(temporaryСhoiceCountry)
-        // }
+//         refInput.value = localStorage['CountryForBooster'];
+//         refsGen.countryCode = localStorage['CountryCodeForBooster'];
+//         temporaryСhoiceCountry = [];
+//         temporaryСhoiceCountry.push({
+//                 innerText: refInput.value,
+//                 dataset: { code: refsGen.countryCode }
+//             });
+//         }
         
         for (let each of refDatalist.children) {
             aFilteredOptions.push(each)
         }
         
         function doKeyAction(whichKey) {
-            whichKey.preventDefault();
             const focusPoint = document.activeElement
             switch(whichKey.key) {
                 //   case 'ArrowDown':
@@ -151,13 +149,12 @@ function displayItems() {
 // }
 
 function acceptСhoice(el) {
-    refInput.value = el.innerText;
+    closeList();
     eventsApiService.countryCode = el.dataset.code;
+    refInput.value = el.innerText;
     refsGen.countryCode = el.dataset.code;
     temporaryСhoiceCountry = [];
     temporaryСhoiceCountry.push(el);
-    closeList();
-    document.querySelector('.btn-search').click();
     localStorage.setItem('CountryForBooster', el.innerText);
     localStorage.setItem('CountryCodeForBooster', el.dataset.code);
     displayItems();
