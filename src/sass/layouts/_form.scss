@@ -12,6 +12,7 @@
 
   .input-search {
     margin-right: 30px;
+    margin-bottom: 25px;
     @media screen and (max-width: 645px) {
       margin-bottom: 25px;
       margin-left: auto;
@@ -94,7 +95,7 @@
 .input-triangle {
   position: absolute;
   left: 225px;
-  bottom: 16px;
+  top: 16px;
   height: 0;
   width: 0;
   border-left: 7.5px solid transparent;
@@ -102,6 +103,7 @@
   border-top: 7.5px solid var(--form-input-icons);
   transform: rotate(0deg);
   transition: transform 400ms ease-in-out 0ms;
+  // cursor: pointer;
 }
 
 .input-triangle-rotate {
@@ -120,10 +122,11 @@
 
 .icon-search {
   fill: var(--form-input-icons);
+  cursor: pointer;
   transition: transform 400ms ease-in-out 0ms;
   transform: scale(1);
-  // &:focus,
-  &:active {
+
+  &:hover {
     fill: var(--form-imput-bgc-active);
     transform: scale(1.3);
     transition: transform 400ms ease-in-out 0ms;
@@ -144,10 +147,14 @@
 }
 
 .label-open-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: none;
   display: block;
-  padding-left: 30px;
+  margin-top: 5px;
+  // padding-left: 30px;
 }
 
 .checkbox-open-menu {
@@ -160,39 +167,51 @@
 }
 
 .btn-open-menu--icon {
-  display: block;
-  margin-left: auto;
+  // margin-left: auto;
   fill: var(--form-input-icons);
+  cursor: pointer;
+  margin-left: 30px;
+  @media screen and (max-width: 645px) {
+    margin-left: 0;
+    margin-top: 20px;
+  }
 }
 
 .form {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  // display:  block;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
 
-  @media screen and (max-width: 599px) {
+  @media screen and (max-width: 645px) {
     display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 .container-hero.container-hero-big {
   @media screen and (max-width: 645px) {
-    margin-bottom: 0;
+    margin-bottom: 25px;
   }
 }
 
 .select {
-  width: 180px;
+  width: 212px;
   background-color: transparent;
   color: var(--form-imput-bgc-active);
   border: none;
   outline: none;
+  font-weight: 700;
   cursor: pointer;
+
   &:first-child {
     margin-bottom: 15px;
     margin-top: 15px;
-    margin-right: 60px;
+    @media screen and (min-width: 645px) {
+      margin-right: 45px;
+    }
   }
 }

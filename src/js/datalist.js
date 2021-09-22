@@ -82,13 +82,20 @@ function selectOption() {
     } 
 }
 
-function openList() {   
+function openList() {
+    if (document.querySelector('.checkbox-open-menu').checked === true) {
+        document.querySelector('.form').classList.add("hidden-visually")
+        document.querySelector('.container-hero').classList.remove("container-hero-big")
+        document.querySelector('.checkbox-open-menu').checked = false
+        
+    }
     refDatalist.classList.remove("hidden-list");
     refInput.value = "";
     refInput.style.borderRadius = "20px 20px 0 0";
     document.querySelector(".input-triangle").classList.add("input-triangle-rotate")
     displayItems()
     window.addEventListener("click", doMouseClick);
+
 }
 
 function closeList() {
