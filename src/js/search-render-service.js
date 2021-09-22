@@ -15,6 +15,7 @@ class RenderService {
     this.searchForm = document.querySelector('.search-form');
     this.inputCountry = document.querySelector(".input-country");
     this.scrollSwitch = document.querySelector('#scroll-switch-toggle');
+    this.tempInfScr = false;
     this.tempRenderArr = [];
     this.tempCountryCode = '';
     this.tempMadePage;
@@ -39,7 +40,7 @@ class RenderService {
 
   /* ======проверка на повторный ввод того-же====== */
 
-    if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '' && ref.countryCode === this.tempCountryCode) {
+    if (e.currentTarget.elements.query.value === ref.currentSearchQuery && e.currentTarget.elements.query.value !== '' && ref.countryCode === this.tempCountryCode && eventsApiService.sort === ref.sortType && this.tempInfScr === ref.UNLESS_SCROLL) {
     // return alert('такое уже есть...');
       if (myNotify4) {
         myNotify4.close();
@@ -54,6 +55,7 @@ class RenderService {
   };
 
   async fetchAndRenderEvents(ref) {
+    this.tempInfScr = ref.UNLESS_SCROLL;
     eventsApiService.sort = ref.sortType;
     document.querySelector('.pagination__list').classList.add('hide-el'); //скрытие пагинации
     spinner.spin(document.getElementById('events'));
@@ -76,7 +78,8 @@ class RenderService {
     };
 
     /* ======= запуск/не запуск бесконечного скролла ======= */
-    if (ref.UNLESS_SCROLL) { 
+    if (ref.UNLESS_SCROLL) {
+      
       window.addEventListener('scroll',throttle(500, () => this.unlessScroll(ref)));
       document.querySelector('.pagination__list').classList.add('hide-el'); //скрытие пагинации
       this.renderEvtList(ref);
