@@ -1,6 +1,6 @@
 <header>
   <section class="container container-hero">
-    <a href="javascript:void(0)" class="js-logo-link pulsate-bck"><img class="header_logo" src="./images/logo/logo.svg" alt="Event booster logo"></a>
+    <a href="javascript:void(0)" class="logo-div js-logo-link pulsate-bck"><img class="header_logo" src="./images/logo/logo.svg" alt="Event booster logo"></a>
     <div class="hero">
       <h1 class="header_title text-focus-in">FIND BEST EVENTS
       AROUND THE WORLD</h1>
@@ -22,8 +22,34 @@
         <ul class="datalist-country hidden-list">
         </ul>
         </label>
- 
+
       </form>
+
+
+      <label class="label-open-menu">
+          <input type="checkbox" class="checkbox-open-menu" aria-checked="false">
+          <svg class="btn-open-menu--icon" width="32" height="32">
+            <use href="./images/sprite.svg#icon-flickr"></use>
+          </svg>
+      </label>      
+        <!-- <button class="btn-open-menu">
+          <svg class="btn-open-menu--icon" width="32" height="32">
+            <use href="./images/sprite.svg#icon-flickr"></use>
+          </svg>
+        </button> -->
+        <div class="form-sort hidden-visually">
+          <select class="select-sort" name="sort">
+            <option disabled>Сhoose sorting type:</option>
+            <option value="name,asc">by name ascending</option>
+            <option value="name,desc">by name descending</option>
+            <option value="relevance,asc">by relevance ascending</option>
+            <option value="relevance,desc">by relevance descending</option>
+            <option value="random">random</option>
+          </select>
+
+          
+        </div>
+
     </div>
   </section>
 </header>
