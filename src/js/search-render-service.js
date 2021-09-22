@@ -3,6 +3,7 @@ import { eventsApiService } from './api-event-service';
 import evtListTpl from '../templates/events-list.hbs';
 import { spinner } from './spin';
 import { createPagination } from './pagination';
+import { queryTotalPages, pageNumber } from "./api-event-service";
 import { refsGen } from './refs';
 import { pushNotify1, pushNotify2, pushNotify3, pushNotify4, myNotify1, myNotify2, myNotify3, myNotify4 } from './notify';
 
@@ -83,7 +84,7 @@ class RenderService {
       document.querySelector('.pagination__list').classList.add('hide-el'); //скрытие пагинации
       this.renderEvtList(ref);
       spinner.stop(document.getElementById('events'));
-      document.querySelector('.pagination__list').innerHTML = createPagination(refsGen.totalPages, refsGen.pageNumber);
+      document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages, pageNumber);
       this.tempMadePage = eventsApiService.page;
     } else {
       window.removeEventListener("scroll", throttle(500, () => this.unlessScroll(ref)));
@@ -91,7 +92,7 @@ class RenderService {
       this.renderEvtList(ref);
       spinner.stop(document.getElementById('events'));
       document.querySelector('.pagination__list').classList.remove('hide-el'); //открытие пагинации
-      document.querySelector('.pagination__list').innerHTML = createPagination(refsGen.totalPages, refsGen.pageNumber);
+      document.querySelector('.pagination__list').innerHTML = createPagination(queryTotalPages, pageNumber);
     };
   };
 

@@ -4,20 +4,17 @@ import { eventsApiService } from './api-event-service';
 
 const element = document.querySelector('.pagination__list');
 
-export function createPagination(totalPages, page) {  
+export function createPagination(totalPages, page) {
+  
   let liTag = '';
   let active;
   let beforePage = page - 1;
   let afterPage = page + 1;
-  
-  if (totalPages === 1) {
-    return
-  }
 
    if (totalPages>4 && page > 2) {
       liTag += `<li class="first numb"><span>1</span></li>`;
       if (totalPages>5 && page > 3) {
-        liTag += `<li class="dots numb dots--preview-page"><span class="dots--preview-page">...</span></li>`;
+        liTag += `<li class="dots"><span>...</span></li>`;
       }
     }    
  
@@ -52,45 +49,20 @@ export function createPagination(totalPages, page) {
 
   if ( totalPages>4 && page < totalPages - 1) {
     if (totalPages > 5 && page < totalPages - 2) {
-      liTag += `<li class="dots numb dots--next-page"><span class="dots--next-page">...</span></li>`;
+      liTag += `<li class="dots"><span>...</span></li>`;
     }
 
     liTag += `<li class="last numb"><span>${totalPages}</span></li>`;
   }
 
+  // element.innerHTML = liTag;
   return liTag;
 }
 
 element.addEventListener('click', e => onClickPagination(e, refsGen));
 
-function onClickPagination(e, ref) {  
-  if (e.target.classList.contains('dots--preview-page')) {
-    switch (eventsApiService.page) {
-      case refsGen.totalPages:
-        eventsApiService.page -= 5;
-        break;
-    case refsGen.totalPages-1:
-        eventsApiService.page -= 4;
-        break;
-      default:
-        eventsApiService.page -= 3;
-        break;
-    }   
-  } else
-    if (e.target.classList.contains('dots--next-page')) {
-      switch (eventsApiService.page) {
-        case 1: eventsApiService.page += 3;
-          break;
-        case 2: eventsApiService.page += 2;
-          break;
-        default:
-          eventsApiService.page += 1;          
-          break;
-      }     
-} else {
+function onClickPagination(e, ref) {
   eventsApiService.page = Number(e.target.textContent) - 1;
-  }
   renderService.resetAtPagination(ref);
   return renderService.fetchAndRenderEvents(ref);
 }
-

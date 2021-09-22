@@ -5,7 +5,7 @@ export const refsGen = {
   currentEvent: 0,
   countryCode: "",
   totalPages: 0,  //крайняя страница, доступная в пагинации
-  pageNumber: "",
+  pageNumber: 1,
   lastServerPage: 0, //крайняя страница, доступная на сервере
   UNLESS_SCROLL: false,
   sortType: "random",

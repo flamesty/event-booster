@@ -1,7 +1,8 @@
 import axios from '../../node_modules/axios';
 import { refsGen } from './refs';
 import { renderService } from './search-render-service';
-
+export let queryTotalPages = 1;
+export let pageNumber = 1
 class EventsApiService {
   constructor() {
     this.searchQuery = refsGen.DEFAULT_QUERY;
@@ -15,7 +16,7 @@ class EventsApiService {
   /* вариант используя async-away + axios + try-catch, который применен в ф-ции fetchAndRenderEvents*/
 
   async fetchEvents() {
-    const url = `${this.BASE_URL}events.json?keyword=${this.searchQuery}&sort=${this.sort}&countryCode=${this.countryCode}&size=3&number=3&page=${this.page}&apikey=${this.KEY}`;
+    const url = `${this.BASE_URL}events.json?keyword=${this.searchQuery}&sort=${this.sort}&countryCode=${this.countryCode}&size=24&number=3&page=${this.page}&apikey=${this.KEY}`;
     renderService.renderStopper = false;
     // console.log('ищу: ', this.searchQuery);
     const response = await axios.get(url);
@@ -25,11 +26,13 @@ class EventsApiService {
       // alert('а нифига не найдено!!!!')
       return;
     }
-    refsGen.pageNumber = this.page + 1;
+    pageNumber = this.page + 1;
     refsGen.lastServerPage = response.data.page.totalPages;
-    if (refsGen.lastServerPage >= refsGen.pageNumber + 40) {      
+    if (refsGen.lastServerPage >= pageNumber + 40) {
+      queryTotalPages = 42;
       refsGen.totalPages = 42;
-    } else {      
+    } else {
+      queryTotalPages = response.data.page.totalPages;
       refsGen.totalPages = response.data.page.totalPages;
     }
     //   console.log(queryTotalPages);
