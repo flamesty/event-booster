@@ -203,6 +203,7 @@ class RenderService {
     this.tempRenderArr.length = 0;
     ref.tempEventsArray.length = 0;
     this.doneBtn.classList.add('hide-el');
+    document.querySelector('body').scrollIntoView({block: "start", behavior: "smooth"});
   };
 
   resetAtPaginationAndKeyWord(ref) {
@@ -210,6 +211,7 @@ class RenderService {
     this.tempRenderArr.length = 0;
     ref.tempEventsArray.length = 0;
     this.doneBtn.classList.add('hide-el');
+    document.querySelector('body').scrollIntoView({block: "start", behavior: "smooth"});
   };
 
   /* ============= передача ключевого слова с модалки ============= */
