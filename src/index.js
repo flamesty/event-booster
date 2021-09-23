@@ -7,6 +7,7 @@ import { renderService } from './js/search-render-service';
 import { toTop } from './js/to-top-btn';
 import './js/notify.js';
 import './js/formPlus.js';
+import './js/team-modal-service';
 
 toTop.createBtnAndEvnListeners();
 window.addEventListener('DOMContentLoaded', () => renderService.initialAtStartup(refsGen));
