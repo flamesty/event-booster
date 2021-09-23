@@ -19,7 +19,7 @@ refs.overlay.addEventListener('click', onCloseModalOverlay);
 window.addEventListener('keyup', onCloseModalEsc);
 
 const renderArr = [];
-let eventIndex = 0;
+let eventIndex = "";
 
 function modalIsOpen(e) {
   if (
@@ -29,7 +29,7 @@ function modalIsOpen(e) {
     return;
   }
   const eventId = document.activeElement.dataset.id;
-  const eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
+  eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
   const eventObj = tempEventsArray[eventIndex];
 
   // console.log('id: ', eventId, ' index: ', eventIndex, ' eventObj ', eventObj)
@@ -157,7 +157,11 @@ function openNextEvent() {
 
   removeClassIsOpen();
   
-  if (eventIndex === 23) {
+  // if (eventIndex === 23) {
+  //   return;
+  // }
+
+  if (eventIndex === tempEventsArray.length - 1) {
     return;
   }
 
@@ -193,6 +197,7 @@ function openPreviousEvent() {
   if (eventIndex === 0) {
     return;
   }
+
   eventIndex -= 1;
   const eventObj = tempEventsArray[eventIndex];
 
