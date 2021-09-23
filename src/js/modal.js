@@ -19,13 +19,14 @@ refs.overlay.addEventListener('click', onCloseModalOverlay);
 window.addEventListener('keyup', onCloseModalEsc);
 
 const renderArr = [];
+let eventIndex = "";
 
 function modalIsOpen(e) {
   if (e.target.nodeName !== 'IMG' && !e.target.classList.contains('decorative-frame')) {
     return;
   }
   const eventId = document.activeElement.dataset.id;
-  const eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
+  eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
   const eventObj = tempEventsArray[eventIndex]
 
   // console.log('id: ', eventId, ' index: ', eventIndex, ' eventObj ', eventObj)
@@ -36,16 +37,6 @@ function modalIsOpen(e) {
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
   
-  // Render MoreFromThisAuthor 
-  function renderByMoreFromThisAuthor(ref) {
-    eventObj._embedded.attractions === undefined ?
-      refsGen.currentSearchQuery = eventObj.name :
-      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
-    refsGen.currentSearchQuery = eventObj.name;
-    renderService.onKeyWord(ref);
-    renderService.resetAtPaginationAndKeyWord(ref);
-    return renderService.fetchAndRenderEvents(ref);
-  }
   stopScroll();
     
 }
@@ -71,10 +62,15 @@ function onCloseModalOverlay (e) {
    };
 
 function onCloseModalEsc (e) {
-    if (e.key !== "Escape") {
-      return;
+    if (e.key === "Escape") {
+      removeClassIsOpen();
     }
-    removeClassIsOpen();
+    if (e.key === "ArrowLeft") {
+      openPreviousEvent();
+    }
+    if (e.key === "ArrowRight") {
+      openNextEvent();
+    }
   };
   
   function removeClassIsOpen () {
@@ -116,6 +112,18 @@ function renderList(arr) {
 function clearMarkUp() {
   refs.eventsList.innerHTML = ''
 }
+
+// Render MoreFromThisAuthor 
+  function renderByMoreFromThisAuthor(ref) {
+    eventObj._embedded.attractions === undefined ?
+      refsGen.currentSearchQuery = eventObj.name :
+      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
+    refsGen.currentSearchQuery = eventObj.name;
+    renderService.onKeyWord(ref);
+    renderService.resetAtPaginationAndKeyWord(ref);
+    return renderService.fetchAndRenderEvents(ref);
+  }
+
 // function searchUserCountry() {
 //   axios.get('https://ipapi.co/json/')
 //     .then((response) => {
@@ -126,3 +134,49 @@ function clearMarkUp() {
 //     .catch((err) => console.log(err))
 // }
 // searchUserCountry();
+
+// Added by Oleg, for choise a next event
+
+
+function openNextEvent() {
+
+  removeClassIsOpen();
+  
+  if (eventIndex === 23) {
+    return;
+  }
+
+  eventIndex += 1;
+  const eventObj = tempEventsArray[eventIndex];
+
+  refs.overlay.classList.add('is-open');
+  refs.overlay.classList.remove('is-hidden');
+  refs.modalContainer.innerHTML = modalMarkup(eventObj);
+  refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
+  refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
+  
+ 
+  stopScroll();
+    
+}
+
+function openPreviousEvent() {
+
+  removeClassIsOpen();
+
+  if (eventIndex === 0) {
+    return;
+  }
+  eventIndex -= 1;
+  const eventObj = tempEventsArray[eventIndex];
+
+  refs.overlay.classList.add('is-open');
+  refs.overlay.classList.remove('is-hidden');
+  refs.modalContainer.innerHTML = modalMarkup(eventObj);
+  refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
+  refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
+  
+ 
+  stopScroll();
+    
+}
