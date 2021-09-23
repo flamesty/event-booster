@@ -3,7 +3,6 @@ export const refsGen = {
   currentSearchQuery: '',
   tempEventsArray: [],
   countryCode: '',
-  currentEvent: 0,
   totalPages: 0, //крайняя страница, доступная в пагинации
   pageNumber: '',
   lastServerPage: 0, //крайняя страница, доступная на сервере
