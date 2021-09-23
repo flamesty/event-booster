@@ -29,7 +29,7 @@ function modalIsOpen(e) {
     return;
   }
   const eventId = document.activeElement.dataset.id;
-  const eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
+  eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
   const eventObj = tempEventsArray[eventIndex];
 
   // console.log('id: ', eventId, ' index: ', eventIndex, ' eventObj ', eventObj)
@@ -42,7 +42,19 @@ function modalIsOpen(e) {
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
   
+  // Render MoreFromThisAuthor 
+  function renderByMoreFromThisAuthor(ref) {
+    eventObj._embedded.attractions === undefined ?
+      refsGen.currentSearchQuery = eventObj.name :
+      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
+    refsGen.currentSearchQuery = eventObj.name;
+    renderService.onKeyWord(ref);
+    renderService.resetAtPaginationAndKeyWord(ref);
+    return renderService.fetchAndRenderEvents(ref);
+  }
+
   stopScroll();
+  window.addEventListener('keyup', onCloseModalEsc);
 }
 
 function stopScroll() {
@@ -78,18 +90,19 @@ function onCloseModalEsc (e) {
     }
   };
   
-  function removeClassIsOpen () {
+  function removeClassIsOpen() {
     refs.overlay.classList.remove('is-open');
     refs.overlay.classList.add('is-hidden');
     startScroll();
+    window.removeEventListener('keyup', onCloseModalEsc);
   };
 
 
-function removeClassIsOpen() {
-  refs.overlay.classList.remove('is-open');
-  refs.overlay.classList.add('is-hidden');
-  startScroll();
-}
+// function removeClassIsOpen() {
+//   refs.overlay.classList.remove('is-open');
+//   refs.overlay.classList.add('is-hidden');
+//   startScroll();
+// }
 
 // --------------------- MoreFromThisAuthor button ------------------------
 function createOneCard(obj) {
@@ -123,16 +136,7 @@ function clearMarkUp() {
   refs.eventsList.innerHTML = '';
 }
 
-// Render MoreFromThisAuthor 
-  function renderByMoreFromThisAuthor(ref) {
-    eventObj._embedded.attractions === undefined ?
-      refsGen.currentSearchQuery = eventObj.name :
-      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
-    refsGen.currentSearchQuery = eventObj.name;
-    renderService.onKeyWord(ref);
-    renderService.resetAtPaginationAndKeyWord(ref);
-    return renderService.fetchAndRenderEvents(ref);
-  }
+
 
 // function searchUserCountry() {
 //   axios.get('https://ipapi.co/json/')
@@ -153,7 +157,11 @@ function openNextEvent() {
 
   removeClassIsOpen();
   
-  if (eventIndex === 23) {
+  // if (eventIndex === 23) {
+  //   return;
+  // }
+
+  if (eventIndex === tempEventsArray.length - 1) {
     return;
   }
 
@@ -166,8 +174,19 @@ function openNextEvent() {
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
   
- 
+ // Render MoreFromThisAuthor 
+  function renderByMoreFromThisAuthor(ref) {
+    eventObj._embedded.attractions === undefined ?
+      refsGen.currentSearchQuery = eventObj.name :
+      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
+    refsGen.currentSearchQuery = eventObj.name;
+    renderService.onKeyWord(ref);
+    renderService.resetAtPaginationAndKeyWord(ref);
+    return renderService.fetchAndRenderEvents(ref);
+  }
+
   stopScroll();
+  window.addEventListener('keyup', onCloseModalEsc);
     
 }
 
@@ -178,6 +197,7 @@ function openPreviousEvent() {
   if (eventIndex === 0) {
     return;
   }
+
   eventIndex -= 1;
   const eventObj = tempEventsArray[eventIndex];
 
@@ -187,7 +207,18 @@ function openPreviousEvent() {
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
   
+  // Render MoreFromThisAuthor 
+  function renderByMoreFromThisAuthor(ref) {
+    eventObj._embedded.attractions === undefined ?
+      refsGen.currentSearchQuery = eventObj.name :
+      refsGen.currentSearchQuery = eventObj._embedded.attractions[0].name;
+    refsGen.currentSearchQuery = eventObj.name;
+    renderService.onKeyWord(ref);
+    renderService.resetAtPaginationAndKeyWord(ref);
+    return renderService.fetchAndRenderEvents(ref);
+  }
  
   stopScroll();
+  window.addEventListener('keyup', onCloseModalEsc);
     
 }
