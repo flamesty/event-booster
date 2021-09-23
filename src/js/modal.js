@@ -41,7 +41,7 @@ function modalIsOpen(e) {
   // Added by Aleksey, for MoreFromThisAuthor btn 
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
-  
+
   // Render MoreFromThisAuthor 
   function renderByMoreFromThisAuthor(ref) {
     eventObj._embedded.attractions === undefined ?
@@ -77,25 +77,37 @@ function onCloseModalOverlay(e) {
   }
 }
 
+function animate() {
+  refs.overlay.classList.remove('is-open');
+  refs.overlay.classList.add('is-hidden');
+  setTimeout(() => {
+    refs.overlay.classList.add('is-open');
+    refs.overlay.classList.remove('is-hidden');
+  }, 400);
+}
 
-function onCloseModalEsc (e) {
-    if (e.key === "Escape") {
-      removeClassIsOpen();
-    }
-    if (e.key === "ArrowLeft") {
-      openPreviousEvent();
-    }
-    if (e.key === "ArrowRight") {
-      openNextEvent();
-    }
-  };
-  
-  function removeClassIsOpen() {
-    refs.overlay.classList.remove('is-open');
-    refs.overlay.classList.add('is-hidden');
-    startScroll();
-    window.removeEventListener('keyup', onCloseModalEsc);
-  };
+function onCloseModalEsc(e) {
+  if (e.key === "Escape") {
+    removeClassIsOpen();
+  }
+  if (e.key === "ArrowLeft") {
+    openPreviousEvent();
+  }
+  if (e.key === "ArrowRight") {
+    openNextEvent();
+  }
+  animate();
+  refs.modalContainer.innerHTML = modalMarkup(
+    tempEventsArray[refGen.currentEvent],
+  );
+};
+
+function removeClassIsOpen() {
+  refs.overlay.classList.remove('is-open');
+  refs.overlay.classList.add('is-hidden');
+  startScroll();
+  window.removeEventListener('keyup', onCloseModalEsc);
+};
 
 
 // function removeClassIsOpen() {
@@ -156,7 +168,7 @@ function clearMarkUp() {
 function openNextEvent() {
 
   removeClassIsOpen();
-  
+
   // if (eventIndex === 23) {
   //   return;
   // }
@@ -173,8 +185,8 @@ function openNextEvent() {
   refs.modalContainer.innerHTML = modalMarkup(eventObj);
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
-  
- // Render MoreFromThisAuthor 
+
+  // Render MoreFromThisAuthor 
   function renderByMoreFromThisAuthor(ref) {
     eventObj._embedded.attractions === undefined ?
       refsGen.currentSearchQuery = eventObj.name :
@@ -187,7 +199,7 @@ function openNextEvent() {
 
   stopScroll();
   window.addEventListener('keyup', onCloseModalEsc);
-    
+
 }
 
 function openPreviousEvent() {
@@ -206,7 +218,7 @@ function openPreviousEvent() {
   refs.modalContainer.innerHTML = modalMarkup(eventObj);
   refs.modalContainer.lastElementChild.addEventListener('click', onCloseModalOverlay);
   refs.modalContainer.lastElementChild.addEventListener('click', () => renderByMoreFromThisAuthor(refsGen))
-  
+
   // Render MoreFromThisAuthor 
   function renderByMoreFromThisAuthor(ref) {
     eventObj._embedded.attractions === undefined ?
@@ -217,8 +229,8 @@ function openPreviousEvent() {
     renderService.resetAtPaginationAndKeyWord(ref);
     return renderService.fetchAndRenderEvents(ref);
   }
- 
+
   stopScroll();
   window.addEventListener('keyup', onCloseModalEsc);
-    
+
 }
