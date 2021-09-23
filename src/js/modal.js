@@ -31,7 +31,9 @@ function modalIsOpen(e) {
   const eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
   const eventObj = tempEventsArray[eventIndex];
 
-  console.log('id: ', eventId, ' index: ', eventIndex, ' eventObj ', eventObj);
+
+  // console.log('id: ', eventId, ' index: ', eventIndex, ' eventObj ', eventObj)
+
   refs.overlay.classList.add('is-open');
   refs.overlay.classList.remove('is-hidden');
   refs.modalContainer.innerHTML = modalMarkup(eventObj);
