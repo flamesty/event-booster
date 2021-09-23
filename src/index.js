@@ -5,11 +5,13 @@ import './js/datalist.js';
 import { refsGen } from './js/refs';
 import { renderService } from './js/search-render-service';
 import { toTop } from './js/to-top-btn';
+import {teamModalService} from './js/team-modal-service';
 import './js/notify.js';
 import './js/formPlus.js';
-import './js/team-modal-service';
+
 
 toTop.createBtnAndEvnListeners();
+teamModalService.eventListenerCreator();
 window.addEventListener('DOMContentLoaded', () => renderService.initialAtStartup(refsGen));
 
 

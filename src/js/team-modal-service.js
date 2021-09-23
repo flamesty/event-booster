@@ -1,44 +1,36 @@
-const rr = {
-    modalTeam: document.querySelector('.students-team'),
-    teamModal: document.querySelector('.team-modal'),
-    teamCards: document.querySelectorAll('.team-img-card'),
-    closeBtn: document.querySelector('.team-close-btn'),
-    overlayTeam: document.querySelector('.team-modal-overlay'),
+class TeamModalService {
+    constructor() {
+        this.modalTeam = document.querySelector('.students-team');
+        this.closeBtn = document.querySelector('.team-close-btn');
+        this.overlayTeam = document.querySelector('.team-modal-overlay');
+    };
+
+    openTeamModal() {
+        
+        document.querySelectorAll('.team-img-card').forEach(el => el.classList.add('slide-team'));
+        document.querySelector('.team-modal').classList.add('is-open');
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100wh";
+    };  
+
+    closeTeamModal() {
+        document.querySelector('.team-modal').classList.remove('is-open');
+        document.querySelectorAll('.team-img-card').forEach(el => el.classList.remove('slide-team'));
+        document.body.style.overflow = "auto"; 
+        document.body.style.height = "auto";
+    };
+
+    onOverlay(e) {
+            if (e.target === e.currentTarget) {
+                this.closeTeamModal();
+            };
+        };
+    eventListenerCreator() {
+        this.modalTeam.addEventListener('click', this.openTeamModal);
+        this.closeBtn.addEventListener('click', this.closeTeamModal);
+        this.overlayTeam.addEventListener('click', e => this.onOverlay(e)); 
+    };
 
 };
-rr.modalTeam.addEventListener('click', openTeamModal);
-
-rr.closeBtn.addEventListener('click', closeTeamModal);
-rr.overlayTeam.addEventListener('click', e => onOverlay(e));
-
-function openTeamModal() {   
-    rr.teamModal.classList.add('is-open');
-    rr.teamCards.forEach(el => el.classList.add('slide-team'));
-    stopScroll();
-};
-
-function closeTeamModal() {
-    rr.teamModal.classList.remove('is-open');
-    rr.teamCards.forEach(el => el.classList.remove('slide-team'));
-    startScroll();
-};
-
-function onOverlay(e) {
-    if (e.target === e.currentTarget) {
-        closeTeamModal()
-    }
-};
-
-/* ============остановка скролла под модальным окном============ */
-
-function stopScroll() {
-    document.body.style.overflow = "hidden";
-    document.body.style.height = "100wh";
-};
-
-/* =========запуск скролла после закрытия модального окна========= */
-
-function startScroll() {
-    document.body.style.overflow = "auto"; 
-    document.body.style.height = "auto";
-};
+    
+export const teamModalService = new TeamModalService;
