@@ -31,7 +31,6 @@ function modalIsOpen(e) {
   const eventIndex = tempEventsArray.findIndex(obj => obj.id === eventId);
   const eventObj = tempEventsArray[eventIndex];
 
-
   // console.log('id: ', eventId, ' index: ', eventIndex, ' eventObj ', eventObj)
 
   refs.overlay.classList.add('is-open');
@@ -79,34 +78,11 @@ function onCloseModalOverlay(e) {
   }
 }
 
-// function onCloseModalEsc (e) {
-//     if (e.key !== "Escape") {
-//       return;
-//     }
-//     removeClassIsOpen();
-//   };
-
 function onCloseModalEsc(e) {
-  switch (e.key) {
-    case 'Escape':
-      removeClassIsOpen();
-      return;
-    case 'ArrowLeft':
-      if (refsGen.currentEvent !== 0) {
-        refsGen.currentEvent--;
-        refs.modalContainer.innerHTML = modalMarkup(
-          tempEventsArray[refsGen.currentEvent],
-        );
-      }
-      break;
-    case 'ArrowRight':
-      if (refsGen.currentEvent < tempEventsArray.length - 1) {
-        refsGen.currentEvent++;
-        refs.modalContainer.innerHTML = modalMarkup(
-          tempEventsArray[refsGen.currentEvent],
-        );
-      }
+  if (e.key !== 'Escape') {
+    return;
   }
+  removeClassIsOpen();
 }
 
 function removeClassIsOpen() {
