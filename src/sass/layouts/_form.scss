@@ -240,7 +240,6 @@
   border: 1px solid #aaa;
   border-radius: 50px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-  color: #555;
   font-size: inherit;
   margin: 0;
   overflow: hidden;
@@ -249,6 +248,7 @@
   padding-left: 50px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
 
   &:first-child {
     margin-bottom: 15px;
@@ -257,7 +257,7 @@
       margin-right: 50px;
     }
   }
-  
+
   display: flex;
   font-size: 16px;
   // font-family: sans-serif;
@@ -290,6 +290,29 @@
   }
 }
 
+.select-css::-ms-expand {
+  display: none;
+}
+.select-css:hover {
+  border-color: #888;
+}
+.select-css:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 1px 3px rgba(220, 86, 197, 0.7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #222;
+  outline: none;
+}
+.select-css option {
+  font-weight: normal;
+}
+*[dir='rtl'] .select-css,
+:root:lang(ar) .select-css,
+:root:lang(iw) .select-css {
+  background-position: left 0.7em top 50%, 0 0;
+  padding: 0.6em 0.8em 0.5em 1.4em;
+}
+
 .select::-ms-expand {
   display: none;
 }
@@ -298,14 +321,12 @@
 }
 .select:focus {
   border-color: #aaa;
-  box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
+  box-shadow: 0 0 1px 3px rgba(220, 86, 197, 0.7);
   box-shadow: 0 0 0 3px -moz-mac-focusring;
-  color: #222;
+  // color: #222;
   outline: none;
 }
-.select option {
-  font-weight: normal;
-}
+
 *[dir='rtl'] .select-css,
 :root:lang(ar) .select-css,
 :root:lang(iw) .select-css {
@@ -324,7 +345,7 @@
   overflow-y: auto;
   border-radius: 0.3125rem;
 }
-.select__options {
+.select__option {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -334,7 +355,12 @@
 }
 
 .select__option:hover {
-  background-color: #f5f5f5;
+  background-color: transparent;
   cursor: pointer;
+  background-color: #db56c4;
   transition: 0.2s background-color ease-in-out;
+}
+
+.select option {
+  background-color: #212121;
 }

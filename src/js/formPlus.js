@@ -37,4 +37,3 @@ function changeValueScroll(e) {
         refsGen.UNLESS_SCROLL = false
     }
 }
-console.dir(refBtnOpenMenu)
